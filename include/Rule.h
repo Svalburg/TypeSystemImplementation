@@ -4,22 +4,30 @@
 #include <vector>
 #include <string>
 #include <stdexcept>
+#include <stdlib.h>
+#include <sstream>
+
+using namespace std;
 
 class Rule
 {
     public:
-        Rule(std::string statement, std::string ruleName);
+        Rule();
         ~Rule();
-        virtual std::string toStringSigma(std::string x, std::string y) = 0;
-        virtual std::string toStringE(std::string x, std::string y) = 0;
-        Rule* getBranch(int i);
-        std::string getStatement();
-        std::string getRuleName();
+        string getStatement();
+        string getPath();
+        void updatePath();
+        virtual string toStringSigma(string states) = 0;
+        virtual string toStringE(string states) = 0;
+        virtual string toStringV(string states) = 0;
     protected:
+        vector<Rule*> branches;
+        string statement;
+        string ruleName;
+        string path;
+        int left, right, middle;
     private:
-        std::vector<Rule*> branches;
-        std::string statement;
-        std::string ruleName;
+        void updatePath(string path);
 };
 
 #endif // RULE_H

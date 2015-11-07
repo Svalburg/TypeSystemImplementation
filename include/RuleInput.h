@@ -1,18 +1,19 @@
-#ifndef RULEEDINPUT_H
-#define RULEEDINPUT_H
+#ifndef RULEINPUT_H
+#define RULEINPUT_H
 
 #include <Rule.h>
 
 
-class RuleEdInput : public Rule
+class RuleInput : public Rule
 {
     public:
-        RuleEdInput(std::string statement);
-        std::string toStringSigma(std::string x, std::string y);
-        std::string toStringE(std::string x, std::string y);
-        virtual ~RuleEdInput();
+        RuleInput(string statement);
+        string toStringSigma(string states);
+        string toStringE(string states);
+        string toStringV(string states);
+        virtual ~RuleInput();
     protected:
     private:
 };
 
-#endif // RULEEDINPUT_H
+#endif // RULEINPUT_H
