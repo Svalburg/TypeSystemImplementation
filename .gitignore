@@ -17,6 +17,10 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+#CB Files
+*.depend
+*.layout
+
 # =========================
 # Operating System Files
 # =========================

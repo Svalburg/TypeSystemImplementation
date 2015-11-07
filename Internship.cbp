@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Internship" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Internship" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="include" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Internship" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add directory="include" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+		</Compiler>
+		<Unit filename="include/Rule.h" />
+		<Unit filename="include/RuleAssign.h" />
+		<Unit filename="include/RuleBinOp.h" />
+		<Unit filename="include/RuleCallCmpF.h" />
+		<Unit filename="include/RuleCallF.h" />
+		<Unit filename="include/RuleConst.h" />
+		<Unit filename="include/RuleExprAsStmt.h" />
+		<Unit filename="include/RuleExprConcat.h" />
+		<Unit filename="include/RuleFuncDef.h" />
+		<Unit filename="include/RuleIf.h" />
+		<Unit filename="include/RuleInput.h" />
+		<Unit filename="include/RuleRepeat.h" />
+		<Unit filename="include/RuleSkip.h" />
+		<Unit filename="include/RuleStmtConcat.h" />
+		<Unit filename="include/RuleVar.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="src/Rule.cpp" />
+		<Unit filename="src/RuleAssign.cpp" />
+		<Unit filename="src/RuleBinOp.cpp" />
+		<Unit filename="src/RuleCallCmpF.cpp" />
+		<Unit filename="src/RuleCallF.cpp" />
+		<Unit filename="src/RuleConst.cpp" />
+		<Unit filename="src/RuleExprAsStmt.cpp" />
+		<Unit filename="src/RuleExprConcat.cpp" />
+		<Unit filename="src/RuleFuncDef.cpp" />
+		<Unit filename="src/RuleIf.cpp" />
+		<Unit filename="src/RuleInput.cpp" />
+		<Unit filename="src/RuleRepeat.cpp" />
+		<Unit filename="src/RuleSkip.cpp" />
+		<Unit filename="src/RuleStmtConcat.cpp" />
+		<Unit filename="src/RuleVar.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
