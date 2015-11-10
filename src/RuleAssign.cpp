@@ -13,14 +13,14 @@ string RuleAssign::toStringSigma()
 {
     string sigma = branches.at(middle)->toStringSigma();
     string v = branches.at(middle)->toStringV();
-    return "Assign_" + variable + '(' + v + ")(" + sigma + ')';
+    return sigma + " >>> Assign_" + variable + '(' + v + ")";
 }
 
 string RuleAssign::toStringE()
 {
     string sigma = branches.at(middle)->toStringSigma();
     string e = branches.at(middle)->toStringE();
-    return e + " + " + "td_ec(t_assign)(" + sigma + ')';
+    return e + " + (" + sigma + ">>> td_ec(t_assign) )";
 }
 
 string RuleAssign::toStringV()

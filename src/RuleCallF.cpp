@@ -16,23 +16,25 @@ RuleCallF::RuleCallF(string functionname, Rule* branch)
 
 string RuleCallF::toStringSigma()
 {
-    string v = branches.at(middle)->toStringV();
     string sigma = branches.at(middle)->toStringSigma();
-    return "Sigma_" + functionName + '[' + v + "](" + sigma + ')';
+    string path = branches.at(middle)->getPath();
+    return "Split( " + sigma + ", [ x_" + functionName + "<- V_" + path + ", Sigma_" + path +
+            "] >>> Sigma_" + functionName;
 }
 
 string RuleCallF::toStringE()
 {
-    string v = branches.at(middle)->toStringV();
+    string path = branches.at(middle)->getPath();
     string e = branches.at(middle)->toStringE();
     string sigma = branches.at(middle)->toStringSigma();
-    return e + " + E_" + functionName + "[" + v + "](" + sigma + ')';
+    return e + " + ( [ x_" + functionName + "<- V_" + path + ", Sigma_" + path +
+            "] >>> E_" + functionName + " )" ;
 }
 
 string RuleCallF::toStringV()
 {
-    string v = branches.at(middle)->toStringV();
-    return "V_" + functionName + "[" + v + "]";
+    string path = branches.at(middle)->getPath();
+    return "[ x_" + functionName + "<- V_" + path + ", Sigma_" + path + "] >>> V_" + functionName;
 }
 
 RuleCallF::~RuleCallF()

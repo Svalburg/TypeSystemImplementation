@@ -14,7 +14,7 @@ string RuleStmtConcat::toStringSigma()
 {
     string sigma1 = branches.at(left)->toStringSigma();
     string sigma2 = branches.at(right)->toStringSigma();
-    return sigma2 + '(' + sigma1 + ')';
+    return sigma1 + " >>> " + sigma2;
 }
 
 string RuleStmtConcat::toStringE()
@@ -22,7 +22,7 @@ string RuleStmtConcat::toStringE()
     string sigma1 = branches.at(left)->toStringSigma();
     string e1 = branches.at(left)->toStringE();
     string e2 = branches.at(right)->toStringE();
-    return e1 + " + " + e2 + '(' + sigma1 + ')';
+    return e1 + " + (" + sigma1 + " >>> " + e2 + ')';
 }
 
 string RuleStmtConcat::toStringV()

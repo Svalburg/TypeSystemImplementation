@@ -1,15 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <vector>
-#include "Rule.h"
-#include "RuleInput.h"
-#include "RuleVar.h"
-#include "RuleBinOp.h"
-#include "RuleConst.h"
-#include "RuleAssign.h"
-#include "RuleIf.h"
-#include "RuleCallCmpF.h"
-#include "RuleStmtConcat.h"
+#include "libtypesystem.h"
 
 using namespace std;
 
@@ -34,7 +26,7 @@ int main()
     RuleStmtConcat* s2 = new RuleStmtConcat(on, s3);
     RuleStmtConcat* root = new RuleStmtConcat(assx, s2);
     root->updatePath();
-    cout << root->toStringE();
+    cout << root->toStringSigma();
     getchar();
     return 0;
 }

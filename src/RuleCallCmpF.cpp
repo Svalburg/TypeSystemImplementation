@@ -12,21 +12,24 @@ RuleCallCmpF::RuleCallCmpF(string functionName, Rule* branch)
 string RuleCallCmpF::toStringSigma()
 {
     string sigma = branches.at(middle)->toStringSigma();
-    return "Sigma_" + functionName + '(' + sigma + ')';
+    string path = branches.at(middle)->getPath();
+    return "Split( " + sigma + ", [ x_" + functionName + "<- V_" + path + ", Sigma_" + path +
+            "] >>> Sigma_" + functionName;
 }
 
 string RuleCallCmpF::toStringE()
 {
-    string v = branches.at(middle)->toStringV();
+    string path = branches.at(middle)->getPath();
     string e = branches.at(middle)->toStringE();
     string sigma = branches.at(middle)->toStringSigma();
-    return e + " + td_ec(t_" + functionName + ")(" + sigma + ") + E_" + functionName + "[" + v + "](" + sigma + ')';
+    return e + " + ( [ x_" + functionName + "<- V_" + path + ", Sigma_" + path +
+            "] >>> ( td_ec(t_" + functionName + ") + E_" + functionName + " )  )" ;
 }
 
 string RuleCallCmpF::toStringV()
 {
-    string v = branches.at(middle)->toStringV();
-    return "V_" + functionName + "[" + v + "]";
+    string path = branches.at(middle)->getPath();
+    return "[ x_" + functionName + "<- V_" + path + ", Sigma_" + path + "] >>> V_" + functionName;
 }
 
 RuleCallCmpF::~RuleCallCmpF()
