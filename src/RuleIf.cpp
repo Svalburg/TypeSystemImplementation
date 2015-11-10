@@ -2,7 +2,7 @@
 
 RuleIf::RuleIf(Rule* left, Rule* middle, Rule* right)
 {
-    this-> statement = "if " + left->getStatement() + " then " + middle->getStatement() + " else " + right->getStatement() + " end";
+    this->statement = "if " + left->getStatement() + " then " + middle->getStatement() + " else " + right->getStatement() + " end";
     branches.push_back(left);
     branches.push_back(middle);
     branches.push_back(right);

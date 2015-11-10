@@ -13,7 +13,7 @@ RuleStmtConcat::RuleStmtConcat(Rule* left, Rule* right)
 string RuleStmtConcat::toStringSigma()
 {
     string sigma1 = branches.at(left)->toStringSigma();
-    string sigma2 = branches.at(right)->toStringSigma(sigma1);
+    string sigma2 = branches.at(right)->toStringSigma();
     return sigma2 + '(' + sigma1 + ')';
 }
 
