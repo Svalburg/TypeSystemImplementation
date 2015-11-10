@@ -1,22 +1,14 @@
 #include "RuleBinOp.h"
 
-RuleBinOp::RuleBinOp(string statement, Rule* left, Rule* right)
+RuleBinOp::RuleBinOp(string binop, Rule* left, Rule* right)
 {
-    this->statement = statement;
+    this->statement = left->getStatement() + " " + binop + " " + right->getStatement();
+    this->binop = binop;
     ruleName = "BinOp";
     branches.push_back(left);
     branches.push_back(right);
     this->left = 0;
     this->right = 1;
-
-    //remove the left branch statement and the space
-    string remainder = statement.substr(branches.at(this->left)->getStatement().size()+1);
-    //find and remove the second space and statement, the remainder is the binop we need
-    size_t found = remainder.find(branches.at(this->right)->getStatement());
-    if(found != string::npos)
-        binop = remainder.erase(found-1);
-    else
-        exit(-1);
 }
 
 string RuleBinOp::toStringSigma(string states)

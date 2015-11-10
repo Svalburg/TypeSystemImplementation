@@ -7,7 +7,7 @@
 class RuleExprConcat : public Rule
 {
     public:
-        RuleExprConcat(string statement, Rule* left, Rule* right);
+        RuleExprConcat(Rule* left, Rule* right);
         string toStringSigma(string states);
         string toStringE(string states);
         string toStringV(string states);

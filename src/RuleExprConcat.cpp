@@ -1,8 +1,8 @@
 #include "RuleExprConcat.h"
 
-RuleExprConcat::RuleExprConcat(string statement, Rule* left, Rule* right)
+RuleExprConcat::RuleExprConcat(Rule* left, Rule* right)
 {
-    this->statement = statement;
+    this->statement = left->getStatement() + "," + right->getStatement();
     branches.push_back(left);
     branches.push_back(right);
     this->left  = 0;
