@@ -7,7 +7,7 @@
 class RuleRepeat : public Rule
 {
     public:
-        RuleRepeat(string statement, Rule* left, Rule* right);
+        RuleRepeat(Rule* left, Rule* right);
         string toStringSigma(string states);
         string toStringE(string states);
         string toStringV(string states);

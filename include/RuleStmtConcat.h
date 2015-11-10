@@ -7,7 +7,7 @@
 class RuleStmtConcat : public Rule
 {
     public:
-        RuleStmtConcat(string statement, Rule* left, Rule* right);
+        RuleStmtConcat(Rule* left, Rule* right);
         string toStringSigma(string states);
         string toStringE(string states);
         string toStringV(string states);
