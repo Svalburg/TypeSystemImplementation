@@ -22,8 +22,8 @@ $RECYCLE.BIN/
 *.layout
 
 #compiled files
-.o
-.exe
+*.o
+*.exe
 
 # =========================
 # Operating System Files
