@@ -1,8 +1,9 @@
 #include "RuleCallCmpF.h"
 
-RuleCallCmpF::RuleCallCmpF(string cmpfname, Rule* branch)
+RuleCallCmpF::RuleCallCmpF(string functionName, Rule* branch)
 {
-    this->statement = cmpfname + '(' + branch->getStatement() + ')';
+    this->functionName = functionName;
+    this->statement = functionName + '(' + branch->getStatement() + ')';
     branches.push_back(branch);
     middle = 0;
     ruleName = "CallCmpF";
