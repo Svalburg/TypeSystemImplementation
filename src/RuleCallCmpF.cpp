@@ -14,7 +14,7 @@ string RuleCallCmpF::toStringSigma()
     string sigma = branches.at(middle)->toStringSigma();
     string path = branches.at(middle)->getPath();
     return "Split( " + sigma + ", [ x_" + functionName + "<- V_" + path + ", Sigma_" + path +
-            "] >>> Sigma_" + functionName;
+            "] >>> Sigma_" + functionName + ')';
 }
 
 string RuleCallCmpF::toStringE()
