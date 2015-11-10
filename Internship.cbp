@@ -50,6 +50,9 @@
 		<Unit filename="include/RuleStmtConcat.h" />
 		<Unit filename="include/RuleVar.h" />
 		<Unit filename="include/StateTuple.h" />
+		<Unit filename="include/libtypesystem.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Rule.cpp" />
 		<Unit filename="src/RuleAssign.cpp" />
