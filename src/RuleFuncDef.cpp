@@ -1,8 +1,8 @@
 #include "RuleFuncDef.h"
 
-RuleFuncDef::RuleFuncDef(string statement, Rule* left, Rule* right)
+RuleFuncDef::RuleFuncDef(string functionname, Rule* left, Rule* right)
 {
-    this->statement = statement;
+    this->statement = "function " + functionname + " begin " + left->getStatement() + " end " + right->getStatement();
     branches.push_back(left);
     branches.push_back(right);
     this->left = 0;

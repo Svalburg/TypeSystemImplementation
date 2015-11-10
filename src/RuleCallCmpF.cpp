@@ -1,17 +1,11 @@
 #include "RuleCallCmpF.h"
 
-RuleCallCmpF::RuleCallCmpF(string statement, Rule* branch)
+RuleCallCmpF::RuleCallCmpF(string cmpfname, Rule* branch)
 {
-    this->statement = statement;
+    this->statement = cmpfname + '(' + branch->getStatement() + ')';
     branches.push_back(branch);
     middle = 0;
     ruleName = "CallCmpF";
-    //retrieve the function name from the statement
-    size_t found = statement.find("(");
-    if(found != string::npos)
-        functionName = statement.erase(found);
-    else
-        exit(-1);
 }
 
 string RuleCallCmpF::toStringSigma(string states)

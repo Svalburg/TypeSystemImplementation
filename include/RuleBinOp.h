@@ -7,7 +7,7 @@
 class RuleBinOp : public Rule
 {
     public:
-        RuleBinOp(string statement, Rule* left, Rule* right);
+        RuleBinOp(string binop, Rule* left, Rule* right);
         string toStringSigma(string states);
         string toStringE(string states);
         string toStringV(string states);

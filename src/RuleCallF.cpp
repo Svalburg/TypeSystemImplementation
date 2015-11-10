@@ -1,8 +1,8 @@
 #include "RuleCallF.h"
 
-RuleCallF::RuleCallF(string statement, Rule* branch)
+RuleCallF::RuleCallF(string functionname, Rule* branch)
 {
-    this->statement = statement;
+    this->statement = functionName + '(' + branch->getStatement() + ')';
     branches.push_back(branch);
     middle = 0;
     ruleName = "CallF";

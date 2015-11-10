@@ -7,7 +7,7 @@
 class RuleAssign : public Rule
 {
     public:
-        RuleAssign(string statement, Rule* branch);
+        RuleAssign(string variable, Rule* branch);
         string toStringSigma(string states);
         string toStringE(string states);
         string toStringV(string states);

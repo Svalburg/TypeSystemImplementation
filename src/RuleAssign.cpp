@@ -1,8 +1,8 @@
 #include "RuleAssign.h"
 
-RuleAssign::RuleAssign(string statement, Rule* branch)
+RuleAssign::RuleAssign(string variable, Rule* branch)
 {
-    this->statement = statement;
+    this->statement = variable + " := " + branch->getStatement();
     branches.push_back(branch);
     middle = 0;
     ruleName = "Assign";

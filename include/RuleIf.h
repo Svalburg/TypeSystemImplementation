@@ -7,7 +7,7 @@
 class RuleIf : public Rule
 {
     public:
-        RuleIf(string statement, Rule* left, Rule* middle, Rule* right);
+        RuleIf(Rule* left, Rule* middle, Rule* right);
         string toStringSigma(string states);
         string toStringE(string states);
         string toStringV(string states);

@@ -1,8 +1,8 @@
 #include "RuleRepeat.h"
 
-RuleRepeat::RuleRepeat(string statement, Rule* left, Rule* right)
+RuleRepeat::RuleRepeat(Rule* left, Rule* right)
 {
-    this->statement = statement;
+    this->statement = "repeat " + left->getStatement() + " begin " + right->getStatement() + " end";
     branches.push_back(left);
     branches.push_back(right);
     this->left = 0;

@@ -7,7 +7,7 @@
 class RuleFuncDef : public Rule
 {
     public:
-        RuleFuncDef(string statement, Rule* left, Rule* right);
+        RuleFuncDef(string functionname, Rule* left, Rule* right);
         string toStringSigma(string states);
         string toStringE(string states);
         string toStringV(string states);
