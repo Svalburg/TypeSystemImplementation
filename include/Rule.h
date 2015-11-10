@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <stdlib.h>
 #include <sstream>
+#include "StateTuple.h"
 
 using namespace std;
 

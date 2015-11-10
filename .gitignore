@@ -21,6 +21,10 @@ $RECYCLE.BIN/
 *.depend
 *.layout
 
+#compiled files
+.o
+.exe
+
 # =========================
 # Operating System Files
 # =========================
