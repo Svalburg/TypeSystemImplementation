@@ -7,7 +7,7 @@
 class RuleCallCmpF : public Rule
 {
     public:
-        RuleCallCmpF(string cmpfname, Rule* branch);
+        RuleCallCmpF(string functionName, Rule* branch);
         string toStringSigma();
         string toStringE();
         string toStringV();
