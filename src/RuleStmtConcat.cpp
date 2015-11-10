@@ -14,15 +14,15 @@ string RuleStmtConcat::toStringSigma()
 {
     string sigma1 = branches.at(left)->toStringSigma();
     string sigma2 = branches.at(right)->toStringSigma(sigma1);
-    return sigma2;
+    return sigma2 + '(' + sigma1 + ')';
 }
 
 string RuleStmtConcat::toStringE()
 {
     string sigma1 = branches.at(left)->toStringSigma();
     string e1 = branches.at(left)->toStringE();
-    string e2 = branches.at(right)->toStringE(sigma1);
-    return e1 + " + " + e2;
+    string e2 = branches.at(right)->toStringE();
+    return e1 + " + " + e2 + '(' + sigma1 + ')';
 }
 
 string RuleStmtConcat::toStringV()

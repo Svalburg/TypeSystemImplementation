@@ -8,12 +8,12 @@ RuleSkip::RuleSkip()
 
 string RuleSkip::toStringSigma()
 {
-    return states;
+    return "id";
 }
 
 string RuleSkip::toStringE()
 {
-    return "nil";
+    return "zero";
 }
 
 string RuleSkip::toStringV()

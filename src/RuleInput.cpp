@@ -8,7 +8,7 @@ RuleInput::RuleInput(string statement)
 
 string RuleInput::toStringSigma()
 {
-    return states;
+    return "id";
 }
 
 string RuleInput::toStringE()
@@ -18,7 +18,7 @@ string RuleInput::toStringE()
 
 string RuleInput::toStringV()
 {
-    return "Lookup_" + statement + '(' + states + ')';
+    return "Lookup_" + statement;
 }
 
 RuleInput::~RuleInput()

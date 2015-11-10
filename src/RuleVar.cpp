@@ -8,7 +8,7 @@ RuleVar::RuleVar(string statement)
 
 string RuleVar::toStringSigma()
 {
-    return states;
+    return "id";
 }
 
 string RuleVar::toStringE()
@@ -18,7 +18,7 @@ string RuleVar::toStringE()
 
 string RuleVar::toStringV()
 {
-    return "Lookup_" + statement + '(' + states + ')';
+    return "Lookup_" + statement;
 }
 
 RuleVar::~RuleVar()
