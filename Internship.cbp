@@ -49,6 +49,7 @@
 		<Unit filename="include/RuleSkip.h" />
 		<Unit filename="include/RuleStmtConcat.h" />
 		<Unit filename="include/RuleVar.h" />
+		<Unit filename="include/StateTuple.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Rule.cpp" />
 		<Unit filename="src/RuleAssign.cpp" />
@@ -65,6 +66,7 @@
 		<Unit filename="src/RuleSkip.cpp" />
 		<Unit filename="src/RuleStmtConcat.cpp" />
 		<Unit filename="src/RuleVar.cpp" />
+		<Unit filename="src/StateTuple.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
