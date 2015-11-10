@@ -6,17 +6,17 @@ RuleInput::RuleInput(string statement)
     ruleName = "Input";
 }
 
-string RuleInput::toStringSigma(string states)
+string RuleInput::toStringSigma()
 {
     return states;
 }
 
-string RuleInput::toStringE(string states)
+string RuleInput::toStringE()
 {
-    return "td_ec(t_input)(" + states + ')';
+    return "td_ec(t_input)";
 }
 
-string RuleInput::toStringV(string states)
+string RuleInput::toStringV()
 {
     return "Lookup_" + statement + '(' + states + ')';
 }

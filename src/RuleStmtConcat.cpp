@@ -10,22 +10,22 @@ RuleStmtConcat::RuleStmtConcat(Rule* left, Rule* right)
     ruleName = "StmtConcat";
 }
 
-string RuleStmtConcat::toStringSigma(string states)
+string RuleStmtConcat::toStringSigma()
 {
-    string sigma1 = branches.at(left)->toStringSigma(states);
+    string sigma1 = branches.at(left)->toStringSigma();
     string sigma2 = branches.at(right)->toStringSigma(sigma1);
     return sigma2;
 }
 
-string RuleStmtConcat::toStringE(string states)
+string RuleStmtConcat::toStringE()
 {
-    string sigma1 = branches.at(left)->toStringSigma(states);
-    string e1 = branches.at(left)->toStringE(states);
+    string sigma1 = branches.at(left)->toStringSigma();
+    string e1 = branches.at(left)->toStringE();
     string e2 = branches.at(right)->toStringE(sigma1);
     return e1 + " + " + e2;
 }
 
-string RuleStmtConcat::toStringV(string states)
+string RuleStmtConcat::toStringV()
 {
     exit(-3);
 }

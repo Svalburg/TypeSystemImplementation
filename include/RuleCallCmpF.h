@@ -8,9 +8,9 @@ class RuleCallCmpF : public Rule
 {
     public:
         RuleCallCmpF(string cmpfname, Rule* branch);
-        string toStringSigma(string states);
-        string toStringE(string states);
-        string toStringV(string states);
+        string toStringSigma();
+        string toStringE();
+        string toStringV();
         virtual ~RuleCallCmpF();
     protected:
     private:

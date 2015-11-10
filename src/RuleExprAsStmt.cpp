@@ -8,17 +8,17 @@ RuleExprAsStmt::RuleExprAsStmt(Rule* branch)
     ruleName = "ExprAsStmt";
 }
 
-string RuleExprAsStmt::toStringSigma(string states)
+string RuleExprAsStmt::toStringSigma()
 {
-    return branches.at(middle)->toStringSigma(states);
+    return branches.at(middle)->toStringSigma();
 }
 
-string RuleExprAsStmt::toStringE(string states)
+string RuleExprAsStmt::toStringE()
 {
-    return branches.at(middle)->toStringE(states);
+    return branches.at(middle)->toStringE();
 }
 
-string RuleExprAsStmt::toStringV(string states)
+string RuleExprAsStmt::toStringV()
 {
     exit(-3);
 }

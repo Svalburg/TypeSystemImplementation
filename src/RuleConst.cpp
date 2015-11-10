@@ -6,19 +6,19 @@ RuleConst::RuleConst(string statement)
     ruleName = "Const";
 }
 
-string RuleConst::toStringSigma(string states)
+string RuleConst::toStringSigma()
 {
     return states;
 }
 
-string RuleConst::toStringE(string states)
+string RuleConst::toStringE()
 {
-    return "td_ec(t_const)(" + states + ')';
+    return "td_ec(t_const)";
 }
 
-string RuleConst::toStringV(string states)
+string RuleConst::toStringV()
 {
-    return "Const_N(" + statement + ")(" + states + ')';
+    return "Const_N(" + statement + ")";
 }
 
 RuleConst::~RuleConst()

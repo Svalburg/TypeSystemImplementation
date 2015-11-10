@@ -8,9 +8,9 @@ class RuleFuncDef : public Rule
 {
     public:
         RuleFuncDef(string functionname, Rule* left, Rule* right);
-        string toStringSigma(string states);
-        string toStringE(string states);
-        string toStringV(string states);
+        string toStringSigma();
+        string toStringE();
+        string toStringV();
         virtual ~RuleFuncDef();
     protected:
     private:

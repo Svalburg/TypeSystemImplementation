@@ -14,25 +14,25 @@ RuleCallF::RuleCallF(string functionname, Rule* branch)
         exit(-1);
 }
 
-string RuleCallF::toStringSigma(string states)
+string RuleCallF::toStringSigma()
 {
-    string v = branches.at(middle)->toStringV(states);
-    string sigma = branches.at(middle)->toStringSigma(states);
+    string v = branches.at(middle)->toStringV();
+    string sigma = branches.at(middle)->toStringSigma();
     return "Sigma_" + functionName + '[' + v + "](" + sigma + ')';
 }
 
-string RuleCallF::toStringE(string states)
+string RuleCallF::toStringE()
 {
-    string v = branches.at(middle)->toStringV(states);
-    string e = branches.at(middle)->toStringE(states);
-    string sigma = branches.at(middle)->toStringSigma(states);
+    string v = branches.at(middle)->toStringV();
+    string e = branches.at(middle)->toStringE();
+    string sigma = branches.at(middle)->toStringSigma();
     return e + " + E_" + functionName + "[" + v + "](" + sigma + ')';
 }
 
-string RuleCallF::toStringV(string states)
+string RuleCallF::toStringV()
 {
-    string v = branches.at(middle)->toStringV(states);
-    return "V_" + functionName + "[" + v + "](" + states + ')';
+    string v = branches.at(middle)->toStringV();
+    return "V_" + functionName + "[" + v + "]";
 }
 
 RuleCallF::~RuleCallF()

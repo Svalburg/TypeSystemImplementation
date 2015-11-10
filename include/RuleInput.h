@@ -8,9 +8,9 @@ class RuleInput : public Rule
 {
     public:
         RuleInput(string statement);
-        string toStringSigma(string states);
-        string toStringE(string states);
-        string toStringV(string states);
+        string toStringSigma();
+        string toStringE();
+        string toStringV();
         virtual ~RuleInput();
     protected:
     private:

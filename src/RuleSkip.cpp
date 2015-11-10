@@ -6,17 +6,17 @@ RuleSkip::RuleSkip()
     ruleName = "Skip";
 }
 
-string RuleSkip::toStringSigma(string states)
+string RuleSkip::toStringSigma()
 {
     return states;
 }
 
-string RuleSkip::toStringE(string states)
+string RuleSkip::toStringE()
 {
-    return "nil(" + states + ')';
+    return "nil";
 }
 
-string RuleSkip::toStringV(string states)
+string RuleSkip::toStringV()
 {
     exit(-3);
 }

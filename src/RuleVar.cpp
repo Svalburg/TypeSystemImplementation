@@ -6,17 +6,17 @@ RuleVar::RuleVar(string statement)
     ruleName = "Var";
 }
 
-string RuleVar::toStringSigma(string states)
+string RuleVar::toStringSigma()
 {
     return states;
 }
 
-string RuleVar::toStringE(string states)
+string RuleVar::toStringE()
 {
-    return "td_ec(t_var)(" + states + ')';
+    return "td_ec(t_var)";
 }
 
-string RuleVar::toStringV(string states)
+string RuleVar::toStringV()
 {
     return "Lookup_" + statement + '(' + states + ')';
 }

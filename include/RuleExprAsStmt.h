@@ -8,9 +8,9 @@ class RuleExprAsStmt : public Rule
 {
     public:
         RuleExprAsStmt(Rule* branch);
-        string toStringSigma(string states);
-        string toStringE(string states);
-        string toStringV(string states);
+        string toStringSigma();
+        string toStringE();
+        string toStringV();
         virtual ~RuleExprAsStmt();
     protected:
     private:

@@ -8,9 +8,9 @@ class RuleCallF : public Rule
 {
     public:
         RuleCallF(string functionname, Rule* branch);
-        string toStringSigma(string states);
-        string toStringE(string states);
-        string toStringV(string states);
+        string toStringSigma();
+        string toStringE();
+        string toStringV();
         virtual ~RuleCallF();
     protected:
     private:

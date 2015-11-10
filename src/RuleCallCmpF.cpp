@@ -8,24 +8,24 @@ RuleCallCmpF::RuleCallCmpF(string cmpfname, Rule* branch)
     ruleName = "CallCmpF";
 }
 
-string RuleCallCmpF::toStringSigma(string states)
+string RuleCallCmpF::toStringSigma()
 {
-    string sigma = branches.at(middle)->toStringSigma(states);
+    string sigma = branches.at(middle)->toStringSigma();
     return "Sigma_" + functionName + '(' + sigma + ')';
 }
 
-string RuleCallCmpF::toStringE(string states)
+string RuleCallCmpF::toStringE()
 {
-    string v = branches.at(middle)->toStringV(states);
-    string e = branches.at(middle)->toStringE(states);
-    string sigma = branches.at(middle)->toStringSigma(states);
+    string v = branches.at(middle)->toStringV();
+    string e = branches.at(middle)->toStringE();
+    string sigma = branches.at(middle)->toStringSigma();
     return e + " + td_ec(t_" + functionName + ")(" + sigma + ") + E_" + functionName + "[" + v + "](" + sigma + ')';
 }
 
-string RuleCallCmpF::toStringV(string states)
+string RuleCallCmpF::toStringV()
 {
-    string v = branches.at(middle)->toStringV(states);
-    return "V_" + functionName + "[" + v + "](" + states + ')';
+    string v = branches.at(middle)->toStringV();
+    return "V_" + functionName + "[" + v + "]";
 }
 
 RuleCallCmpF::~RuleCallCmpF()

@@ -8,7 +8,7 @@ RuleAssign::RuleAssign(string variable, Rule* branch)
     ruleName = "Assign";
 }
 
-string RuleAssign::toStringSigma(string states)
+string RuleAssign::toStringSigma()
 {
     size_t found = statement.find(":=");
     //extract variable name from statement
@@ -17,21 +17,21 @@ string RuleAssign::toStringSigma(string states)
         x = statement.erase(found);
     else
         exit(-2);
-    string sigma = branches.at(middle)->toStringSigma(states);
-    string v = branches.at(middle)->toStringV(states);
+    string sigma = branches.at(middle)->toStringSigma();
+    string v = branches.at(middle)->toStringV();
     return "Assign_" + x + '(' + v + ")(" + sigma + ')';
 }
 
-string RuleAssign::toStringE(string states)
+string RuleAssign::toStringE()
 {
-    string sigma = branches.at(middle)->toStringSigma(states);
-    string e = branches.at(middle)->toStringE(states);
+    string sigma = branches.at(middle)->toStringSigma();
+    string e = branches.at(middle)->toStringE();
     return e + " + " + "td_ec(t_assign)(" + sigma + ')';
 }
 
-string RuleAssign::toStringV(string states)
+string RuleAssign::toStringV()
 {
-    return branches.at(middle)->toStringV(states);
+    return branches.at(middle)->toStringV();
 }
 
 RuleAssign::~RuleAssign()

@@ -8,9 +8,9 @@ class RuleConst : public Rule
 {
     public:
         RuleConst(string statement);
-        string toStringSigma(string states);
-        string toStringE(string states);
-        string toStringV(string states);
+        string toStringSigma();
+        string toStringE();
+        string toStringV();
         virtual ~RuleConst();
     protected:
     private:

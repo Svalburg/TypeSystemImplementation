@@ -12,28 +12,28 @@ RuleIf::RuleIf(Rule* left, Rule* middle, Rule* right)
     ruleName = "If";
 }
 
-string RuleIf::toStringSigma(string states)
+string RuleIf::toStringSigma()
 {
     string vex = "V_" + branches.at(left)->getPath();
     string sigmaex = "Sigma_" + branches.at(left)->getPath();
     string sigmat = "Sigma_" + branches.at(middle)->getPath();
     string sigmaf = "Sigma_" + branches.at(right)->getPath();
-    return "if(" + vex + ", " + sigmaex + ">>>" + sigmat + ", " + sigmaex + ">>>" + sigmaf + ")(" + states + ')';
+    return "if(" + vex + ", " + sigmaex + ">>>" + sigmat + ", " + sigmaex + ">>>" + sigmaf + ")";
 }
 
-string RuleIf::toStringE(string states)
+string RuleIf::toStringE()
 {
-    string e_ex = branches.at(left)->toStringE(states);
-    string sigma = branches.at(left)->toStringSigma(states);
+    string e_ex = branches.at(left)->toStringE();
+    string sigma = branches.at(left)->toStringSigma();
     string vex = "V_" + branches.at(left)->getPath();
     string sigmaex = "Sigma_" + branches.at(left)->getPath();
     string et = "E_" + branches.at(middle)->getPath();
     string ef = "E_" + branches.at(right)->getPath();
     return e_ex + " + td_ec(t_if)(" + sigma + ") + if(" + vex + ", "
-        + sigmaex + ">>>" + et + ", " + sigmaex + ">>>" + ef + ")(" + states + ')';
+        + sigmaex + ">>>" + et + ", " + sigmaex + ">>>" + ef + ")";
 }
 
-string RuleIf::toStringV(string states)
+string RuleIf::toStringV()
 {
     exit(-3);
 }

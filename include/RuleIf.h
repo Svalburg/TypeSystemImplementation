@@ -8,9 +8,9 @@ class RuleIf : public Rule
 {
     public:
         RuleIf(Rule* left, Rule* middle, Rule* right);
-        string toStringSigma(string states);
-        string toStringE(string states);
-        string toStringV(string states);
+        string toStringSigma();
+        string toStringE();
+        string toStringV();
         virtual ~RuleIf();
     protected:
     private:

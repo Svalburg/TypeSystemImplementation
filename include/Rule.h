@@ -18,9 +18,9 @@ class Rule
         string getStatement();
         string getPath();
         void updatePath();
-        virtual string toStringSigma(string states) = 0;
-        virtual string toStringE(string states) = 0;
-        virtual string toStringV(string states) = 0;
+        virtual string toStringSigma() = 0;
+        virtual string toStringE() = 0;
+        virtual string toStringV() = 0;
     protected:
         vector<Rule*> branches;
         string statement;

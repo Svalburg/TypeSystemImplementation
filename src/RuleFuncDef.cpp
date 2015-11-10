@@ -10,17 +10,17 @@ RuleFuncDef::RuleFuncDef(string functionname, Rule* left, Rule* right)
     ruleName = "FuncDef";
 }
 
-string RuleFuncDef::toStringSigma(string states)
+string RuleFuncDef::toStringSigma()
 {
-    return branches.at(right)->toStringSigma(states);
+    return branches.at(right)->toStringSigma();
 }
 
-string RuleFuncDef::toStringE(string states)
+string RuleFuncDef::toStringE()
 {
-    return branches.at(right)->toStringSigma(states);
+    return branches.at(right)->toStringSigma();
 }
 
-string RuleFuncDef::toStringV(string states)
+string RuleFuncDef::toStringV()
 {
     exit(-3);
 }

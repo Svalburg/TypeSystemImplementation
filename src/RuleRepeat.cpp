@@ -10,25 +10,25 @@ RuleRepeat::RuleRepeat(Rule* left, Rule* right)
     ruleName = "Repeat";
 }
 
-string RuleRepeat::toStringSigma(string states)
+string RuleRepeat::toStringSigma()
 {
     string vex = "V_" + branches.at(left)->getPath();
     string sigmaex = "Sigma_" + branches.at(left)->getPath();
     string sigmast = "Sigma_" + branches.at(right)->getPath();
-    return "repeat_v(" + vex + ", " + sigmaex + ", " + sigmast + ")(" + states + ')';
+    return "repeat_v(" + vex + ", " + sigmaex + ", " + sigmast + ")";
 }
 
-string RuleRepeat::toStringE(string states)
+string RuleRepeat::toStringE()
 {
     string vex = "V_" + branches.at(left)->getPath();
     string sigmaex = "Sigma_" + branches.at(left)->getPath();
-    string e_ex = branches.at(left)->toStringE(states);
+    string e_ex = branches.at(left)->toStringE();
     string est = "E_" + branches.at(right)->getPath();
     string sigmast = "Sigma_" + branches.at(right)->getPath();
-    return e_ex + " + repeat_ex(" + vex + ", " + sigmaex + ", " + est + ", " + sigmast + ")(" + states + ')';
+    return e_ex + " + repeat_ex(" + vex + ", " + sigmaex + ", " + est + ", " + sigmast + ")";
 }
 
-string RuleRepeat::toStringV(string states)
+string RuleRepeat::toStringV()
 {
     exit(-3);
 }
