@@ -2,6 +2,7 @@
 
 RuleAssign::RuleAssign(string variable, Rule* branch)
 {
+    this->variable = variable;
     this->statement = variable + " := " + branch->getStatement();
     branches.push_back(branch);
     middle = 0;
@@ -10,16 +11,9 @@ RuleAssign::RuleAssign(string variable, Rule* branch)
 
 string RuleAssign::toStringSigma()
 {
-    size_t found = statement.find(":=");
-    //extract variable name from statement
-    string x;
-    if(found != string::npos)
-        x = statement.erase(found);
-    else
-        exit(-2);
     string sigma = branches.at(middle)->toStringSigma();
     string v = branches.at(middle)->toStringV();
-    return "Assign_" + x + '(' + v + ")(" + sigma + ')';
+    return "Assign_" + variable + '(' + v + ")(" + sigma + ')';
 }
 
 string RuleAssign::toStringE()

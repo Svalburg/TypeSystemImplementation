@@ -8,7 +8,7 @@ RuleConst::RuleConst(string statement)
 
 string RuleConst::toStringSigma()
 {
-    return states;
+    return "id";
 }
 
 string RuleConst::toStringE()

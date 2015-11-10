@@ -14,6 +14,7 @@ class RuleAssign : public Rule
         virtual ~RuleAssign();
     protected:
     private:
+        string variable;
 };
 
 #endif // RULEASSIGN_H
