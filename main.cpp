@@ -26,7 +26,7 @@ int main()
     RuleStmtConcat* s2 = new RuleStmtConcat(on, s3);
     RuleStmtConcat* root = new RuleStmtConcat(assx, s2);
     root->updatePath();
-    cout << root->toStringSigma();
+    cout << root->getStatement();
     getchar();
     return 0;
 }

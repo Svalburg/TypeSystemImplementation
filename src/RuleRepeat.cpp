@@ -2,7 +2,7 @@
 
 RuleRepeat::RuleRepeat(Rule* left, Rule* right)
 {
-    this->statement = "repeat " + left->getStatement() + " begin " + right->getStatement() + " end";
+    this->statement = "repeat " + left->getStatement() + " begin\n" + right->getStatement() + "\n" + "end";
     branches.push_back(left);
     branches.push_back(right);
     this->left = 0;
