@@ -20,7 +20,7 @@ string RuleAssign::toStringE()
 {
     string sigma = branches.at(middle)->toStringSigma();
     string e = branches.at(middle)->toStringE();
-    return e + " + (" + sigma + ">>> td_ec(t_assign) )";
+    return e + " + (" + sigma + " >>> td_ec(t_assign) )";
 }
 
 string RuleAssign::toStringV()

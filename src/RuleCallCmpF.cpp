@@ -22,7 +22,7 @@ string RuleCallCmpF::toStringE()
     string path = branches.at(middle)->getPath();
     string e = branches.at(middle)->toStringE();
     string sigma = branches.at(middle)->toStringSigma();
-    return e + " + ( [ x_" + functionName + "<- V_" + path + ", Sigma_" + path +
+    return e + " + ( [ x_" + functionName + " <- V_" + path + ", Sigma_" + path +
             " ] >>> ( td_ec(t_" + functionName + ") + E_" + functionName + " ) )" ;
 }
 

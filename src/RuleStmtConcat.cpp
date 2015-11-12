@@ -22,7 +22,7 @@ string RuleStmtConcat::toStringE()
     string sigma1 = branches.at(left)->toStringSigma();
     string e1 = branches.at(left)->toStringE();
     string e2 = branches.at(right)->toStringE();
-    return e1 + " + \n(" + sigma1 + " >>> " + e2 + ')';
+    return e1 + " + \n( " + sigma1 + " >>> " + e2 + " )";
 }
 
 string RuleStmtConcat::toStringV()
