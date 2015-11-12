@@ -2,6 +2,7 @@
 
 Rule::Rule()
 {
+	branches.reserve(3);
     path = "";
 }
 
