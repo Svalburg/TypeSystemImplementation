@@ -1,49 +1,55 @@
 #include "StateTuple.h"
 
 StateTuple::StateTuple()
+{}
+
+int StateTuple::getCStateValue(string name)
 {
-    cState = "";
-    pState = "";
+	for(int i = 0; i < cState.size(); i++)
+		if(name == cState.at(i).name)
+			return cState.at(i).value;
+	cout << "Value has not been declared.\n";
+	getchar();
+	exit(-4);
 }
 
-StateTuple::StateTuple(string cState, string pState)
+int StateTuple::getPStateValue(string name)
 {
-    this->cState = cState;
-    this->pState = pState;
+	for(int i = 0; i < pState.size(); i++)
+		if(name == pState.at(i).name)
+			return pState.at(i).value;
+	cout << "Value has not been declared.\n";
+	getchar();
+	exit(-4);
 }
 
-string StateTuple::getCState()
+void StateTuple::declareCState(string name, int value)
 {
-    return cState;
+	for(int i = 0; i < cState.size(); i++)
+		if(name == cState.at(i).name)
+		{
+			cState.at(i).value = value;
+			return;
+		}
+	declaration newvar;
+	newvar.name = name;
+	newvar.value = value;
+	cState.push_back(newvar);
 }
 
-string StateTuple::getPState()
+void StateTuple::declarePState(string name, int value)
 {
-    return pState;
-}
-
-string StateTuple::getTuple()
-{
-    return '(' + pState + ", " + cState + ')';
-}
-
-void StateTuple::setCState(string cState)
-{
-    this->cState = cState;
-}
-
-void StateTuple::setPState(string pState)
-{
-    this->pState = pState;
-}
-
-void StateTuple::setBoth(string cState, string pState)
-{
-    this->cState = cState;
-    this->pState = pState;
+	for(int i = 0; i < pState.size(); i++)
+		if(name == pState.at(i).name)
+		{
+			pState.at(i).value = value;
+			return;
+		}
+	declaration newvar;
+	newvar.name = name;
+	newvar.value = value;
+	pState.push_back(newvar);
 }
 
 StateTuple::~StateTuple()
-{
-    //dtor
-}
+{}

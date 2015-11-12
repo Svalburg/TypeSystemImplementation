@@ -15,7 +15,7 @@ int main()
     RuleCallCmpF* antqueue = new RuleCallCmpF("antenna.Queue", x);
     RuleCallCmpF* send = new RuleCallCmpF("antenna.Send", zero);
     RuleCallCmpF* receive = new RuleCallCmpF("DataCenter.Receive", zero);
-    RuleAssign* assy = new RuleAssign("y", read);
+    RuleAssign* assy = new RuleAssign("y", receive);
     RuleVar* y = new RuleVar("y");
     RuleCallCmpF* store = new RuleCallCmpF("DataCenter.Store", y);
     RuleCallCmpF* off = new RuleCallCmpF("antenna.Off", zero);

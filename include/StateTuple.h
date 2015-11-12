@@ -2,6 +2,8 @@
 #define STATETUPLE_H
 
 #include <string>
+#include <vector>
+#include <iostream>
 
 using namespace std;
 
@@ -9,18 +11,20 @@ class StateTuple
 {
     public:
         StateTuple();
-        StateTuple(string cState, string pState);
-        string getCState();
-        string getPState();
-        string getTuple();
-        void setCState(string cState);
-        void setPState(string pState);
-        void setBoth(string cState, string pState);
+		int getCStateValue(string name);
+		int getPStateValue(string name);
+		void declareCState(string name, int value);
+		void declarePState(string name, int value);
         virtual ~StateTuple();
     protected:
-    private:
-        string cState;
-        string pState;
+	private:
+		struct declaration
+		{
+			string name;
+			int value;
+		};
+		vector<declaration> cState;
+		vector<declaration> pState;
 };
 
 #endif // STATETUPLE_H
