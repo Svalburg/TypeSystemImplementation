@@ -36,7 +36,8 @@ int RuleAssign::value(StateTuple states)
 StateTuple RuleAssign::sigma(StateTuple states)
 {
     StateTuple sigma1 = branches.at(middle)->sigma(states);
-    return sigma1->declarePState(variable, this->value(states));
+    sigma1.declarePState(variable, this->value(states));
+    return sigma1;
 }
 
 RuleAssign::~RuleAssign()

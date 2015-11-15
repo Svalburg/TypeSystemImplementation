@@ -37,28 +37,60 @@ int RuleBinOp::value(StateTuple states)
 {
     int v1 = branches.at(left)->value(states);
     StateTuple sigma1 = branches.at(left)->sigma(states);
-    int v2 = branches.at(right)->values(sigma1);
-    switch(binop)
+    int v2 = branches.at(right)->value(sigma1);
+    if(binop == "+")
+        return v1 + v2;
+    else if(binop == "-")
+        return v1 - v2;
+    else if(binop == "*")
+        return v1 * v2;
+    else if (binop == ">")
     {
-        case "+": return v1 + v2; break;
-        case "-": return v1 - v2; break;
-        case "*": return v1 * v2; break;
-        case ">": if(v1 > v2){return 1;} 
-            else {return 0;} break; 
-        case ">=": if(v1 >= v2){return 1;} 
-            else {return 0;} break; 
-        case "==": if(v1 == v2){return 1;} 
-            else {return 0;} break;
-        case "!=": if(v1!= v2){return 1;} 
-            else {return 0;} break; 
-        case "<=": if(v1 <= v2){return 1;} 
-            else {return 0;} break; 
-        case "<": if(v1 < v2){return 1;} 
-            else {return 0;} break; 
-        case "and": if(v1 != 0 && v2 != 0){return 1;} 
-            else {return 0;} break; 
-        case "or": if(v1 != 0 || v2 != 0){return 1;} 
-            else {return 0;} break; 
+        if(v1 > v2)
+            return 1;
+        else return 0;
+    }
+    else if (binop == ">=")
+    {
+        if(v1 >= v2)
+            return 1;
+        else return 0;
+    }
+    else if (binop == "==")
+    {
+        if(v1 == v2)
+            return 1;
+        else return 0;
+    }
+    else if (binop == "!=")
+    {
+        if(v1 != v2)
+            return 1;
+        else return 0;
+    }
+    else if (binop == "<=")
+    {
+        if(v1 <= v2)
+            return 1;
+        else return 0;
+    }
+    else if (binop == "<")
+    {
+        if(v1 < v2)
+            return 1;
+        else return 0;
+    }
+    else if (binop == "and")
+    {
+        if(v1 != 0 && v2 != 0)
+            return 1;
+        else return 0;
+    }
+    else if (binop == "or")
+    {
+        if(v1 != 0 || v2 != 0)
+            return 1;
+        else return 0;
     }
     exit(-5);
 }
