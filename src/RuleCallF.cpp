@@ -48,11 +48,11 @@ StateTuple RuleCallF::sigma(StateTuple states)
 {
     //not final version, awaiting implementation of an environment so Component function changes 
     //can be taken into account.
-    sigma1 = branches.at(middle)->sigma(states);
-    vector<declaration> pstate = sigma1.getPState();
-    vector<declaration> cstate = sigma1.getCState();
-    StateTuple newstate = new StateTuple(pstate, cstate);
-    return newstate;
+    StateTuple sigma1 = branches.at(middle)->sigma(states);
+    vector<StateTuple::declaration> pstate = sigma1.getPState();
+    vector<StateTuple::declaration> cstate = sigma1.getCState();
+    StateTuple* newstate = new StateTuple(pstate, cstate);
+    return (*newstate);
 }
 
 RuleCallF::~RuleCallF()

@@ -45,7 +45,7 @@ int RuleIf::value(StateTuple states)
 
 StateTuple RuleIf::sigma(StateTuple states)
 {
-	Rule::StateTuple sigma_ex = branches.at(left)->sigma(states);
+	StateTuple sigma_ex = branches.at(left)->sigma(states);
 	if(branches.at(left)->value(states) != 0)
 		return branches.at(middle)->sigma(sigma_ex);
 	else

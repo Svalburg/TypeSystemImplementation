@@ -27,7 +27,7 @@ int RuleConst::value(StateTuple states)
     return atoi(statement.c_str());
 }
 
-StateTuple RuleConst:sigma(StateTuple states)
+StateTuple RuleConst::sigma(StateTuple states)
 {
     return states;
 }
