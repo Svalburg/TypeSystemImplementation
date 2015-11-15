@@ -28,6 +28,17 @@ string RuleAssign::toStringV()
     return branches.at(middle)->toStringV();
 }
 
+int RuleAssign::value(StateTuple states)
+{
+    return branches.at(middle)->value(states);
+}
+
+StateTuple RuleAssign::sigma(StateTuple states)
+{
+    StateTuple sigma1 = branches.at(middle)->sigma(states);
+    return sigma1->declarePState(variable, this->value(states));
+}
+
 RuleAssign::~RuleAssign()
 {
     //dtor

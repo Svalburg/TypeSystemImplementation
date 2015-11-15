@@ -21,6 +21,17 @@ string RuleConst::toStringV()
     return "Const_N(" + statement + ")";
 }
 
+int RuleConst::value(StateTuple states)
+{
+    //returns the value of the constant as in the statement
+    return atoi(statement.c_str());
+}
+
+StateTuple RuleConst:sigma(StateTuple states)
+{
+    return states;
+}
+
 RuleConst::~RuleConst()
 {
     //dtor

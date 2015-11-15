@@ -23,6 +23,16 @@ string RuleExprAsStmt::toStringV()
     exit(-3);
 }
 
+int RuleExprAsStmt::value(StateTuple states)
+{
+    exit(-4);
+}
+
+StateTuple RuleExprAsStmt::sigma(StateTuple states)
+{
+    return branches.at(middle)->sigma(states);
+}
+
 RuleExprAsStmt::~RuleExprAsStmt()
 {
     //dtor

@@ -33,6 +33,43 @@ string RuleBinOp::toStringV()
     return v1 + ' ' + binop + ' ' + v2;
 }
 
+int RuleBinOp::value(StateTuple states)
+{
+    int v1 = branches.at(left)->value(states);
+    StateTuple sigma1 = branches.at(left)->sigma(states);
+    int v2 = branches.at(right)->values(sigma1);
+    switch(binop)
+    {
+        case "+": return v1 + v2; break;
+        case "-": return v1 - v2; break;
+        case "*": return v1 * v2; break;
+        case ">": if(v1 > v2){return 1;} 
+            else {return 0;} break; 
+        case ">=": if(v1 >= v2){return 1;} 
+            else {return 0;} break; 
+        case "==": if(v1 == v2){return 1;} 
+            else {return 0;} break;
+        case "!=": if(v1!= v2){return 1;} 
+            else {return 0;} break; 
+        case "<=": if(v1 <= v2){return 1;} 
+            else {return 0;} break; 
+        case "<": if(v1 < v2){return 1;} 
+            else {return 0;} break; 
+        case "and": if(v1 != 0 && v2 != 0){return 1;} 
+            else {return 0;} break; 
+        case "or": if(v1 != 0 || v2 != 0){return 1;} 
+            else {return 0;} break; 
+    }
+    exit(-5);
+}
+
+StateTuple RuleBinOp::sigma(StateTuple states)
+{
+    StateTuple sigma1 = branches.at(left)->sigma(states);
+    StateTuple sigma2 = branches.at(right)->sigma(sigma1);
+    return sigma2;
+}
+
 RuleBinOp::~RuleBinOp()
 {
     //dtor

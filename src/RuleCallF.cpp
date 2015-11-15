@@ -37,6 +37,23 @@ string RuleCallF::toStringV()
     return "[ x_" + functionName + "<- V_" + path + ", Sigma_" + path + "] >>> V_" + functionName;
 }
 
+int RuleCallF::value(StateTuple states)
+{
+    //not final version, awaiting implementation of an environment so Component function changes 
+    //can be taken into account.
+    return branches.at(middle)->value(states);
+}
+
+StateTuple RuleCallF::sigma(StateTuple states)
+{
+    //not final version, awaiting implementation of an environment so Component function changes 
+    //can be taken into account.
+    vector<declaration> pstate = branches.at(middle)->getPState();
+    vector<declaration> cstate = branches.at(middle)->getCState();
+    StateTuple newstate = new StateTuple(pstate, cstate);
+    return newstate;
+}
+
 RuleCallF::~RuleCallF()
 {
     //dtor

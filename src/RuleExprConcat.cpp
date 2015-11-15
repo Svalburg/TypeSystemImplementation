@@ -32,6 +32,20 @@ string RuleExprConcat::toStringV()
     return sigma1 + " >>> " + v;
 }
 
+int RuleExprConcat::value(StateTuple states)
+{
+    StateTuple sigma1 = branches.at(left)->sigma(states);
+    int v = branches.at(right)->value(sigma1);
+    return v;
+}
+
+StateTuple RuleExprConcat::sigma(StateTuple states)
+{
+    StateTuple sigma1 = branches.at(left)->sigma(states);
+    StateTuple sigma2 = branches.at(right)->sigma(sigma1);
+    return sigma2;
+}
+
 RuleExprConcat::~RuleExprConcat()
 {
     //dtor
