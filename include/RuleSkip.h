@@ -11,6 +11,7 @@ class RuleSkip : public Rule
         string toStringSigma();
         string toStringE();
         string toStringV();
+        StateTuple value(StateTuple states);
         virtual ~RuleSkip();
     protected:
     private:

@@ -21,6 +21,7 @@ class Rule
         virtual string toStringSigma() = 0;
         virtual string toStringE() = 0;
         virtual string toStringV() = 0;
+        virtual StateTuple value(StateTuple states) = 0;
     protected:
         vector<Rule*> branches;
         string statement;

@@ -10,6 +10,7 @@ class RuleVar : public Rule
         string toStringSigma();
         string toStringE();
         string toStringV();
+        StateTuple value(StateTuple states);
         virtual ~RuleVar();
     protected:
     private:

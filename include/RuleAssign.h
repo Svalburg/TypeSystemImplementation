@@ -11,6 +11,7 @@ class RuleAssign : public Rule
         string toStringSigma();
         string toStringE();
         string toStringV();
+        StateTuple value(StateTuple states);
         virtual ~RuleAssign();
     protected:
     private:

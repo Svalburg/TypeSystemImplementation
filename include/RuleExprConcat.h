@@ -11,6 +11,7 @@ class RuleExprConcat : public Rule
         string toStringSigma();
         string toStringE();
         string toStringV();
+        StateTuple value(StateTuple states);
         virtual ~RuleExprConcat();
     protected:
     private:
