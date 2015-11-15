@@ -12,6 +12,7 @@ class RuleIf : public Rule
         string toStringE();
         string toStringV();
         int value(StateTuple states);
+		StateTuple sigma(StateTuple states);
         virtual ~RuleIf();
     protected:
     private:

@@ -12,6 +12,7 @@ class RuleCallCmpF : public Rule
         string toStringE();
         string toStringV();
         int value(StateTuple states);
+		StateTuple sigma(StateTuple states);
         virtual ~RuleCallCmpF();
     protected:
     private:
