@@ -9,12 +9,12 @@ using namespace std;
 
 class StateTuple
 {
-	struct declaration
-	{
-		string name;
+	public:
+		struct declaration
+		{
+			string name;
 		int value;
-	};
-    public:
+		};
         StateTuple();
 		StateTuple(vector<declaration> cState, vector<declaration> pState);
 		int getPStateValue(string name);
