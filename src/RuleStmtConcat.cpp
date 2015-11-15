@@ -30,6 +30,17 @@ string RuleStmtConcat::toStringV()
     exit(-3);
 }
 
+int RuleStmtConcat::value(StateTuple states)
+{
+	exit(-3);
+}
+
+StateTuple RuleStmtConcat::sigma(StateTuple states)
+{
+	StateTuple sigma_1 = branches.at(left)->sigma(states);
+	return branches.at(right)->sigma(sigma_1);
+}
+
 RuleStmtConcat::~RuleStmtConcat()
 {
     //dtor

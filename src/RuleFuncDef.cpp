@@ -25,6 +25,16 @@ string RuleFuncDef::toStringV()
     exit(-3);
 }
 
+int RuleFuncDef::value(StateTuple states)
+{
+	exit(-3);
+}
+
+StateTuple RuleFuncDef::sigma(StateTuple states)
+{
+	return branches.at(right)->sigma(states);
+}
+
 RuleFuncDef::~RuleFuncDef()
 {
     //dtor

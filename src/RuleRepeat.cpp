@@ -33,6 +33,23 @@ string RuleRepeat::toStringV()
     exit(-3);
 }
 
+int RuleRepeat::value(StateTuple states)
+{
+	exit(-3);
+}
+
+StateTuple RuleRepeat::sigma(StateTuple states)
+{
+	int c = branches.at(left)->value(states);
+	StateTuple states_now = branches.at(left)->sigma(states);
+	while(c > 0)
+	{
+		states_now = branches.at(right)->sigma(states_now);
+		c = c-1;
+	}
+	return states_now;
+}
+
 RuleRepeat::~RuleRepeat()
 {
     //dtor

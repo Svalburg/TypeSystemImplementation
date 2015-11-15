@@ -38,6 +38,20 @@ string RuleIf::toStringV()
     exit(-3);
 }
 
+int RuleIf::value(StateTuple states)
+{
+	exit(-3);
+}
+
+StateTuple RuleIf::sigma(StateTuple states)
+{
+	Rule::StateTuple sigma_ex = branches.at(left)->sigma(states);
+	if(branches.at(left)->value(states) != 0)
+		return branches.at(middle)->sigma(sigma_ex);
+	else
+		return branches.at(right)->sigma(sigma_ex);
+}
+
 RuleIf::~RuleIf()
 {
     //dtor

@@ -21,6 +21,16 @@ string RuleVar::toStringV()
     return "Lookup_" + statement;
 }
 
+int RuleVar::value(StateTuple states)
+{
+	states.getPStateValue(statement);
+}
+
+StateTuple RuleVar::sigma(StateTuple states)
+{
+	return states;
+}
+
 RuleVar::~RuleVar()
 {
     //dtor
