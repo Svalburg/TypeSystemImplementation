@@ -11,7 +11,7 @@ class RuleExprAsStmt : public Rule
         string toStringSigma();
         string toStringE();
         string toStringV();
-        StateTuple value(StateTuple states);
+        int value(StateTuple states);
         virtual ~RuleExprAsStmt();
     protected:
     private:

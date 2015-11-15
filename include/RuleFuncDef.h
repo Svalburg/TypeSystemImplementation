@@ -11,7 +11,7 @@ class RuleFuncDef : public Rule
         string toStringSigma();
         string toStringE();
         string toStringV();
-        StateTuple value(StateTuple states);
+        int value(StateTuple states);
         virtual ~RuleFuncDef();
     protected:
     private:
