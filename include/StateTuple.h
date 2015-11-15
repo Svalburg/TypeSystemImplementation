@@ -17,12 +17,12 @@ class StateTuple
     public:
         StateTuple();
 		StateTuple(vector<declaration> cState, vector<declaration> pState);
-		int getCStateValue(string name);
 		int getPStateValue(string name);
-		void declareCState(string name, int value);
+		int getCStateValue(string name);
 		void declarePState(string name, int value);
-		vector<declaration> getCState();
+		void declareCState(string name, int value);
 		vector<declaration> getPState();
+		vector<declaration> getCState();
         virtual ~StateTuple();
     protected:
 	private:
