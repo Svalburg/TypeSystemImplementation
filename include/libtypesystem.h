@@ -17,5 +17,6 @@
 #include "RuleStmtConcat.h"
 #include "RuleVar.h"
 #include "StateTuple.h"
+#include "ComponentFunction.h"
 
 #endif // LIBTYPESYSTEM_H_INCLUDED

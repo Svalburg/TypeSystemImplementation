@@ -13,7 +13,7 @@ CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=koen
-Date                   :=15/11/2015
+Date                   :=17/11/2015
 CodeLitePath           :="C:\Program Files\CodeLite"
 LinkerName             :=C:/TDM-GCC-64/bin/g++.exe
 SharedObjectLinkerName :=C:/TDM-GCC-64/bin/g++.exe -shared -fPIC
@@ -63,7 +63,7 @@ AS       := C:/TDM-GCC-64/bin/as.exe
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
 Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_Rule.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleAssign.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleBinOp.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleCallCmpF.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleCallF.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleConst.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleExprAsStmt.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleExprConcat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleFuncDef.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/src_RuleIf.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleInput.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleRepeat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleSkip.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleStmtConcat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleVar.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_StateTuple.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/src_RuleIf.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleInput.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleRepeat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleSkip.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleStmtConcat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleVar.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_StateTuple.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentFunction.cpp$(ObjectSuffix) 
 
 
 
@@ -229,6 +229,14 @@ $(IntermediateDirectory)/src_StateTuple.cpp$(DependSuffix): src/StateTuple.cpp
 
 $(IntermediateDirectory)/src_StateTuple.cpp$(PreprocessSuffix): src/StateTuple.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_StateTuple.cpp$(PreprocessSuffix) "src/StateTuple.cpp"
+
+$(IntermediateDirectory)/src_ComponentFunction.cpp$(ObjectSuffix): src/ComponentFunction.cpp $(IntermediateDirectory)/src_ComponentFunction.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/koen/Documents/GitHub/TypeSystemImplementation/src/ComponentFunction.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_ComponentFunction.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_ComponentFunction.cpp$(DependSuffix): src/ComponentFunction.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_ComponentFunction.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_ComponentFunction.cpp$(DependSuffix) -MM "src/ComponentFunction.cpp"
+
+$(IntermediateDirectory)/src_ComponentFunction.cpp$(PreprocessSuffix): src/ComponentFunction.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_ComponentFunction.cpp$(PreprocessSuffix) "src/ComponentFunction.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
