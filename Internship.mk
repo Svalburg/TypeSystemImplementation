@@ -62,9 +62,9 @@ AS       := C:/TDM-GCC-64/bin/as.exe
 ## User defined environment variables
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
-Objects0=$(IntermediateDirectory)/include_Environment.cpp$(ObjectSuffix) $(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_Rule.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleAssign.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleBinOp.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleCallCmpF.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleCallF.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleConst.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleExprAsStmt.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleExprConcat.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/src_RuleFuncDef.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleIf.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleInput.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleRepeat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleSkip.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleStmtConcat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleVar.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_StateTuple.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_Function.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentFunction.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/src_TimeDependentEC.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_Rule.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleAssign.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleBinOp.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleCallCmpF.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleCallF.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleConst.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleExprAsStmt.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleExprConcat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleFuncDef.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/src_RuleIf.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleInput.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleRepeat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleSkip.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleStmtConcat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleVar.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_StateTuple.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_Function.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentFunction.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_TimeDependentEC.cpp$(ObjectSuffix) \
+	$(IntermediateDirectory)/src_Environment.cpp$(ObjectSuffix) 
 
 
 
@@ -95,14 +95,6 @@ PreBuild:
 ##
 ## Objects
 ##
-$(IntermediateDirectory)/include_Environment.cpp$(ObjectSuffix): include/Environment.cpp $(IntermediateDirectory)/include_Environment.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/koen/Documents/GitHub/TypeSystemImplementation/include/Environment.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/include_Environment.cpp$(ObjectSuffix) $(IncludePath)
-$(IntermediateDirectory)/include_Environment.cpp$(DependSuffix): include/Environment.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/include_Environment.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/include_Environment.cpp$(DependSuffix) -MM "include/Environment.cpp"
-
-$(IntermediateDirectory)/include_Environment.cpp$(PreprocessSuffix): include/Environment.cpp
-	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/include_Environment.cpp$(PreprocessSuffix) "include/Environment.cpp"
-
 $(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
 	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/koen/Documents/GitHub/TypeSystemImplementation/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
@@ -262,6 +254,14 @@ $(IntermediateDirectory)/src_TimeDependentEC.cpp$(DependSuffix): src/TimeDepende
 
 $(IntermediateDirectory)/src_TimeDependentEC.cpp$(PreprocessSuffix): src/TimeDependentEC.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_TimeDependentEC.cpp$(PreprocessSuffix) "src/TimeDependentEC.cpp"
+
+$(IntermediateDirectory)/src_Environment.cpp$(ObjectSuffix): src/Environment.cpp $(IntermediateDirectory)/src_Environment.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/koen/Documents/GitHub/TypeSystemImplementation/src/Environment.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_Environment.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_Environment.cpp$(DependSuffix): src/Environment.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_Environment.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_Environment.cpp$(DependSuffix) -MM "src/Environment.cpp"
+
+$(IntermediateDirectory)/src_Environment.cpp$(PreprocessSuffix): src/Environment.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_Environment.cpp$(PreprocessSuffix) "src/Environment.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
