@@ -3,7 +3,7 @@
 
 #include "Function.h"
 
-class ComponentFunction : public Function 
+class ComponentFunction : public Function
 {
     public:
         ComponentFunction(string component, string name, string argumentName, Rule* definition, 

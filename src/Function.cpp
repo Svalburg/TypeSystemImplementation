@@ -1,11 +1,10 @@
 #include "Function.h"
 
-Function::ComponentFunction(string name, string argumentName, 
-int energy, Rule* definition)
+Function::Function(string name, string argumentName, 
+Rule* definition)
 {
 	this->name = name;
     this->argumentName = argumentName;
-    this->energy = energy;
     this->definition = definition;
 }
 

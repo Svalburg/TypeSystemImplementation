@@ -1,5 +1,5 @@
-#ifndef COMPONENTFUNCTION_H
-#define COMPONENTFUNCTION_H
+#ifndef FUNCTION_H
+#define FUNCTION_H
 
 #include "Rule.h"
 
@@ -21,4 +21,4 @@ class Function
 
 };
 
-#endif // COMPONENTFUNCTION_H
+#endif //FUNCTION_H
