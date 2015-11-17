@@ -1,39 +1,17 @@
 #include "ComponentFunction.h"
 
 ComponentFunction::ComponentFunction(string component, string name, string argumentName, 
-int time, int energy, Rule* definition)
+        Rule* definition, int energy, int time)
+    : Function(name, argumentName, definition)
 {
-	this->component = component;
-	this->name = name;
-    this->argumentName = argumentName;
+    this->component = component;
     this->time = time;
     this->energy = energy;
-    this->definition = definition;
-}
-
-StateTuple ComponentFunction::sigma(StateTuple states)
-{
-    return definition->sigma(states);
-}
-
-int ComponentFunction::value(StateTuple states)
-{
-    return definition->value(states);
-}
-
-string ComponentFunction::getArgumentName()
-{
-    return argumentName;
 }
 
 string ComponentFunction::getComponent()
 {
-	return component;
-}
-
-string ComponentFunction::getName()
-{
-	return name;
+    return component;
 }
 
 int ComponentFunction::getTime()
@@ -48,6 +26,5 @@ int ComponentFunction::getEnergy()
 
 ComponentFunction::~ComponentFunction()
 {
-    //dtor
 }
 

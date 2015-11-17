@@ -113,6 +113,7 @@
     <File Name="include/RuleVar.h"/>
     <File Name="include/StateTuple.h"/>
     <File Name="include/libtypesystem.h"/>
+    <File Name="include/Function.h"/>
     <File Name="include/ComponentFunction.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
@@ -133,6 +134,7 @@
     <File Name="src/RuleStmtConcat.cpp"/>
     <File Name="src/RuleVar.cpp"/>
     <File Name="src/StateTuple.cpp"/>
+    <File Name="src/Function.cpp"/>
     <File Name="src/ComponentFunction.cpp"/>
   </VirtualDirectory>
 </CodeLite_Project>
