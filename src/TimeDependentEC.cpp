@@ -11,6 +11,11 @@ int TimeDependentEC::getEnergyCost(StateTuple states)
 	return rule->value(states);
 }
 
+string TimeDependentEC::getComponentState()
+{
+    return componentState;
+}
+
 TimeDependentEC::~TimeDependentEC()
 {
 	

@@ -7,6 +7,7 @@ class TimeDependentEC {
 	public:
 		TimeDependentEC(string componentState, Rule* rule);
 		int getEnergyCost(StateTuple states);
+        string getComponentState();
 		virtual ~TimeDependentEC();
 	private:
 		string componentState;

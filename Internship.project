@@ -116,6 +116,8 @@
     <File Name="include/Function.h"/>
     <File Name="include/ComponentFunction.h"/>
     <File Name="include/TimeDependentEC.h"/>
+    <File Name="include/Environment.h"/>
+    <File Name="include/Environment.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
     <File Name="main.cpp"/>
