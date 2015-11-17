@@ -114,6 +114,7 @@
     <File Name="include/StateTuple.h"/>
     <File Name="include/libtypesystem.h"/>
     <File Name="include/ComponentFunction.h"/>
+    <File Name="include/TimeDependentEC.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
     <File Name="main.cpp"/>
@@ -134,5 +135,6 @@
     <File Name="src/RuleVar.cpp"/>
     <File Name="src/StateTuple.cpp"/>
     <File Name="src/ComponentFunction.cpp"/>
+    <File Name="src/TimeDependentEC.cpp"/>
   </VirtualDirectory>
 </CodeLite_Project>

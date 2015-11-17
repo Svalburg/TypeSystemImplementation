@@ -15,6 +15,7 @@ int main()
 	RuleCallCmpF* write = new RuleCallCmpF("Meter.Write", varX);
 	RuleStmtConcat* s2 = new RuleStmtConcat(del, write);
 	RuleStmtConcat* root = new RuleStmtConcat(first, s2);
+	root->updatePath();
 	cout << root->getStatement() << ";\n\n";
 	cout << root->toStringE();
 	getchar();

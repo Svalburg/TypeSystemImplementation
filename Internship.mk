@@ -63,7 +63,7 @@ AS       := C:/TDM-GCC-64/bin/as.exe
 ##
 CodeLiteDir:=C:\Program Files\CodeLite
 Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_Rule.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleAssign.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleBinOp.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleCallCmpF.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleCallF.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleConst.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleExprAsStmt.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleExprConcat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleFuncDef.cpp$(ObjectSuffix) \
-	$(IntermediateDirectory)/src_RuleIf.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleInput.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleRepeat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleSkip.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleStmtConcat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleVar.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_StateTuple.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentFunction.cpp$(ObjectSuffix) 
+	$(IntermediateDirectory)/src_RuleIf.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleInput.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleRepeat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleSkip.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleStmtConcat.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_RuleVar.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_StateTuple.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_ComponentFunction.cpp$(ObjectSuffix) $(IntermediateDirectory)/src_TimeDependentEC.cpp$(ObjectSuffix) 
 
 
 
@@ -237,6 +237,14 @@ $(IntermediateDirectory)/src_ComponentFunction.cpp$(DependSuffix): src/Component
 
 $(IntermediateDirectory)/src_ComponentFunction.cpp$(PreprocessSuffix): src/ComponentFunction.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_ComponentFunction.cpp$(PreprocessSuffix) "src/ComponentFunction.cpp"
+
+$(IntermediateDirectory)/src_TimeDependentEC.cpp$(ObjectSuffix): src/TimeDependentEC.cpp $(IntermediateDirectory)/src_TimeDependentEC.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "C:/Users/Sven/Documents/GitHub/TypeSystemImplementation/src/TimeDependentEC.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/src_TimeDependentEC.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/src_TimeDependentEC.cpp$(DependSuffix): src/TimeDependentEC.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/src_TimeDependentEC.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/src_TimeDependentEC.cpp$(DependSuffix) -MM "src/TimeDependentEC.cpp"
+
+$(IntermediateDirectory)/src_TimeDependentEC.cpp$(PreprocessSuffix): src/TimeDependentEC.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/src_TimeDependentEC.cpp$(PreprocessSuffix) "src/TimeDependentEC.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
