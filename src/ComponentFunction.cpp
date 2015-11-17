@@ -1,7 +1,10 @@
 #include "ComponentFunction.h"
 
-ComponentFunction::ComponentFunction(string argumentName, int time, int energy, Rule* definition)
+ComponentFunction::ComponentFunction(string component, string name, string argumentName, 
+int time, int energy, Rule* definition)
 {
+	this->component = component;
+	this->name = name;
     this->argumentName = argumentName;
     this->time = time;
     this->energy = energy;
@@ -21,6 +24,16 @@ int ComponentFunction::value(StateTuple states)
 string ComponentFunction::getArgumentName()
 {
     return argumentName;
+}
+
+string ComponentFunction::getComponent()
+{
+	return component;
+}
+
+string ComponentFunction::getName()
+{
+	return name;
 }
 
 int ComponentFunction::getTime()
