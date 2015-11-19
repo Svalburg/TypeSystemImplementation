@@ -1,7 +1,9 @@
 #include "RuleCallCmpF.h"
+#include "Environment.h"
 
-RuleCallCmpF::RuleCallCmpF(string functionName, Rule* branch)
+RuleCallCmpF::RuleCallCmpF(string componentName, string functionName, Rule* branch)
 {
+    this->componentName = componentName;
     this->functionName = functionName;
     this->statement = functionName + '(' + branch->getStatement() + ')';
     branches.push_back(branch);
@@ -34,20 +36,23 @@ string RuleCallCmpF::toStringV()
 
 int RuleCallCmpF::value(StateTuple states)
 {
-    //not final version, awaiting implementation of an environment so Component function changes 
-    //can be taken into account.
-    return branches.at(middle)->value(states);
+    int v_ex = branches.at(middle)->value(states);
+    StateTuple sigma_ex = branches.at(middle)->sigma(states);
+    ComponentFunction* function = env->getComponentFunction(componentName, functionName);
+    sigma_ex.declarePState(function->getArgumentName(), v_ex);
+    return function->value(sigma_ex);    
 }
 
 StateTuple RuleCallCmpF::sigma(StateTuple states)
 {
-    //not final version, awaiting implementation of an environment so Component function changes 
-    //can be taken into account.
-    StateTuple sigma1 = branches.at(middle)->sigma(states);
-    vector<StateTuple::declaration> pstate = sigma1.getPState();
-    vector<StateTuple::declaration> cstate = sigma1.getCState();
-    StateTuple* newstate = new StateTuple(pstate, cstate);
-    return (*newstate);
+    int v_ex = branches.at(middle)->value(states);
+    StateTuple sigma_ex = branches.at(middle)->sigma(states);
+    vector<StateTuple::declaration> pstate = sigma_ex.getPState();
+    ComponentFunction* function = env->getComponentFunction(componentName, functionName);
+    sigma_ex.declarePState(function->getArgumentName(), v_ex);
+    StateTuple sigma_f = function->sigma(sigma_ex);
+    vector<StateTuple::declaration> cstate = sigma_f.getCState();
+    return *(new StateTuple(pstate, cstate));
 }
 
 RuleCallCmpF::~RuleCallCmpF()

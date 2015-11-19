@@ -7,15 +7,17 @@
 class RuleCallCmpF : public Rule
 {
     public:
-        RuleCallCmpF(string functionName, Rule* branch);
+        RuleCallCmpF(string componentName, string functionName, Rule* branch);
         string toStringSigma();
         string toStringE();
         string toStringV();
         int value(StateTuple states);
 		StateTuple sigma(StateTuple states);
+        int energy(StateTuple states);
         virtual ~RuleCallCmpF();
     protected:
     private:
+        string componentName;
         string functionName;
 };
 

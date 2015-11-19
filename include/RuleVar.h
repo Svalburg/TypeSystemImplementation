@@ -12,6 +12,7 @@ class RuleVar : public Rule
         string toStringV();
         int value(StateTuple states);
 		StateTuple sigma(StateTuple states);
+        int energy(StateTuple states);
         virtual ~RuleVar();
     protected:
     private:

@@ -7,7 +7,7 @@ using namespace std;
 
 int main()
 {
-	RuleConst* zero = new RuleConst("0");
+	/*RuleConst* zero = new RuleConst("0");
 	RuleCallCmpF* read = new RuleCallCmpF("Meter.Read", zero);
 	RuleAssign* first = new RuleAssign("x", read);
 	RuleCallCmpF* del = new RuleCallCmpF("Meter.Delete", zero);
@@ -17,7 +17,7 @@ int main()
 	RuleStmtConcat* root = new RuleStmtConcat(first, s2);
 	root->updatePath();
 	cout << root->getStatement() << ";\n\n";
-	cout << root->toStringE();
+	cout << root->toStringE();*/
 	getchar();
 	return 0;
 }

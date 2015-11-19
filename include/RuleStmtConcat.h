@@ -13,6 +13,7 @@ class RuleStmtConcat : public Rule
         string toStringV();
         int value(StateTuple states);
 		StateTuple sigma(StateTuple states);
+        int energy(StateTuple states);
         virtual ~RuleStmtConcat();
     protected:
     private:

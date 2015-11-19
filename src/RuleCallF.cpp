@@ -1,17 +1,13 @@
 #include "RuleCallF.h"
+#include "Environment.h"
 
-RuleCallF::RuleCallF(string functionname, Rule* branch)
+RuleCallF::RuleCallF(string functionName, Rule* branch)
 {
+    this->functionName = functionName;
     this->statement = functionName + '(' + branch->getStatement() + ')';
     branches.push_back(branch);
     middle = 0;
     ruleName = "CallF";
-    //retrieve the function name from the statement
-    size_t found = statement.find("(");
-    if(found != string::npos)
-        functionName = statement.erase(found);
-    else
-        exit(-1);
 }
 
 string RuleCallF::toStringSigma()
@@ -39,20 +35,23 @@ string RuleCallF::toStringV()
 
 int RuleCallF::value(StateTuple states)
 {
-    //not final version, awaiting implementation of an environment so Component function changes 
-    //can be taken into account.
-    return branches.at(middle)->value(states);
+    int v_ex = branches.at(middle)->value(states);
+    StateTuple sigma_ex = branches.at(middle)->sigma(states);
+    Function* function = env->getFunction(functionName);
+    sigma_ex.declarePState(function->getArgumentName(), v_ex);
+    return function->value(sigma_ex);    
 }
 
 StateTuple RuleCallF::sigma(StateTuple states)
 {
-    //not final version, awaiting implementation of an environment so Component function changes 
-    //can be taken into account.
-    StateTuple sigma1 = branches.at(middle)->sigma(states);
-    vector<StateTuple::declaration> pstate = sigma1.getPState();
-    vector<StateTuple::declaration> cstate = sigma1.getCState();
-    StateTuple* newstate = new StateTuple(pstate, cstate);
-    return (*newstate);
+    int v_ex = branches.at(middle)->value(states);
+    StateTuple sigma_ex = branches.at(middle)->sigma(states);
+    vector<StateTuple::declaration> pstate = sigma_ex.getPState();
+    Function* function = env->getFunction(functionName);
+    sigma_ex.declarePState(function->getArgumentName(), v_ex);
+    StateTuple sigma_f = function->sigma(sigma_ex);
+    vector<StateTuple::declaration> cstate = sigma_f.getCState();
+    return *(new StateTuple(pstate, cstate));
 }
 
 RuleCallF::~RuleCallF()
