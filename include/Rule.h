@@ -7,9 +7,11 @@
 #include <stdlib.h>
 #include <sstream>
 #include "StateTuple.h"
+//#include "Environment.h"
 
 using namespace std;
 
+class Environment;
 class Rule
 {
     public:
@@ -18,6 +20,7 @@ class Rule
         string getStatement();
         string getPath();
         void updatePath();
+		void updateEnvironment(Environment* env);
         virtual string toStringSigma() = 0;
         virtual string toStringE() = 0;
         virtual string toStringV() = 0;
@@ -28,6 +31,7 @@ class Rule
         string statement;
         string ruleName;
         string path;
+		Environment* env;
         int left, right, middle;
     private:
         void updatePath(string path);

@@ -42,7 +42,7 @@ int Environment::getTBinop()
 
 ComponentFunction Environment::getComponentFunction(string component, string name)
 {
-    for(int i=0;i<componentFunctions.size();i++)
+    for(size_t i=0;i<componentFunctions.size();i++)
     {
         ComponentFunction cfunction = componentFunctions.at(i);
         if(cfunction.getComponent() == component && cfunction.getName() == name)
@@ -53,7 +53,7 @@ ComponentFunction Environment::getComponentFunction(string component, string nam
 
 Function Environment::getFunction(string name)
 {    
-    for(int i=0;i<functions.size();i++)
+    for(size_t i=0;i<functions.size();i++)
     {
         Function function = functions.at(i);
         if(function.getName() == name)
@@ -64,7 +64,7 @@ Function Environment::getFunction(string name)
 
 TimeDependentEC Environment::getTimeDependentEC(string componentState)
 {
-    for(int i=0;i<timeDependentEC.size();i++)
+    for(size_t i=0;i<timeDependentEC.size();i++)
     {
         TimeDependentEC timedependent = timeDependentEC.at(i);
         if(timedependent.getComponentState() == componentState)

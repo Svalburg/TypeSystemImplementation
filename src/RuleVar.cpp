@@ -23,7 +23,7 @@ string RuleVar::toStringV()
 
 int RuleVar::value(StateTuple states)
 {
-	states.getPStateValue(statement);
+	return states.getPStateValue(statement);
 }
 
 StateTuple RuleVar::sigma(StateTuple states)

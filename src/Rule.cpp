@@ -1,4 +1,5 @@
 #include "Rule.h"
+#include "Environment.h"
 
 Rule::Rule()
 {
@@ -19,7 +20,7 @@ string Rule::getPath()
 void Rule::updatePath()
 {
     path = "root";
-    for(int i = 0; i < branches.size(); i++)
+    for(size_t i = 0; i < branches.size(); i++)
     {
         stringstream stream;
         stream << path << '-' << i;
@@ -30,12 +31,19 @@ void Rule::updatePath()
 void Rule::updatePath(string path)
 {
     this->path = path;
-    for(int i = 0; i < branches.size(); i++)
+    for(size_t i = 0; i < branches.size(); i++)
     {
         stringstream stream;
         stream << path << '-' << i;
         branches.at(i)->updatePath(stream.str());
     }
+}
+
+void Rule::updateEnvironment(Environment* env)
+{
+	this->env = env;
+	for(size_t i = 0; i < branches.size(); i++)
+		branches.at(i)->updateEnvironment(env);
 }
 
 Rule::~Rule()
