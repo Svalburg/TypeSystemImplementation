@@ -7,7 +7,7 @@
 class RuleFuncDef : public Rule
 {
     public:
-        RuleFuncDef(string functionname, Rule* left, Rule* right);
+        RuleFuncDef(string functionname, string argumentname, Rule* left, Rule* right);
         string toStringSigma();
         string toStringE();
         string toStringV();
@@ -16,6 +16,8 @@ class RuleFuncDef : public Rule
         virtual ~RuleFuncDef();
     protected:
     private:
+        string functionname;
+        string argumentname;
 };
 
 #endif // RULEFUNCDEF_H

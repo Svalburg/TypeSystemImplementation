@@ -1,6 +1,6 @@
 #include "Environment.h"
 
-Environment::Environment(int t_input, int t_const, int t_var, int t_assing, int t_binop,
+Environment::Environment(int t_input, int t_const, int t_var, int t_assign, int t_binop,
                 vector<ComponentFunction> componentFunctions,
                 vector<Function> functions,
                 vector<TimeDependentEC> timeDependent)
@@ -71,6 +71,18 @@ TimeDependentEC Environment::getTimeDependentEC(string componentState)
             return timedependent;
     }
     exit(-6);
+}
+
+Environment Environment::clone()
+{
+    return new Environment(t_input, t_const, t_var, t_assign, t_binop, 
+        componentFunctions, functions, timeDependent);
+}
+
+void addFunction(string name, string argumentName, Rule* definition)
+{
+    Function newfunction = new Function(name, argumentName, definition);
+    functions.push_back(newfunction);
 }
 
 Environment::~Environment()
