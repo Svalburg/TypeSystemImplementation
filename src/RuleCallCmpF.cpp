@@ -55,6 +55,18 @@ StateTuple RuleCallCmpF::sigma(StateTuple states)
     return *(new StateTuple(pstate, cstate));
 }
 
+int RuleCallCmpF::energy(StateTuple states)
+{
+    int e_expr = branches.at(middle)->energy(states);
+    int v_ex = branches.at(middle)->value(states);
+    StateTuple sigma_ex = branches.at(middle)->sigma(states);
+    ComponentFunction* function = env->getComponentFunction(componentName, functionName);
+    sigma_ex.declarePState(function->getArgumentName(), v_ex);
+    int e_func = function->energy(sigma_ex);
+    int time = function.getTime();
+    return e_expr + e_func + td_ec(time, sigma_ex);
+}
+
 RuleCallCmpF::~RuleCallCmpF()
 {
     //dtor

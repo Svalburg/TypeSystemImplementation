@@ -102,6 +102,16 @@ StateTuple RuleBinOp::sigma(StateTuple states)
     return sigma2;
 }
 
+int RuleBinOp::energy(StateTuple states)
+{
+    int e1 = branches.at(left)->energy(states);
+    int e2 = branches.at(right)->energy(sigma1);
+    int time = env.getTBinop();
+    StateTuple sigma1 = branches.at(left)->sigma(states);
+    StateTuple sigma2 = branches.at(right)->sigma(sigma1);
+    return e1 + e2 + td_ec(time, sigma2);
+}
+
 RuleBinOp::~RuleBinOp()
 {
     //dtor

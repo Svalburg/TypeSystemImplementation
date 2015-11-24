@@ -33,6 +33,11 @@ StateTuple RuleExprAsStmt::sigma(StateTuple states)
     return branches.at(middle)->sigma(states);
 }
 
+int RuleExprAsStmt::energy(StateTuple states)
+{
+    return branches.at(middle)->energy(states);
+}
+
 RuleExprAsStmt::~RuleExprAsStmt()
 {
     //dtor

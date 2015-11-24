@@ -40,6 +40,14 @@ StateTuple RuleAssign::sigma(StateTuple states)
     return sigma1;
 }
 
+int RuleAssign:energy(StateTuple states)
+{
+    int e = branches.at(middle)->energy(states);
+    StateTuple sigma = branches.at(middle)->sigma(states);
+    int time = env.getTAssign();
+    return e + td_ec(time, sigma);
+}
+
 RuleAssign::~RuleAssign()
 {
     //dtor

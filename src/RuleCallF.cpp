@@ -54,6 +54,17 @@ StateTuple RuleCallF::sigma(StateTuple states)
     return *(new StateTuple(pstate, cstate));
 }
 
+int RuleCallF::energy(StateTuple states)
+{    
+    int e_expr = branches.at(middle)->energy(states);
+    int v_ex = branches.at(middle)->value(states);
+    StateTuple sigma_ex = branches.at(middle)->sigma(states);
+    Function* function = env->getFunction(functionName);
+    sigma_ex.declarePState(function->getArgumentName(), v_ex);
+    int e_func = function->energy(sigma_ex);
+    return e_expr + e_func;
+}
+
 RuleCallF::~RuleCallF()
 {
     //dtor
