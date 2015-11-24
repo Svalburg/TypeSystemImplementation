@@ -2,7 +2,7 @@
 
 All:
 	@echo "----------Building project:[ Internship - Debug ]----------"
-	@"$(MAKE)" -f  "Internship.mk"
+	$(MAKE) -C "." -f "Internship.mk"
 clean:
 	@echo "----------Cleaning project:[ Internship - Debug ]----------"
-	@"$(MAKE)" -f  "Internship.mk" clean
+	$(MAKE) -C "." -f "Internship.mk" clean

@@ -30,6 +30,8 @@ $RECYCLE.BIN/
 *.exe
 Debug/*
 bin/*
+build/*
+.cmake_dirty
 
 # =========================
 # Operating System Files

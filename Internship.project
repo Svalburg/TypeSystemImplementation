@@ -1,7 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CodeLite_Project Name="Internship">
+  <Plugins>
+    <Plugin Name="CMakePlugin">
+      <![CDATA[[{
+  "name": "Debug",
+  "enabled": true,
+  "buildDirectory": "build",
+  "sourceDirectory": "$(ProjectPath)",
+  "generator": "MinGW Makefiles",
+  "buildType": "",
+  "arguments": [],
+  "parentProject": ""
+ }]]]>
+    </Plugin>
+  </Plugins>
+  <VirtualDirectory Name="parser">
+    <VirtualDirectory Name="lib">
+      <File Name="parser/lib/deque.h"/>
+      <File Name="parser/lib/exception.cpp"/>
+      <File Name="parser/lib/exception.h"/>
+      <File Name="parser/lib/extension.h"/>
+      <File Name="parser/lib/iterators.cpp"/>
+      <File Name="parser/lib/iterators.h"/>
+      <File Name="parser/lib/lib-common.h"/>
+      <File Name="parser/lib/memory.cpp"/>
+      <File Name="parser/lib/memory.h"/>
+      <File Name="parser/lib/memorypool.cpp"/>
+      <File Name="parser/lib/memorypool.debug.cpp"/>
+      <File Name="parser/lib/memorypool.debug.h"/>
+      <File Name="parser/lib/memorypool.h"/>
+      <File Name="parser/lib/parser.cpp"/>
+      <File Name="parser/lib/parser.h"/>
+      <File Name="parser/lib/parser.test.cpp"/>
+      <File Name="parser/lib/queue.cpp"/>
+      <File Name="parser/lib/queue.h"/>
+      <File Name="parser/lib/shared_object.cpp"/>
+      <File Name="parser/lib/shared_object.h"/>
+      <File Name="parser/lib/simplestring.cpp"/>
+      <File Name="parser/lib/simplestring.h"/>
+      <File Name="parser/lib/simplestring.test.cpp"/>
+      <File Name="parser/lib/stack.cpp"/>
+      <File Name="parser/lib/stack.h"/>
+      <File Name="parser/lib/stringparse.cpp"/>
+      <File Name="parser/lib/stringparse.h"/>
+      <File Name="parser/lib/stringparse.test.cpp"/>
+      <File Name="parser/lib/type_hash.cpp"/>
+      <File Name="parser/lib/type_hash.h"/>
+      <File Name="parser/lib/zip.h"/>
+    </VirtualDirectory>
+    <File Name="parser/main.cpp"/>
+    <File Name="parser/parse.cpp"/>
+    <File Name="parser/parse.h"/>
+    <File Name="parser/parse.test.cpp"/>
+    <File Name="parser/test.cpp"/>
+  </VirtualDirectory>
   <Description/>
   <Dependencies/>
+  <VirtualDirectory Name="include">
+    <File Name="include/Rule.h"/>
+    <File Name="include/RuleAssign.h"/>
+    <File Name="include/RuleBinOp.h"/>
+    <File Name="include/RuleCallCmpF.h"/>
+    <File Name="include/RuleCallF.h"/>
+    <File Name="include/RuleConst.h"/>
+    <File Name="include/RuleExprAsStmt.h"/>
+    <File Name="include/RuleExprConcat.h"/>
+    <File Name="include/RuleFuncDef.h"/>
+    <File Name="include/RuleIf.h"/>
+    <File Name="include/RuleInput.h"/>
+    <File Name="include/RuleRepeat.h"/>
+    <File Name="include/RuleSkip.h"/>
+    <File Name="include/RuleStmtConcat.h"/>
+    <File Name="include/RuleVar.h"/>
+    <File Name="include/StateTuple.h"/>
+    <File Name="include/libtypesystem.h"/>
+    <File Name="include/Function.h"/>
+    <File Name="include/ComponentFunction.h"/>
+    <File Name="include/TimeDependentEC.h"/>
+    <File Name="include/Environment.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="src">
+    <File Name="main.cpp"/>
+    <File Name="src/Rule.cpp"/>
+    <File Name="src/RuleAssign.cpp"/>
+    <File Name="src/RuleBinOp.cpp"/>
+    <File Name="src/RuleCallCmpF.cpp"/>
+    <File Name="src/RuleCallF.cpp"/>
+    <File Name="src/RuleConst.cpp"/>
+    <File Name="src/RuleExprAsStmt.cpp"/>
+    <File Name="src/RuleExprConcat.cpp"/>
+    <File Name="src/RuleFuncDef.cpp"/>
+    <File Name="src/RuleIf.cpp"/>
+    <File Name="src/RuleInput.cpp"/>
+    <File Name="src/RuleRepeat.cpp"/>
+    <File Name="src/RuleSkip.cpp"/>
+    <File Name="src/RuleStmtConcat.cpp"/>
+    <File Name="src/RuleVar.cpp"/>
+    <File Name="src/StateTuple.cpp"/>
+    <File Name="src/Function.cpp"/>
+    <File Name="src/ComponentFunction.cpp"/>
+    <File Name="src/TimeDependentEC.cpp"/>
+    <File Name="src/Environment.cpp"/>
+  </VirtualDirectory>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">
@@ -13,7 +115,7 @@
       <ResourceCompiler Options=""/>
     </GlobalSettings>
     <Configuration Name="Debug" CompilerType="MinGW ( TDM-GCC-32 )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
-      <Compiler Options="-g -Wall -fexceptions " C_Options="-g -Wall -fexceptions " Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+      <Compiler Options="-g -Wall -fexceptions" C_Options="-g -Wall -fexceptions " Assembler="" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
         <IncludePath Value="include"/>
       </Compiler>
       <Linker Options="-O0" Required="yes">
@@ -22,7 +124,7 @@
       </Linker>
       <ResourceCompiler Options="" Required="no"/>
       <General OutputFile="bin/Debug/Internship" IntermediateDirectory="./Debug" Command="./Internship" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="bin/Debug" PauseExecWhenProcTerminates="no" IsGUIProgram="no" IsEnabled="yes"/>
-      <Environment EnvVarSetName="&lt;Use Workspace Settings&gt;" DbgSetName="&lt;Use Global Settings&gt;">
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
         <![CDATA[]]>
       </Environment>
       <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
@@ -95,50 +197,4 @@
       </Completion>
     </Configuration>
   </Settings>
-  <VirtualDirectory Name="include">
-    <File Name="include/Rule.h"/>
-    <File Name="include/RuleAssign.h"/>
-    <File Name="include/RuleBinOp.h"/>
-    <File Name="include/RuleCallCmpF.h"/>
-    <File Name="include/RuleCallF.h"/>
-    <File Name="include/RuleConst.h"/>
-    <File Name="include/RuleExprAsStmt.h"/>
-    <File Name="include/RuleExprConcat.h"/>
-    <File Name="include/RuleFuncDef.h"/>
-    <File Name="include/RuleIf.h"/>
-    <File Name="include/RuleInput.h"/>
-    <File Name="include/RuleRepeat.h"/>
-    <File Name="include/RuleSkip.h"/>
-    <File Name="include/RuleStmtConcat.h"/>
-    <File Name="include/RuleVar.h"/>
-    <File Name="include/StateTuple.h"/>
-    <File Name="include/libtypesystem.h"/>
-    <File Name="include/Function.h"/>
-    <File Name="include/ComponentFunction.h"/>
-    <File Name="include/TimeDependentEC.h"/>
-    <File Name="include/Environment.h"/>
-  </VirtualDirectory>
-  <VirtualDirectory Name="src">
-    <File Name="main.cpp"/>
-    <File Name="src/Rule.cpp"/>
-    <File Name="src/RuleAssign.cpp"/>
-    <File Name="src/RuleBinOp.cpp"/>
-    <File Name="src/RuleCallCmpF.cpp"/>
-    <File Name="src/RuleCallF.cpp"/>
-    <File Name="src/RuleConst.cpp"/>
-    <File Name="src/RuleExprAsStmt.cpp"/>
-    <File Name="src/RuleExprConcat.cpp"/>
-    <File Name="src/RuleFuncDef.cpp"/>
-    <File Name="src/RuleIf.cpp"/>
-    <File Name="src/RuleInput.cpp"/>
-    <File Name="src/RuleRepeat.cpp"/>
-    <File Name="src/RuleSkip.cpp"/>
-    <File Name="src/RuleStmtConcat.cpp"/>
-    <File Name="src/RuleVar.cpp"/>
-    <File Name="src/StateTuple.cpp"/>
-    <File Name="src/Function.cpp"/>
-    <File Name="src/ComponentFunction.cpp"/>
-    <File Name="src/TimeDependentEC.cpp"/>
-    <File Name="src/Environment.cpp"/>
-  </VirtualDirectory>
 </CodeLite_Project>

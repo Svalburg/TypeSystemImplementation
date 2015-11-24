@@ -55,6 +55,7 @@ int Rule::td_ec(int t, StateTuple states)
 		TimeDependentEC* phi = env->getTimeDependentEC(ps.at(i).name);
 		total += (phi->getEnergyCost(states))*t;
 	}
+	return total;
 }
 
 Rule::~Rule()
