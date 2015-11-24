@@ -1,4 +1,5 @@
 #include "RuleConst.h"
+#include "Environment.h"
 
 RuleConst::RuleConst(string statement)
 {
@@ -34,7 +35,7 @@ StateTuple RuleConst::sigma(StateTuple states)
 
 int RuleConst::energy(StateTuple states)
 {
-    int time = env.getTConst();
+    int time = env->getTConst();
     return td_ec(time, states);
 }
 

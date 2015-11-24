@@ -1,4 +1,5 @@
 #include "RuleSkip.h"
+#include "Environment.h"
 
 RuleSkip::RuleSkip()
 {

@@ -1,4 +1,5 @@
 #include "RuleAssign.h"
+#include "Environment.h"
 
 RuleAssign::RuleAssign(string variable, Rule* branch)
 {
@@ -40,11 +41,11 @@ StateTuple RuleAssign::sigma(StateTuple states)
     return sigma1;
 }
 
-int RuleAssign:energy(StateTuple states)
+int RuleAssign::energy(StateTuple states)
 {
     int e = branches.at(middle)->energy(states);
     StateTuple sigma = branches.at(middle)->sigma(states);
-    int time = env.getTAssign();
+    int time = env->getTAssign();
     return e + td_ec(time, sigma);
 }
 

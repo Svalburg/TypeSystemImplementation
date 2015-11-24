@@ -1,4 +1,5 @@
 #include "RuleBinOp.h"
+#include "Environment.h"
 
 RuleBinOp::RuleBinOp(string binop, Rule* left, Rule* right)
 {
@@ -105,9 +106,9 @@ StateTuple RuleBinOp::sigma(StateTuple states)
 int RuleBinOp::energy(StateTuple states)
 {
     int e1 = branches.at(left)->energy(states);
-    int e2 = branches.at(right)->energy(sigma1);
-    int time = env.getTBinop();
     StateTuple sigma1 = branches.at(left)->sigma(states);
+    int e2 = branches.at(right)->energy(sigma1);
+    int time = env->getTBinop();
     StateTuple sigma2 = branches.at(right)->sigma(sigma1);
     return e1 + e2 + td_ec(time, sigma2);
 }

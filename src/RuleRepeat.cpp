@@ -1,4 +1,5 @@
 #include "RuleRepeat.h"
+#include "Environment.h"
 
 RuleRepeat::RuleRepeat(Rule* left, Rule* right)
 {

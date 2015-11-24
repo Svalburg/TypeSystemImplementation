@@ -63,7 +63,7 @@ int RuleCallCmpF::energy(StateTuple states)
     ComponentFunction* function = env->getComponentFunction(componentName, functionName);
     sigma_ex.declarePState(function->getArgumentName(), v_ex);
     int e_func = function->energy(sigma_ex);
-    int time = function.getTime();
+    int time = function->getTime();
     return e_expr + e_func + td_ec(time, sigma_ex);
 }
 

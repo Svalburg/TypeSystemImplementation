@@ -1,4 +1,5 @@
 #include "RuleExprAsStmt.h"
+#include "Environment.h"
 
 RuleExprAsStmt::RuleExprAsStmt(Rule* branch)
 {

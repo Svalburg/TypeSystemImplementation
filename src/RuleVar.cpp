@@ -1,4 +1,5 @@
 #include "RuleVar.h"
+#include "Environment.h"
 
 RuleVar::RuleVar(string statement)
 {

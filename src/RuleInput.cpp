@@ -1,4 +1,5 @@
 #include "RuleInput.h"
+#include "Environment.h"
 
 RuleInput::RuleInput(string statement)
 {

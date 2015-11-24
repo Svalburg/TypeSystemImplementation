@@ -1,4 +1,5 @@
 #include "RuleStmtConcat.h"
+#include "Environment.h"
 
 RuleStmtConcat::RuleStmtConcat(Rule* left, Rule* right)
 {

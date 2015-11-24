@@ -1,4 +1,5 @@
 #include "RuleIf.h"
+#include "Environment.h"
 
 RuleIf::RuleIf(Rule* left, Rule* middle, Rule* right)
 {
@@ -56,9 +57,9 @@ int RuleIf::energy(StateTuple states)
 {
 	StateTuple sigma_ex = branches.at(left)->sigma(states);
 	if(branches.at(left)->value(states) != 0)
-		return branches.at(middle)->sigma(sigma_ex);
+		return branches.at(middle)->energy(sigma_ex);
 	else
-		return branches.at(right)->sigma(sigma_ex);
+		return branches.at(right)->energy(sigma_ex);
 }
 
 RuleIf::~RuleIf()

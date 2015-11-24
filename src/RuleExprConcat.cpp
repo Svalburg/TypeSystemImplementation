@@ -1,4 +1,5 @@
 #include "RuleExprConcat.h"
+#include "Environment.h"
 
 RuleExprConcat::RuleExprConcat(Rule* left, Rule* right)
 {
@@ -49,8 +50,8 @@ StateTuple RuleExprConcat::sigma(StateTuple states)
 int RuleExprConcat::energy(StateTuple states)
 {
     int e_stmt = branches.at(left)->energy(states);
-    int sigma1 = branches.at(left)->sigma(states);
-    int e_expr = branches.at(right)->sigma(sigma1);
+    StateTuple sigma1 = branches.at(left)->sigma(states);
+    int e_expr = branches.at(right)->energy(sigma1);
     return e_stmt + e_expr;
 }
 
