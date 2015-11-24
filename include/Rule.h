@@ -32,6 +32,7 @@ class Rule
         string statement;
         string ruleName;
         string path;
+		int td_ec(int t, StateTuple states);
 		Environment* env;
         int left, right, middle;
     private:

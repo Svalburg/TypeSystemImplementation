@@ -3,7 +3,7 @@
 Environment::Environment(int t_input, int t_const, int t_var, int t_assign, int t_binop,
                 vector<ComponentFunction*> componentFunctions,
                 vector<Function*> functions,
-                vector<TimeDependentEC*> timeDependent)
+                vector<TimeDependentEC*> tdecList)
 {
     this->t_input = t_input;
     this->t_const = t_const;
@@ -12,7 +12,7 @@ Environment::Environment(int t_input, int t_const, int t_var, int t_assign, int 
     this->t_binop = t_binop;
     this->componentFunctions = componentFunctions;
     this->functions = functions;
-    this->timeDependentEC = timeDependentEC;
+    this->tdecList = tdecList;
 }
 
 int Environment::getTInput()
@@ -64,9 +64,9 @@ Function* Environment::getFunction(string name)
 
 TimeDependentEC* Environment::getTimeDependentEC(string componentState)
 {
-    for(size_t i=0;i<timeDependentEC.size();i++)
+    for(size_t i=0;i<tdecList.size();i++)
     {
-        TimeDependentEC* timedependent = timeDependentEC.at(i);
+        TimeDependentEC* timedependent = tdecList.at(i);
         if(timedependent->getComponentState() == componentState)
             return timedependent;
     }
@@ -76,7 +76,7 @@ TimeDependentEC* Environment::getTimeDependentEC(string componentState)
 Environment Environment::clone()
 {
     return *(new Environment(t_input, t_const, t_var, t_assign, t_binop, 
-        componentFunctions, functions, timeDependentEC));
+        componentFunctions, functions, tdecList));
 }
 
 void Environment::addFunction(string name, string argumentName, Rule* definition)

@@ -13,7 +13,7 @@ StateTuple::StateTuple(vector<declaration> pState, vector<declaration> cState)
 
 int StateTuple::getPStateValue(string name)
 {
-	for(int i = 0; i < pState.size(); i++)
+	for(size_t i = 0; i < pState.size(); i++)
 		if(name == pState.at(i).name)
 			return pState.at(i).value;
 	cout << "Value has not been declared.\n";
@@ -23,7 +23,7 @@ int StateTuple::getPStateValue(string name)
 
 int StateTuple::getCStateValue(string name)
 {
-	for(int i = 0; i < cState.size(); i++)
+	for(size_t i = 0; i < cState.size(); i++)
 		if(name == cState.at(i).name)
 			return cState.at(i).value;
 	cout << "Value has not been declared.\n";
@@ -33,7 +33,7 @@ int StateTuple::getCStateValue(string name)
 
 void StateTuple::declarePState(string name, int value)
 {
-	for(int i = 0; i < pState.size(); i++)
+	for(size_t i = 0; i < pState.size(); i++)
 		if(name == pState.at(i).name)
 		{
 			pState.at(i).value = value;
@@ -47,7 +47,7 @@ void StateTuple::declarePState(string name, int value)
 
 void StateTuple::declareCState(string name, int value)
 {
-	for(int i = 0; i < cState.size(); i++)
+	for(size_t i = 0; i < cState.size(); i++)
 		if(name == cState.at(i).name)
 		{
 			cState.at(i).value = value;

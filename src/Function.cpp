@@ -18,6 +18,11 @@ int Function::value(StateTuple states)
     return definition->value(states);
 }
 
+int Function::energy(StateTuple states)
+{
+	return definition->energy(states);
+}
+
 string Function::getArgumentName()
 {
     return argumentName;

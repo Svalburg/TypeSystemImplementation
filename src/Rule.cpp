@@ -46,6 +46,17 @@ void Rule::updateEnvironment(Environment* env)
 		branches.at(i)->updateEnvironment(env);
 }
 
+int Rule::td_ec(int t, StateTuple states)
+{
+	int total = 0;
+	vector<StateTuple::declaration> ps = states.getPState();
+	for(size_t i = 0; i < ps.size(); i++)
+	{
+		TimeDependentEC* phi = env->getTimeDependentEC(ps.at(i).name);
+		total += (phi->getEnergyCost(states))*t;
+	}
+}
+
 Rule::~Rule()
 {
     //dtor

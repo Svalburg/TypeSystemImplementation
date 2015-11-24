@@ -10,7 +10,7 @@ class Environment
         Environment(int t_input, int t_const, int t_var, int t_assign, int t_binop,
                 vector<ComponentFunction*> componentFunctions,
                 vector<Function*> functions,
-                vector<TimeDependentEC*> timeDependentEC);
+                vector<TimeDependentEC*> tdecList);
         int getTInput();
         int getTConst();
         int getTVar();
@@ -26,7 +26,7 @@ class Environment
         int t_input, t_const, t_var, t_assign, t_binop; //t_binop needs to be changed to reflect different binops
         vector<ComponentFunction*> componentFunctions;
         vector<Function*> functions;
-        vector<TimeDependentEC*> timeDependentEC;
+        vector<TimeDependentEC*> tdecList;
     protected:
         
 };

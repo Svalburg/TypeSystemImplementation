@@ -7,14 +7,14 @@ class ComponentFunction : public Function
 {
     public:
         ComponentFunction(string component, string name, string argumentName, Rule* definition, 
-        int energy, int time);
+        Rule* energyFunc, int time);
         string getComponent();
         int getTime();
-        int getEnergy();
+        int energy(StateTuple states);
         ~ComponentFunction();
     private:
         string component;
-        int energy;
+        Rule* energyFunc;
         int time;
     protected:
          
