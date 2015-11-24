@@ -38,6 +38,11 @@ StateTuple RuleFuncDef::sigma(StateTuple states)
 	return branches.at(right)->sigma(states);
 }
 
+int RuleFuncDef::energy(StateTuple states)
+{
+	return branches.at(right)->energy(states);
+}
+
 void RuleFuncDef::updateEnvironment(Environment* env)
 {
     Environment newenv = env->clone();

@@ -40,14 +40,23 @@ int RuleRepeat::value(StateTuple states)
 
 StateTuple RuleRepeat::sigma(StateTuple states)
 {
-	int c = branches.at(left)->value(states);
 	StateTuple states_now = branches.at(left)->sigma(states);
-	while(c > 0)
-	{
+	for(int i = branches.at(left)->value(states); i > 0; i--)
 		states_now = branches.at(right)->sigma(states_now);
-		c = c-1;
-	}
 	return states_now;
+}
+
+int RuleRepeat::energy(StateTuple states)
+{
+	int E_ex = branches.at(left)->energy(states);
+	StateTuple states_now = branches.at(left)->sigma(states);
+	int repeatcost = 0;
+	for(int i = branches.at(left)->value(states); i > 0; i--)
+	{
+		repeatcost += branches.at(right)->energy(states_now);
+		states_now = branches.at(right)->sigma(states_now);
+	}
+	return E_ex + repeatcost;
 }
 
 RuleRepeat::~RuleRepeat()

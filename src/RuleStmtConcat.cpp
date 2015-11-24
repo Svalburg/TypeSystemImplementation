@@ -37,8 +37,14 @@ int RuleStmtConcat::value(StateTuple states)
 
 StateTuple RuleStmtConcat::sigma(StateTuple states)
 {
-	StateTuple sigma_1 = branches.at(left)->sigma(states);
-	return branches.at(right)->sigma(sigma_1);
+	StateTuple sigma1 = branches.at(left)->sigma(states);
+	return branches.at(right)->sigma(sigma1);
+}
+
+int RuleStmtConcat::energy(StateTuple states)
+{
+	StateTuple sigma1 = branches.at(left)->sigma(states);
+	return branches.at(left)->energy(states) + branches.at(right)->energy(sigma1);
 }
 
 RuleStmtConcat::~RuleStmtConcat()

@@ -31,6 +31,11 @@ StateTuple RuleInput::sigma(StateTuple states)
 	return states;
 }
 
+int RuleInput::energy(StateTuple states)
+{
+	return td_ec(env->getTInput(), states);
+}
+
 RuleInput::~RuleInput()
 {
     //dtor

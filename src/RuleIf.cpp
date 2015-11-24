@@ -52,6 +52,15 @@ StateTuple RuleIf::sigma(StateTuple states)
 		return branches.at(right)->sigma(sigma_ex);
 }
 
+int RuleIf::energy(StateTuple states)
+{
+	StateTuple sigma_ex = branches.at(left)->sigma(states);
+	if(branches.at(left)->value(states) != 0)
+		return branches.at(middle)->sigma(sigma_ex);
+	else
+		return branches.at(right)->sigma(sigma_ex);
+}
+
 RuleIf::~RuleIf()
 {
     //dtor

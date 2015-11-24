@@ -31,6 +31,11 @@ StateTuple RuleVar::sigma(StateTuple states)
 	return states;
 }
 
+int RuleVar::energy(StateTuple states)
+{
+	return td_ec(env->getTVar(), states);
+}
+
 RuleVar::~RuleVar()
 {
     //dtor

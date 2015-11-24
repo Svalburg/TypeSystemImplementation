@@ -31,6 +31,11 @@ StateTuple RuleSkip::sigma(StateTuple states)
 	return states;
 }
 
+int RuleSkip::energy(StateTuple states)
+{
+	return 0;
+}
+
 RuleSkip::~RuleSkip()
 {
     //dtor
