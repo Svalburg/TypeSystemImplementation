@@ -48,6 +48,8 @@ ComponentFunction* Environment::getComponentFunction(string component, string na
         if(cfunction->getComponent() == component && cfunction->getName() == name)
             return cfunction;
     }
+	cout << "No component function found with name: " + component + '.' + name;
+	getchar();
     exit(-6);
 }
 
@@ -55,10 +57,17 @@ Function* Environment::getFunction(string name)
 {    
     for(size_t i=0;i<functions.size();i++)
     {
+		cout << "test" << endl;
         Function* function = functions.at(i);
+		cout << "test" << endl;
         if(function->getName() == name)
+		{
+			cout << "test" << endl;
             return function;
+		}
     }
+	cout << "No function found with name: " + name;
+	getchar();
     exit(-6);
 }
 
@@ -70,6 +79,7 @@ TimeDependentEC* Environment::getTimeDependentEC(string componentState)
         if(timedependent->getComponentState() == componentState)
             return timedependent;
     }
+	cout << "No component state found with name: " + componentState;
     exit(-6);
 }
 

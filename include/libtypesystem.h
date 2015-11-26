@@ -19,5 +19,7 @@
 #include "StateTuple.h"
 #include "Function.h"
 #include "ComponentFunction.h"
+#include "TimeDependentEC.h"
+#include "Environment.h"
 
 #endif // LIBTYPESYSTEM_H_INCLUDED

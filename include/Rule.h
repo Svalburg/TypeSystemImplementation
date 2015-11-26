@@ -20,7 +20,7 @@ class Rule
         string getStatement();
         string getPath();
         void updatePath();
-		void updateEnvironment(Environment* env);
+		virtual void updateEnvironment(Environment* env);
         virtual string toStringSigma() = 0;
         virtual string toStringE() = 0;
         virtual string toStringV() = 0;

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.11)
-include(${CMAKE_CURRENT_SOURCE_DIR}/parser/CMakeLists.txt)
+#include(${CMAKE_CURRENT_SOURCE_DIR}/parser/CMakeLists.txt)
 
 
 
@@ -8,8 +8,8 @@ project(Internship)
 
 
 include_directories(
-    C:/Users/Sven/MediaFire/Documents/Uni/Master/Internship/Implementation/TypeSystemImplementation/
-    C:/Users/Sven/MediaFire/Documents/Uni/Master/Internship/Implementation/TypeSystemImplementation/include
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
 
 )
 

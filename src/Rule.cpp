@@ -1,5 +1,6 @@
 #include "Rule.h"
 #include "Environment.h"
+#include "RuleFuncDef.h"
 
 Rule::Rule()
 {
@@ -49,10 +50,10 @@ void Rule::updateEnvironment(Environment* env)
 int Rule::td_ec(int t, StateTuple states)
 {
 	int total = 0;
-	vector<StateTuple::declaration> ps = states.getPState();
-	for(size_t i = 0; i < ps.size(); i++)
+	vector<StateTuple::declaration> cs = states.getCState();
+	for(size_t i = 0; i < cs.size(); i++)
 	{
-		TimeDependentEC* phi = env->getTimeDependentEC(ps.at(i).name);
+		TimeDependentEC* phi = env->getTimeDependentEC(cs.at(i).name);
 		total += (phi->getEnergyCost(states))*t;
 	}
 	return total;
