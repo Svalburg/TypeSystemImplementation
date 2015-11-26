@@ -80,7 +80,7 @@ TimeDependentEC* Environment::getTimeDependentEC(string componentState)
     exit(-6);
 }
 
-Environment Environment::clone()
+Environment* Environment::clone()
 {
     vector<Function*> functioncopy;
     vector<ComponentFunction*> compfunccopy;
@@ -91,8 +91,7 @@ Environment Environment::clone()
         compfunccopy.push_back(componentFunctions.at(i));
         tdeccopy.push_back(tdecList.at(i));
     }
-    return *(new Environment(t_input, t_const, t_var, t_assign, t_binop, 
-        compfunccopy, functioncopy, tdeccopy));
+    return new Environment(t_input, t_const, t_var, t_assign, t_binop, compfunccopy, functioncopy, tdeccopy);
 }
 
 void Environment::addFunction(string name, string argumentName, Rule* definition)

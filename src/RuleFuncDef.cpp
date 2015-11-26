@@ -45,10 +45,10 @@ int RuleFuncDef::energy(StateTuple states)
 
 void RuleFuncDef::updateEnvironment(Environment* env)
 {
-    Environment newenv = env->clone();
-    newenv.addFunction(functionname, argumentname, branches.at(left));
+    Environment* newenv = env->clone();
+    newenv->addFunction(functionname, argumentname, branches.at(left));
 	for(size_t i = 0; i < branches.size(); i++)
-		branches.at(i)->updateEnvironment(&newenv);
+        branches.at(i)->updateEnvironment(newenv);
 }
 
 RuleFuncDef::~RuleFuncDef()

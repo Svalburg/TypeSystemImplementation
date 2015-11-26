@@ -19,7 +19,7 @@ class Environment
         ComponentFunction* getComponentFunction(string component, string name);
         Function* getFunction(string name);
         TimeDependentEC* getTimeDependentEC(string componentState);
-        Environment clone();
+        Environment* clone();
         void addFunction(string name, string argumentName, Rule* definition);
         ~Environment();
     private:
