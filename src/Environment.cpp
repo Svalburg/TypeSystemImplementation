@@ -86,11 +86,11 @@ Environment* Environment::clone()
     vector<ComponentFunction*> compfunccopy;
     vector<TimeDependentEC*> tdeccopy;
     for(size_t i = 0; i < functions.size(); i++)
-    {
         functioncopy.push_back(functions.at(i));
+    for(size_t i = 0; i < componentFunctions.size(); i++)
         compfunccopy.push_back(componentFunctions.at(i));
+    for(size_t i = 0; i < tdecList.size(); i++)
         tdeccopy.push_back(tdecList.at(i));
-    }
     return new Environment(t_input, t_const, t_var, t_assign, t_binop, compfunccopy, functioncopy, tdeccopy);
 }
 
