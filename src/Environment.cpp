@@ -57,12 +57,9 @@ Function* Environment::getFunction(string name)
 {    
     for(size_t i=0;i<functions.size();i++)
     {
-		cout << "test" << endl;
         Function* function = functions.at(i);
-		cout << "test" << endl;
         if(function->getName() == name)
 		{
-			cout << "test" << endl;
             return function;
 		}
     }
