@@ -5,7 +5,7 @@ RuleCallCmpF::RuleCallCmpF(string componentName, string functionName, Rule* bran
 {
     this->componentName = componentName;
     this->functionName = functionName;
-    this->statement = functionName + '(' + branch->getStatement() + ')';
+    this->statement = componentName + '.' + functionName + '(' + branch->getStatement() + ')';
     branches.push_back(branch);
     middle = 0;
     ruleName = "CallCmpF";

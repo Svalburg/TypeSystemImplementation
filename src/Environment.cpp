@@ -85,8 +85,17 @@ TimeDependentEC* Environment::getTimeDependentEC(string componentState)
 
 Environment Environment::clone()
 {
+    vector<Function*> functioncopy;
+    vector<ComponentFunction*> compfunccopy;
+    vector<TimeDependentEC*> tdeccopy;
+    for(size_t i = 0; i < functions.size(); i++)
+    {
+        functioncopy.push_back(functions.at(i));
+        compfunccopy.push_back(componentFunctions.at(i));
+        tdeccopy.push_back(tdecList.at(i));
+    }
     return *(new Environment(t_input, t_const, t_var, t_assign, t_binop, 
-        componentFunctions, functions, tdecList));
+        compfunccopy, functioncopy, tdeccopy));
 }
 
 void Environment::addFunction(string name, string argumentName, Rule* definition)
