@@ -57,3 +57,7 @@ build/*
 Network Trash Folder
 Temporary Items
 .apdisk
+
+
+## CMAKE
+Makefile
