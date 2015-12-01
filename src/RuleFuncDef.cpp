@@ -5,7 +5,7 @@ RuleFuncDef::RuleFuncDef(string functionname, string argumentname, Rule* left, R
 {
     this->functionname = functionname;
     this->argumentname = argumentname;
-    this->statement = "function " + functionname + " begin " + left->getStatement() + " end " + right->getStatement();
+    this->statement = "function " + functionname + "(" + argumentname + ") " + left->getStatement() + " end " + right->getStatement();
     branches.push_back(left);
     branches.push_back(right);
     this->left = 0;

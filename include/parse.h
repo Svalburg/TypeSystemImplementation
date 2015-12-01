@@ -7,6 +7,8 @@
 #include "simplestring.h"
 #include "memory.h"
 
+#include "Rule.h"
+
 typedef int ECAType;
 
 class ECA_AST {
@@ -24,6 +26,7 @@ public:
         return false;
     }
     virtual void print(std::ostream& out) const = 0;
+    virtual Rule* getTypeRule() const = 0;
 };
 
 class ECAExpression : public ECAStatement {
@@ -39,8 +42,9 @@ public:
     ECASkip() {
     }
     virtual void print(std::ostream& out) const override {
-	out << "skip";
+        out << "skip";
     }
+    Rule* getTypeRule() const override;
 };
 
 class ECAConstant : public ECAExpression {
@@ -49,8 +53,9 @@ public:
     ECAConstant(const ECAType& value) : value(value) {
     }
     virtual void print(std::ostream& out) const override {
-	out << value;
+        out << value;
     }
+    Rule* getTypeRule() const override;
 };
 
 class ECAVariable : public ECAExpression {
@@ -59,8 +64,9 @@ public:
     ECAVariable(const bitpowder::lib::String& name) : name(name) {
     }
     virtual void print(std::ostream& out) const override {
-	out << name;
+        out << name;
     }
+    Rule* getTypeRule() const override;
 };
 
 class ECAAssignment : public ECAExpression {
@@ -70,9 +76,10 @@ public:
     ECAAssignment(const bitpowder::lib::String& name, ECAExpression::Ref rhs) : name(name), rhs(rhs) {
     }
     virtual void print(std::ostream& out) const override {
-	out << name << ":=";
+        out << name << ":=";
         rhs->print(out);
     }
+    Rule* getTypeRule() const override;
 };
 
 class ECABinary : public ECAExpression {
@@ -87,6 +94,7 @@ public:
         out << op;
         rhs->print(out);
     }
+    Rule* getTypeRule() const override;
 };
 
 class ECAConditional : public ECAStatement {
@@ -97,14 +105,15 @@ public:
     ECAConditional(ECAExpression::Ref c, ECAStatement::Ref t, ECAStatement::Ref e) : c(c), t(t), e(e) {
     }
     virtual void print(std::ostream& out) const override {
-	out << "if ";
+        out << "if ";
         c->print(out);
-	out << " then ";
+        out << " then ";
         t->print(out);
-	out << " else ";
+        out << " else ";
         e->print(out);
-	out << " end";
+        out << " end";
     }
+    Rule* getTypeRule() const override;
 };
 
 class ECARepeat: public ECAStatement {
@@ -114,12 +123,13 @@ public:
     ECARepeat(ECAExpression::Ref i, ECAStatement::Ref b) : i(i), b(b) {
     }
     virtual void print(std::ostream& out) const override {
-	out << "repeat ";
+        out << "repeat ";
         i->print(out);
-	out << " begin ";
+        out << " begin ";
         b->print(out);
-	out << " end";
+        out << " end";
     }
+    Rule* getTypeRule() const override;
 };
 
 class ECAWhile : public ECAStatement {
@@ -129,12 +139,13 @@ public:
     ECAWhile(ECAExpression::Ref c, ECAStatement::Ref b) : c(c), b(b) {
     }
     virtual void print(std::ostream& out) const override {
-	out << "while ";
+        out << "while ";
         c->print(out);
-	out << " begin ";
+        out << " begin ";
         b->print(out);
-	out << " end";
+        out << " end";
     }
+    Rule* getTypeRule() const override;
 };
 
 class ECAConcat : public ECAStatement {
@@ -151,6 +162,7 @@ public:
     virtual bool isExpression() const override {
         return b->isExpression();
     }
+    Rule* getTypeRule() const override;
 };
 
 class ECAFunctionCall : public ECAExpression {
@@ -167,13 +179,16 @@ public:
     virtual bool isExpression() const override {
         return argument->isExpression();
     }
+    Rule* getTypeRule() const override;
 };
 
 class ECAFunctionDefinition : public ECAExpression {
+    friend class ECAProgram;
     bitpowder::lib::String functionName;
     bitpowder::lib::String argumentName;
     ECAExpression::Ref body;
 public:
+    typedef bitpowder::lib::shared_object<ECAFunctionDefinition, ECA_AST> Ref;
     ECAFunctionDefinition(const bitpowder::lib::String& functionName, const bitpowder::lib::String& argumentName, ECAExpression::Ref body) : functionName(functionName), argumentName(argumentName), body(body) {
     }
     virtual void print(std::ostream& out) const override {
@@ -184,15 +199,18 @@ public:
     virtual bool isExpression() const override {
         return true;
     }
+    Rule* getTypeRule() const override;
 };
 
 class ECAProgram {
 public:
-    std::map<bitpowder::lib::String,ECAExpression::Ref> functions;
+    std::map<bitpowder::lib::String,ECAFunctionDefinition::Ref> functions;
     ECAStatement::Ref main;
 
     int refcount = 0;
     typedef bitpowder::lib::shared_object<ECAProgram> Ref;
+
+    Rule* getTypeRule() const;
 };
 
 class ECAParseResult {
@@ -223,7 +241,7 @@ public:
 ECAParseResult ParseECA(const bitpowder::lib::String &str, bitpowder::lib::MemoryPool &mp);
 
 // correct lifetime of strings in the structure is limited to the lifetime of the MemoryPool
-ECAParseResult ParseECA(const bitpowder::lib::String &str, bitpowder::lib::MemoryPool& mp);
+ECAParseResult ParseECAFile(const bitpowder::lib::StringT &str, bitpowder::lib::MemoryPool& mp);
 
 
 #endif // PARSE_H

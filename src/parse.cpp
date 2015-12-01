@@ -453,3 +453,82 @@ ECAParseResult ParseECAFile(const StringT& filename, MemoryPool& mp) {
     }
     return result;
 }
+
+#include "RuleFuncDef.h"
+Rule* ECAProgram::getTypeRule() const
+{
+    Rule* retval = main->getTypeRule();
+    for (const auto& fdentry : functions) {
+        const ECAFunctionDefinition::Ref& fd = fdentry.second;
+        retval = new RuleFuncDef(fd->functionName.stl(), fd->argumentName.stl(), fd->body->getTypeRule(), retval);
+    }
+    return retval;
+}
+
+#include "RuleSkip.h"
+Rule* ECASkip::getTypeRule() const {
+    return new RuleSkip();
+}
+
+#include "RuleConst.h"
+Rule* ECAConstant::getTypeRule() const
+{
+    return new RuleConst(std::to_string(value));
+}
+
+#include "RuleVar.h"
+Rule* ECAVariable::getTypeRule() const
+{
+    return new RuleVar(name.stl());
+}
+
+#include "RuleCallF.h"
+Rule*ECAFunctionCall::getTypeRule() const
+{
+    return new RuleCallF(functionName.stl(), argument->getTypeRule());
+}
+
+#include "RuleBinOp.h"
+Rule* ECABinary::getTypeRule() const
+{
+    return new RuleBinOp(op.stl(), lhs->getTypeRule(), rhs->getTypeRule());
+}
+
+#include "RuleAssign.h"
+Rule* ECAAssignment::getTypeRule() const
+{
+    return new RuleAssign(name.stl(), rhs->getTypeRule());
+}
+
+#include "RuleIf.h"
+Rule* ECAConditional::getTypeRule() const
+{
+    return new RuleIf(c->getTypeRule(), t->getTypeRule(), e->getTypeRule());
+}
+
+#include "RuleRepeat.h"
+Rule* ECARepeat::getTypeRule() const
+{
+    return new RuleRepeat(b->getTypeRule(), b->getTypeRule());
+}
+
+Rule* ECAWhile::getTypeRule() const
+{
+    return nullptr;
+}
+
+#include "RuleExprConcat.h"
+#include "RuleStmtConcat.h"
+Rule* ECAConcat::getTypeRule() const
+{
+    if (isExpression()) {
+        return new RuleExprConcat(a->getTypeRule(), b->getTypeRule());
+    }
+    return new RuleStmtConcat(a->getTypeRule(), b->getTypeRule());
+}
+
+#include "RuleFuncDef.h"
+Rule* ECAFunctionDefinition::getTypeRule() const
+{
+    return new RuleFuncDef(functionName.stl(), argumentName.stl(), body->getTypeRule(), new RuleSkip());
+}

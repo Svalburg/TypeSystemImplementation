@@ -1,0 +1,7 @@
+x := 3;
+if x < 6 then
+x := 3
+ else
+x := 8
+end
+
