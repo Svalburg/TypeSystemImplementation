@@ -26,7 +26,7 @@ string RuleWhile::toStringE()
     string e_ex = branches.at(left)->toStringE();
     string est = "E_" + branches.at(right)->getPath();
     string sigmast = "Sigma_" + branches.at(right)->getPath();
-    return while_ex(" + vex + ", " + sigmaex + ", " + est + ", " + sigmast + ")";
+    return "while_ex(" + vex + ", " + sigmaex + ", " + est + ", " + sigmast + ")";
 }
 
 string RuleWhile::toStringV()

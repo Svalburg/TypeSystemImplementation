@@ -97,7 +97,7 @@ Environment* Environment::clone()
         compfunccopy.push_back(componentFunctions.at(i));
     for(size_t i = 0; i < tdecList.size(); i++)
         tdeccopy.push_back(tdecList.at(i));
-    return new Environment(t_input, t_const, t_var, t_assign, t_binop, compfunccopy, functioncopy, tdeccopy);
+    return new Environment(t_input, t_const, t_var, t_assign, t_binop, t_if, compfunccopy, functioncopy, tdeccopy);
 }
 
 void Environment::addFunction(string name, string argumentName, Rule* definition)

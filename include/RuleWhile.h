@@ -6,14 +6,14 @@
 class RuleWhile : public Rule
 {
 	public:
-        RuleVar(string statement);
+        RuleWhile(Rule* left, Rule* right);
         string toStringSigma();
         string toStringE();
         string toStringV();
         int value(StateTuple states);
 		StateTuple sigma(StateTuple states);
         int energy(StateTuple states);
-		virtual ~RuleWhile() {}
+		virtual ~RuleWhile();
 	protected:
 	private:
 };

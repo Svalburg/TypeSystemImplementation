@@ -34,6 +34,11 @@ along with Bit Powder Libraries.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <cmath>
 
+#define M_PI 3.14159265358979323846
+#define M_E 2.71828182845904523536
+
+#undef ERROR
+
 using namespace bitpowder::lib;
 using namespace std;
 
@@ -48,7 +53,7 @@ struct Number {
     };
     Number(Type t = INT) : type(t), intValue(0) {
     }
-    Number(double f) : type(::isnan(f) ? ERROR : FLOAT), floatValue(f) {
+    Number(double f) : type(isnan(f) ? ERROR : FLOAT), floatValue(f) {
     }
     Number(int i) : type(INT), intValue(i) {
     }
