@@ -58,6 +58,7 @@ SET(srcs
     src/RuleSkip.cpp
     src/RuleStmtConcat.cpp
     src/RuleVar.cpp
+    src/RuleWhile.cpp
     src/StateTuple.cpp
     src/Function.cpp
     src/ComponentFunction.cpp
