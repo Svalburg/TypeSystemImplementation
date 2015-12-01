@@ -27,6 +27,8 @@ along with Bit Powder Libraries.  If not, see <http://www.gnu.org/licenses/>.
 #include <assert.h>
 #include <string.h>
 #include <limits.h>
+#include <stdint.h>
+#include <cstdint>
 
 #ifndef NCONCURRENCY
 #include "spinlock.h"
@@ -180,7 +182,7 @@ bool MemoryPool::addMemory(void* data, size_t _size) {
         return false;
 
     // make multiple of alignment, so MemoryPoolPageVariableSize start at a correct alignment
-    size_t extra = ((long)data) & (DEFAULT_ALIGN_ON - 1);
+    size_t extra = ((intptr_t)data) & (DEFAULT_ALIGN_ON - 1);
     if (extra) {
         if (DEFAULT_ALIGN_ON-extra > _size) {
             data = nullptr;
@@ -253,7 +255,7 @@ bool MemoryPoolPageBase::fitsIn(MemoryPoolPageBase* pool, size_t size, size_t al
     if (!pool)
         return false;
     void* potentialNextPointer = &((char*)pool->data)[pool->size - pool->available];
-    padding = (unsigned long)(potentialNextPointer) & (alignOn - 1);
+    padding = (intptr_t)(potentialNextPointer) & (alignOn - 1);
     if (padding > 0)
         padding = alignOn - padding;
     return pool->available >= size + padding;
@@ -285,7 +287,7 @@ void* MemoryPool::alloc(size_t size, size_t alignOn, MemoryPoolPageBase** pool) 
     assert(current->available >= 0);
     if (pool != nullptr)
         *pool = current;
-    assert((unsigned long)(data) % alignOn == 0);
+    assert((intptr_t)(data) % alignOn == 0);
     return data;
 }
 
@@ -296,7 +298,7 @@ void* MemoryPool::allocAll(size_t& size, size_t alignOn) {
     void* retval = requestedSize > 0 ? alloc(requestedSize, alignOn) : nullptr;
     if (retval)
         size = requestedSize;
-    assert((unsigned long)(retval) % alignOn == 0);
+    assert((intptr_t)(retval) % alignOn == 0);
     return retval;
 }
 
