@@ -19,7 +19,6 @@ along with Bit Powder Libraries.  If not, see <http://www.gnu.org/licenses/>.
 #include <unistd.h>  // NOLINT
 #include <gtest/gtest.h>
 #include "simplestring.h"
-#include "rawreader.h"
 
 namespace {
 using namespace bitpowder::lib;
@@ -406,32 +405,4 @@ TEST(String, RawNumber) {
     EXPECT_EQ("\x11\x22\x33\x44", t);
 }
 
-TEST(String, RawSame) {
-    String key = "key";
-    String attributes = "attributes";
-    String valueType = "valueType";
-    String value = "value";
-    unsigned char CMD_PUT = 1;
-    std::size_t packetContentLength = 1+4+(4+key.size())+(4+attributes.size())+(4+valueType.size())+(4+value.size());
-    StringContainer message(4+packetContentLength);
-    RawWriter writer = {message};
-    writer.writeUnsignedInt32(packetContentLength);
-    writer.writeByte(CMD_PUT);
-    writer.writeUnsignedInt32(0); // store request
-    writer.writeString(key);
-    writer.writeString(attributes);
-    writer.writeString(valueType);
-    writer.writeString(value);
-    ASSERT_TRUE(writer.valid());
-
-    StringContainer message2 = ToRawString(
-                                   ToRawU8(CMD_PUT) +
-                                   ToRawU32(0) +
-                                   ToRawString(key) +
-                                   ToRawString(attributes) +
-                                   ToRawString(valueType) +
-                                   ToRawString(value)
-                               );
-    EXPECT_EQ(message, message2);
-}
 }

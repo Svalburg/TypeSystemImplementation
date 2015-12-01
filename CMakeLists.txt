@@ -1,6 +1,7 @@
 project(eca2)
 cmake_minimum_required(VERSION 2.8)
 
+OPTION(BUILD_UNIT_TESTS "Enable unit testing" ON)
 OPTION(NCONCURRENCY "Disable concurrency to speed up certain processes" ON)
 if (NCONCURRENCY)
     SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DNCONCURRENCY")
@@ -74,8 +75,8 @@ add_executable(${PROJECT_NAME} ${srcs})
 target_link_libraries(${PROJECT_NAME} libbp)
 
 if (BUILD_UNIT_TESTS)
-    FILE(GLOB UNITTESTS_SRCS lib/*.test.cpp *.test.cpp)
-    add_executable(${PROJECT_NAME}-test ${UNITTESTS_SRCS} test.cpp)
+    FILE(GLOB UNITTESTS_SRCS lib/*.test.cpp src/*.test.cpp)
+    add_executable(${PROJECT_NAME}-test ${UNITTESTS_SRCS} src/test.cpp)
     target_link_libraries(${PROJECT_NAME}-test libbp)
 
     set(EXT_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/ext)
