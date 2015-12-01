@@ -182,6 +182,24 @@ public:
     Rule* getTypeRule() const override;
 };
 
+class ECAComponentFunctionCall : public ECAExpression {
+    bitpowder::lib::String componentName;
+    bitpowder::lib::String functionName;
+    ECAExpression::Ref argument;
+public:
+    ECAComponentFunctionCall(const bitpowder::lib::String& componentName, const bitpowder::lib::String& functionName, ECAExpression::Ref argument) : componentName(componentName), functionName(functionName), argument(argument) {
+    }
+    virtual void print(std::ostream& out) const override {
+        out << componentName << "." << functionName << "(";
+        argument->print(out);
+        out << ")";
+    }
+    virtual bool isExpression() const override {
+        return argument->isExpression();
+    }
+    Rule* getTypeRule() const override;
+};
+
 class ECAFunctionDefinition : public ECAExpression {
     friend class ECAProgram;
     bitpowder::lib::String functionName;

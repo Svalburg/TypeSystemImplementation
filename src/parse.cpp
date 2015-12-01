@@ -54,6 +54,8 @@ class ECALexer {
 public:
     static const Token<char> SKIP;
 
+    static const Token<char> DOT;
+
     static const Token<char> MUL;
     static const Token<char> DIV;
     static const Token<char> PLUS;
@@ -134,7 +136,7 @@ public:
             return &opToken[lookaheadIndex];
         }
         if (c[0] == MUL || c[0] == DIV || c[0] == PLUS || c[0] == MIN ||
-                c[0] == COMMA || c[0] == OPEN || c[0] == CLOSE || c[0] == SEMICOLON) {
+                c[0] == COMMA || c[0] == OPEN || c[0] == CLOSE || c[0] == SEMICOLON || c[0] == DOT) {
             opToken[lookaheadIndex].value = c[0];
             c = c.substring(1);
             //std::cout << "Token[lookaheadIndex] op: " << opToken[lookaheadIndex].value << " type=" << opToken[lookaheadIndex].type << std::endl;
@@ -164,6 +166,7 @@ public:
 };
 
 const Token<char> ECALexer::SKIP = 's';
+const Token<char> ECALexer::DOT = '.';
 const Token<char> ECALexer::MUL = '*';
 const Token<char> ECALexer::DIV = '/';
 const Token<char> ECALexer::PLUS = '+';
@@ -226,8 +229,26 @@ struct ECALanguage {
             .accept(ECALexer::CLOSE);
     }
 
+    static PStmt componentFunctionCall(PStmt cont, UserData userData) {
+        String componentName;
+        String functionName;
+        return cont()
+            .fetch(string, componentName)
+            .accept(ECALexer::DOT)
+            .fetch(string, functionName)
+            .accept(ECALexer::OPEN)
+            .perform(stmt)
+            .modify([](Stmt &a, const String& componentName, const String& functionName, UserData userData) {
+                if (!a->isExpression())
+                    return -1;
+                a = new ECAComponentFunctionCall(componentName, functionName, a);
+                return 0;
+            }, componentName, functionName)
+            .accept(ECALexer::CLOSE);
+    }
+
     static PStmt primary(PStmt cont, UserData userData) {
-        return cont().choose(functionCall, variable, constant, parenthesis);
+        return cont().choose(functionCall, componentFunctionCall, variable, constant, parenthesis);
     }
 
     static PStmt mulOp(PStmt cont, UserData userData) {
@@ -483,9 +504,15 @@ Rule* ECAVariable::getTypeRule() const
 }
 
 #include "RuleCallF.h"
-Rule*ECAFunctionCall::getTypeRule() const
+Rule* ECAFunctionCall::getTypeRule() const
 {
     return new RuleCallF(functionName.stl(), argument->getTypeRule());
+}
+
+#include "RuleCallCmpF.h"
+Rule* ECAComponentFunctionCall::getTypeRule() const
+{
+    return new RuleCallCmpF(componentName.stl(), functionName.stl(), argument->getTypeRule());
 }
 
 #include "RuleBinOp.h"
