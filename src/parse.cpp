@@ -4,6 +4,9 @@
 #include "parser.h"
 #include "stringparse.h"
 
+#include <sys/stat.h>
+#include <fcntl.h>
+
 /**
  * TODO:
  * + assignments
@@ -15,7 +18,7 @@
  * Future:
  * - negate unary operator
  * - making else optional
- * -
+ * - ...
  */
 
 using namespace bitpowder::lib;
@@ -401,7 +404,7 @@ struct ECALanguage {
     }
 };
 
-ECAParseResult ParseECA(const String &str, MemoryPool &mp) {
+ECAParseResult ParseECA(const String &str, MemoryPool& mp) {
     ECALexer lexer(str, mp);
     auto p = ParserState<ECALexer, ECA_LOOKAHEAD>(lexer);
     ECALanguage<ECALexer>::FuncDefs result;
@@ -418,4 +421,35 @@ ECAParseResult ParseECA(const String &str, MemoryPool &mp) {
     return {std::move(result)};
 }
 
+ECAParseResult ParseECAFile(const StringT& filename, MemoryPool& mp) {
+    struct stat st;
+    if (stat(filename.c_str(), &st)) {
+	std::cerr << "error: " << strerror(errno) << std::endl;
+	return {errno, "File not found (stat() error)"};
+    }
+#ifdef __MINGW32__
+    int fd = open(filename.c_str(), O_RDONLY | O_BINARY);
+#else
+    int fd = open(filename.c_str(), O_RDONLY);
+#endif
+    if (!fd) {
+	std::cerr << "error: " << strerror(errno) << std::endl;
+	return {errno, "Could not open file (open() error)"};
+    }
+    char *buffer = (char *)mp.alloc(st.st_size);
+    int size = read(fd, buffer, st.st_size);
+    if (size != st.st_size) {
+	std::cerr << "wrong number of bytes read: " << size << " instead of "
+	    << st.st_size << std::endl;
+	abort();
+    }
+    close(fd);
 
+    String current(buffer, size);
+
+    auto result = ParseECA(current, mp);
+    if (!result) {
+	std::cerr << "error: " << result.error() << " at " << result.position() << std::endl;
+    }
+    return result;
+}

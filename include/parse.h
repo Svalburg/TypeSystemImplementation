@@ -222,4 +222,8 @@ public:
 // correct lifetime of strings in the structure is limited to the lifetime of the MemoryPool
 ECAParseResult ParseECA(const bitpowder::lib::String &str, bitpowder::lib::MemoryPool &mp);
 
+// correct lifetime of strings in the structure is limited to the lifetime of the MemoryPool
+ECAParseResult ParseECA(const bitpowder::lib::String &str, bitpowder::lib::MemoryPool& mp);
+
+
 #endif // PARSE_H
