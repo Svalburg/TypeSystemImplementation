@@ -1,6 +1,6 @@
 #include "Environment.h"
 
-Environment::Environment(int t_input, int t_const, int t_var, int t_assign, int t_binop,
+Environment::Environment(int t_input, int t_const, int t_var, int t_assign, int t_binop, int t_if,
                 vector<ComponentFunction*> componentFunctions,
                 vector<Function*> functions,
                 vector<TimeDependentEC*> tdecList)
@@ -10,6 +10,7 @@ Environment::Environment(int t_input, int t_const, int t_var, int t_assign, int 
     this->t_var = t_var;
     this->t_assign = t_assign;
     this->t_binop = t_binop;
+	this->t_if = t_if;
     this->componentFunctions = componentFunctions;
     this->functions = functions;
     this->tdecList = tdecList;
@@ -38,6 +39,11 @@ int Environment::getTAssign()
 int Environment::getTBinop()
 {
     return t_binop;
+}
+
+int Environment::getTIf()
+{
+	return t_if;
 }
 
 ComponentFunction* Environment::getComponentFunction(string component, string name)

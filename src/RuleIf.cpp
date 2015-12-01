@@ -56,10 +56,13 @@ StateTuple RuleIf::sigma(StateTuple states)
 int RuleIf::energy(StateTuple states)
 {
 	StateTuple sigma_ex = branches.at(left)->sigma(states);
+	int e_ex = branches.at(left)->energy(states);
+	int e_stmt;
 	if(branches.at(left)->value(states) != 0)
-		return branches.at(middle)->energy(sigma_ex);
+		e_stmt = branches.at(middle)->energy(sigma_ex);
 	else
-		return branches.at(right)->energy(sigma_ex);
+		e_stmt = branches.at(right)->energy(sigma_ex);
+	return e_ex + td_ec(env->getTIf(), sigma_ex) + e_stmt;
 }
 
 RuleIf::~RuleIf()

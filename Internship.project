@@ -14,49 +14,16 @@
  }]]]>
     </Plugin>
   </Plugins>
-  <VirtualDirectory Name="parser">
-    <VirtualDirectory Name="lib">
-      <File Name="parser/lib/deque.h"/>
-      <File Name="parser/lib/exception.cpp"/>
-      <File Name="parser/lib/exception.h"/>
-      <File Name="parser/lib/extension.h"/>
-      <File Name="parser/lib/iterators.cpp"/>
-      <File Name="parser/lib/iterators.h"/>
-      <File Name="parser/lib/lib-common.h"/>
-      <File Name="parser/lib/memory.cpp"/>
-      <File Name="parser/lib/memory.h"/>
-      <File Name="parser/lib/memorypool.cpp"/>
-      <File Name="parser/lib/memorypool.debug.cpp"/>
-      <File Name="parser/lib/memorypool.debug.h"/>
-      <File Name="parser/lib/memorypool.h"/>
-      <File Name="parser/lib/parser.cpp"/>
-      <File Name="parser/lib/parser.h"/>
-      <File Name="parser/lib/parser.test.cpp"/>
-      <File Name="parser/lib/queue.cpp"/>
-      <File Name="parser/lib/queue.h"/>
-      <File Name="parser/lib/shared_object.cpp"/>
-      <File Name="parser/lib/shared_object.h"/>
-      <File Name="parser/lib/simplestring.cpp"/>
-      <File Name="parser/lib/simplestring.h"/>
-      <File Name="parser/lib/simplestring.test.cpp"/>
-      <File Name="parser/lib/stack.cpp"/>
-      <File Name="parser/lib/stack.h"/>
-      <File Name="parser/lib/stringparse.cpp"/>
-      <File Name="parser/lib/stringparse.h"/>
-      <File Name="parser/lib/stringparse.test.cpp"/>
-      <File Name="parser/lib/type_hash.cpp"/>
-      <File Name="parser/lib/type_hash.h"/>
-      <File Name="parser/lib/zip.h"/>
-    </VirtualDirectory>
-    <File Name="parser/main.cpp"/>
-    <File Name="parser/parse.cpp"/>
-    <File Name="parser/parse.h"/>
-    <File Name="parser/parse.test.cpp"/>
-    <File Name="parser/test.cpp"/>
-  </VirtualDirectory>
   <Description/>
   <Dependencies/>
+  <Dependencies Name="Debug"/>
+  <Dependencies Name="Release"/>
   <VirtualDirectory Name="include">
+    <File Name="include/ComponentFunction.h"/>
+    <File Name="include/Environment.h"/>
+    <File Name="include/Function.h"/>
+    <File Name="include/libtypesystem.h"/>
+    <File Name="include/parse.h"/>
     <File Name="include/Rule.h"/>
     <File Name="include/RuleAssign.h"/>
     <File Name="include/RuleBinOp.h"/>
@@ -73,14 +40,47 @@
     <File Name="include/RuleStmtConcat.h"/>
     <File Name="include/RuleVar.h"/>
     <File Name="include/StateTuple.h"/>
-    <File Name="include/libtypesystem.h"/>
-    <File Name="include/Function.h"/>
-    <File Name="include/ComponentFunction.h"/>
     <File Name="include/TimeDependentEC.h"/>
-    <File Name="include/Environment.h"/>
+    <File Name="include/RuleWhile.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="lib">
+    <File Name="lib/deque.h"/>
+    <File Name="lib/exception.cpp"/>
+    <File Name="lib/exception.h"/>
+    <File Name="lib/extension.h"/>
+    <File Name="lib/iterators.cpp"/>
+    <File Name="lib/iterators.h"/>
+    <File Name="lib/lib-common.h"/>
+    <File Name="lib/memory.cpp"/>
+    <File Name="lib/memory.h"/>
+    <File Name="lib/memorypool.cpp"/>
+    <File Name="lib/memorypool.debug.cpp"/>
+    <File Name="lib/memorypool.debug.h"/>
+    <File Name="lib/memorypool.h"/>
+    <File Name="lib/parser.cpp"/>
+    <File Name="lib/parser.h"/>
+    <File Name="lib/parser.test.cpp"/>
+    <File Name="lib/queue.cpp"/>
+    <File Name="lib/queue.h"/>
+    <File Name="lib/shared_object.cpp"/>
+    <File Name="lib/shared_object.h"/>
+    <File Name="lib/simplestring.cpp"/>
+    <File Name="lib/simplestring.h"/>
+    <File Name="lib/simplestring.test.cpp"/>
+    <File Name="lib/stack.cpp"/>
+    <File Name="lib/stack.h"/>
+    <File Name="lib/stringparse.cpp"/>
+    <File Name="lib/stringparse.h"/>
+    <File Name="lib/stringparse.test.cpp"/>
+    <File Name="lib/type_hash.cpp"/>
+    <File Name="lib/type_hash.h"/>
+    <File Name="lib/zip.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="src">
-    <File Name="main.cpp"/>
+    <File Name="src/ComponentFunction.cpp"/>
+    <File Name="src/Environment.cpp"/>
+    <File Name="src/Function.cpp"/>
+    <File Name="src/parse.cpp"/>
     <File Name="src/Rule.cpp"/>
     <File Name="src/RuleAssign.cpp"/>
     <File Name="src/RuleBinOp.cpp"/>
@@ -97,13 +97,13 @@
     <File Name="src/RuleStmtConcat.cpp"/>
     <File Name="src/RuleVar.cpp"/>
     <File Name="src/StateTuple.cpp"/>
-    <File Name="src/Function.cpp"/>
-    <File Name="src/ComponentFunction.cpp"/>
+    <File Name="src/test.cpp"/>
     <File Name="src/TimeDependentEC.cpp"/>
-    <File Name="src/Environment.cpp"/>
+    <File Name="src/RuleWhile.cpp"/>
   </VirtualDirectory>
-  <Dependencies Name="Debug"/>
-  <Dependencies Name="Release"/>
+  <VirtualDirectory Name="TypeSystemImplementation">
+    <File Name="main.cpp"/>
+  </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="" C_Options="" Assembler="">

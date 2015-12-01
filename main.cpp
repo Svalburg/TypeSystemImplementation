@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 	vector<ComponentFunction*> compfuncs;
 	vector<Function*> funcs;
 	vector<TimeDependentEC*> tdec;
-	Environment* env = new Environment(1, 2, 3, 4, 5, compfuncs, funcs, tdec);
+	Environment* env = new Environment(1, 2, 3, 4, 5, 6, compfuncs, funcs, tdec);
 	
 	root->updateEnvironment(env);
 	root->updatePath();
@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 	StateTuple* states = new StateTuple();
 	StateTuple stateEnd = root->sigma(*states);
 	
-	cout << stateEnd.getPStateValue("y");
+	//cout << stateEnd.getPStateValue("y");
     cout << "Energy usage is : " << root->energy(*states);
 
 	getchar();
