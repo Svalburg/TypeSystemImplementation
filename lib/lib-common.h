@@ -35,7 +35,6 @@ extern "C" {
 #include <errno.h>
 #include <string.h>
 #include <strings.h>
-#include <arpa/inet.h>
 
 #if defined(__linux__)
 #  include <endian.h>
@@ -50,8 +49,28 @@ extern "C" {
 #  define ntohll(x) betoh64(x)
 #  define htonll(x) htobe64(x)
 #elif defined(__APPLE__)
+#  include <arpa/inet.h>
+#elif defined(_WIN32) || defined(__CYGWIN__)
+#  include <Winsock2.h>
+#  if BYTE_ORDER == LITTLE_ENDIAN
+#    define ntohll(x) __builtin_bswap64(x)
+#    define htonll(x) __builtin_bswap64(x)
+#  else
+#    define ntohll(x) (x)
+#    define htonll(x) (x)
+#  endif
 #else
-#warning "no 64-bits ntoh/hton byte operations"
+#  warning "no 64-bits ntoh/hton byte operations"
+#endif
+
+#ifndef __WORDSIZE
+#  if _WIN32 || _WIN64
+#    if _WIN64
+#      define __WORDSIZE 64
+#    else
+#      define __WORDSIZE 32
+#    endif
+#  endif
 #endif
 
 }
