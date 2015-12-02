@@ -51,11 +51,18 @@ extern "C" {
 #elif defined(__APPLE__)
 #  include <arpa/inet.h>
 #elif defined(_WIN32) || defined(__CYGWIN__)
-#  include <Winsock2.h>
 #  if BYTE_ORDER == LITTLE_ENDIAN
+#    define ntohs(x) __builtin_bswap16(x)
+#    define htons(x) __builtin_bswap16(x)
+#    define ntohl(x) __builtin_bswap32(x)
+#    define htonl(x) __builtin_bswap32(x)
 #    define ntohll(x) __builtin_bswap64(x)
 #    define htonll(x) __builtin_bswap64(x)
 #  else
+#    define ntohs(x) (x)
+#    define htons(x) (x)
+#    define ntohl(x) (x)
+#    define htonl(x) (x)
 #    define ntohll(x) (x)
 #    define htonll(x) (x)
 #  endif

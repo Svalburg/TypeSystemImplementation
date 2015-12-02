@@ -539,9 +539,10 @@ Rule* ECARepeat::getTypeRule() const
     return new RuleRepeat(b->getTypeRule(), b->getTypeRule());
 }
 
+#include "RuleWhile.h"
 Rule* ECAWhile::getTypeRule() const
 {
-    return nullptr;
+    return new RuleRepeat(c->getTypeRule(), b->getTypeRule());
 }
 
 #include "RuleExprConcat.h"
