@@ -18,6 +18,8 @@ along with Bit Powder Libraries.  If not, see <http://www.gnu.org/licenses/>.
 
 #define DEBUG_EXCEPTIONS
 
+#define _USE_MATH_DEFINES
+
 #include "parser.h"
 #include "simplestring.h"
 #include "stringparse.h"
@@ -32,20 +34,16 @@ along with Bit Powder Libraries.  If not, see <http://www.gnu.org/licenses/>.
 #include <ostream>
 #include <iostream>
 
+
+#include <math.h> // needed for windows
 #include <cmath>
-
-#define M_PI 3.14159265358979323846
-#define M_E 2.71828182845904523536
-
-#undef ERROR
-
 using namespace bitpowder::lib;
 using namespace std;
 
 namespace tests {
 
 struct Number {
-    enum Type {INT, FLOAT, ERROR};
+    enum Type {INT, FLOAT, NUMBER_ERROR};
     Type type;
     union {
         int intValue;
@@ -53,7 +51,7 @@ struct Number {
     };
     Number(Type t = INT) : type(t), intValue(0) {
     }
-    Number(double f) : type(isnan(f) ? ERROR : FLOAT), floatValue(f) {
+    Number(double f) : type(std::isnan(f) ? NUMBER_ERROR : FLOAT), floatValue(f) {
     }
     Number(int i) : type(INT), intValue(i) {
     }
@@ -77,48 +75,48 @@ struct Number {
         return type == INT;
     }
     bool isError() const {
-        return type == ERROR;
+        return type == NUMBER_ERROR;
     }
 
     Number operator+(const Number& n) const {
         if (isError() || n.isError())
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         if (isFloat() || n.isFloat())
             return getFloat() + n.getFloat();
         return getInt() + n.getInt();
     }
     Number operator-(const Number& n) const {
         if (isError() || n.isError())
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         if (isFloat() || n.isFloat())
             return getFloat() - n.getFloat();
         return getInt() - n.getInt();
     }
     Number operator*(const Number& n) const {
         if (isError() || n.isError())
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         if (isFloat() || n.isFloat())
             return getFloat() * n.getFloat();
         return getInt() * n.getInt();
     }
     Number operator/(const Number& n) const {
         if (isError() || n.isError())
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         if ((n.isFloat() && n.getFloat() == 0) ||
                 (n.isInt() && n.getInt() == 0))
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         if (isInt() && n.isInt() && getInt() % n.getInt() == 0)
             return getInt() / n.getInt();
         return getFloat() / n.getFloat();
     }
     Number operator%(const Number& n) const {
         if (isError() || n.isError())
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         if ((n.isFloat() && n.getFloat() == 0) ||
                 (n.isInt() && n.getInt() == 0))
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         if (isFloat() || n.isFloat())
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         return getInt() % n.getInt();
     }
     bool operator==(const Number& n) const {
@@ -130,17 +128,17 @@ struct Number {
     }
     Number operator-() const {
         if (isError())
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         return isFloat() ? -getFloat() : -getInt();
     }
     Number pow(const Number& n) const {
         if (isError() || n.isError())
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         return ::pow(getFloat(), n.getFloat());
     }
     Number sqrt() const {
         if (isError())
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         if (isInt()) {
             int candidate = ::sqrt(getFloat());
             if (candidate*candidate == getInt())
@@ -150,22 +148,22 @@ struct Number {
     }
     Number log2() const {
         if (isError())
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         return ::log2(getFloat());
     }
     Number sin() const {
         if (isError())
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         return ::sin(getFloat());
     }
     Number cos() const {
         if (isError())
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         return ::cos(getFloat());
     }
     Number tan() const {
         if (isError())
-            return Number(ERROR);
+            return Number(NUMBER_ERROR);
         return ::tan(getFloat());
     }
 
@@ -596,7 +594,7 @@ TEST(Parser, CalculatorOfPositiveValuesFlexible) {
     EXPECT_INT_EQ(result, 16);
 
     EXPECT_EQ(ParseIntegerExpression("1/0", result), 0);
-    EXPECT_EQ(result, Number(Number::ERROR));
+    EXPECT_EQ(result, Number(Number::NUMBER_ERROR));
 
     EXPECT_EQ(ParseIntegerExpression("log(16)", result), 0);
     EXPECT_INT_EQ(result, 4);
