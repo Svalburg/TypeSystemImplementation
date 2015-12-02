@@ -18,6 +18,8 @@ along with Bit Powder Libraries.  If not, see <http://www.gnu.org/licenses/>.
 
 #define DEBUG_EXCEPTIONS
 
+#define _USE_MATH_DEFINES
+
 #include "parser.h"
 #include "simplestring.h"
 #include "stringparse.h"
@@ -32,9 +34,9 @@ along with Bit Powder Libraries.  If not, see <http://www.gnu.org/licenses/>.
 #include <ostream>
 #include <iostream>
 
+
 #include <math.h> // needed for windows
 #include <cmath>
-
 using namespace bitpowder::lib;
 using namespace std;
 
