@@ -36,7 +36,7 @@ class ECALexer {
     Token<Exception> exceptionToken = Exception("could not Tokenize remaining value");
 
     void whitespace() {
-        static auto space = C(' ') + C('\n') + C('\t');
+        static auto space = C(' ') + C('\n') + C('\r') + C('\t');
         StringParser(c).span(space).remainder(c);
     }
 
