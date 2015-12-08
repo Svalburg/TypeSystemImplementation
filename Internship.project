@@ -107,6 +107,7 @@
     <File Name="src/RuleExprConcat.test.cpp"/>
     <File Name="src/RuleFuncDef.test.cpp"/>
     <File Name="src/RuleIf.test.cpp"/>
+    <File Name="src/Environment.test.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="TypeSystemImplementation">
     <File Name="main.cpp"/>
