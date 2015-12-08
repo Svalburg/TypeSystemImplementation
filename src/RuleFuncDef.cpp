@@ -25,12 +25,14 @@ string RuleFuncDef::toStringE()
 
 string RuleFuncDef::toStringV()
 {
+    throw runtime_error("Tried to call toStringV. Not an expression.\n Statement: " + statement);
     exit(-3);
 }
 
 int RuleFuncDef::value(StateTuple states)
 {
-	exit(-3);
+    throw runtime_error("Tried to call value. Not an expression.\n Statement: " + statement);
+	exit(-4);
 }
 
 StateTuple RuleFuncDef::sigma(StateTuple states)

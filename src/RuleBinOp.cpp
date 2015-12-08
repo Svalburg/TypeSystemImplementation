@@ -93,6 +93,7 @@ int RuleBinOp::value(StateTuple states)
             return 1;
         else return 0;
     }
+    throw runtime_error("Invalid binary operator in statement: " + statement);
     exit(-5);
 }
 

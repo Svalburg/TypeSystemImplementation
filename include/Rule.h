@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <sstream>
 #include "StateTuple.h"
+#include <exception>
+
 //#include "Environment.h"
 
 using namespace std;

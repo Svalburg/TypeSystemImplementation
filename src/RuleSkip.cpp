@@ -19,12 +19,14 @@ string RuleSkip::toStringE()
 
 string RuleSkip::toStringV()
 {
+    throw runtime_error("Tried to call toStringV. Not an expression.\n Statement: " + statement);
     exit(-3);
 }
 
 int RuleSkip::value(StateTuple states)
 {
-	exit(-3);
+    throw runtime_error("Tried to call value. Not an expression.\n Statement: " + statement);
+	exit(-4);
 }
 
 StateTuple RuleSkip::sigma(StateTuple states)

@@ -31,12 +31,14 @@ string RuleWhile::toStringE()
 
 string RuleWhile::toStringV()
 {
+    throw runtime_error("Tried to call toStringV. Not an expression.\n Statement: " + statement);
     exit(-3);
 }
 
 int RuleWhile::value(StateTuple states)
 {
-	exit(-3);
+    throw runtime_error("Tried to call value. Not an expression.\n Statement: " + statement);
+	exit(-4);
 }
 
 StateTuple RuleWhile::sigma(StateTuple states)

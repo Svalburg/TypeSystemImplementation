@@ -16,9 +16,8 @@ int StateTuple::getPStateValue(string name)
 	for(size_t i = 0; i < pState.size(); i++)
 		if(name == pState.at(i).name)
 			return pState.at(i).value;
-	cout << "Value has not been declared.\n";
-	getchar();
-	exit(-4);
+	throw runtime_error("Program value '" + name + "' has not been declared.\n");
+	exit(-2);
 }
 
 int StateTuple::getCStateValue(string name)
@@ -26,9 +25,8 @@ int StateTuple::getCStateValue(string name)
 	for(size_t i = 0; i < cState.size(); i++)
 		if(name == cState.at(i).name)
 			return cState.at(i).value;
-	cout << "Value has not been declared.\n";
-	getchar();
-	exit(-4);
+	throw runtime_error("Component value '" + name + "' has not been declared.\n");
+	exit(-2);
 }
 
 void StateTuple::declarePState(string name, int value)

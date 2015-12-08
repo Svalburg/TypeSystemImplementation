@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 	vector<ComponentFunction*> compfuncs;
 	vector<Function*> funcs;
 	vector<TimeDependentEC*> tdec;
-	Environment* env = new Environment(1, 2, 3, 4, 5, 6, compfuncs, funcs, tdec);
+	Environment* env = new Environment(1, 2, 3, 4, 5, 6, 7, compfuncs, funcs, tdec);
 	
 	root->updateEnvironment(env);
 	root->updatePath();

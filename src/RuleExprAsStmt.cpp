@@ -21,11 +21,13 @@ string RuleExprAsStmt::toStringE()
 
 string RuleExprAsStmt::toStringV()
 {
+    throw runtime_error("Tried to call toStringV. Not an expression.\n Statement: " + statement);
     exit(-3);
 }
 
 int RuleExprAsStmt::value(StateTuple states)
 {
+    throw runtime_error("Tried to call value. Not an expression.\n Statement: " + statement);
     exit(-4);
 }
 

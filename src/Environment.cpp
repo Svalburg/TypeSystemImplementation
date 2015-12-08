@@ -1,6 +1,7 @@
 #include "Environment.h"
 
 Environment::Environment(int t_input, int t_const, int t_var, int t_assign, int t_binop, int t_if,
+                int t_while,
                 vector<ComponentFunction*> componentFunctions,
                 vector<Function*> functions,
                 vector<TimeDependentEC*> tdecList)
@@ -11,6 +12,7 @@ Environment::Environment(int t_input, int t_const, int t_var, int t_assign, int 
     this->t_assign = t_assign;
     this->t_binop = t_binop;
 	this->t_if = t_if;
+    this->t_while = t_while;
     this->componentFunctions = componentFunctions;
     this->functions = functions;
     this->tdecList = tdecList;
@@ -46,6 +48,11 @@ int Environment::getTIf()
 	return t_if;
 }
 
+int Environment::getTWhile()
+{
+    return t_while;
+}
+
 ComponentFunction* Environment::getComponentFunction(string component, string name)
 {
     for(size_t i=0;i<componentFunctions.size();i++)
@@ -54,8 +61,7 @@ ComponentFunction* Environment::getComponentFunction(string component, string na
         if(cfunction->getComponent() == component && cfunction->getName() == name)
             return cfunction;
     }
-	cout << "No component function found with name: " + component + '.' + name;
-	getchar();
+	throw runtime_error("No component function found with name: " + component + '.' + name);
     exit(-6);
 }
 
@@ -69,8 +75,7 @@ Function* Environment::getFunction(string name)
             return function;
 		}
     }
-	cout << "No function found with name: " + name;
-	getchar();
+	throw runtime_error("No function found with name: " + name);
     exit(-6);
 }
 
@@ -82,8 +87,8 @@ TimeDependentEC* Environment::getTimeDependentEC(string componentState)
         if(timedependent->getComponentState() == componentState)
             return timedependent;
     }
-	cout << "No component state found with name: " + componentState;
-    exit(-6);
+	throw runtime_error("No component state found with name: " + componentState);
+    exit(-7);
 }
 
 Environment* Environment::clone()
@@ -97,7 +102,7 @@ Environment* Environment::clone()
         compfunccopy.push_back(componentFunctions.at(i));
     for(size_t i = 0; i < tdecList.size(); i++)
         tdeccopy.push_back(tdecList.at(i));
-    return new Environment(t_input, t_const, t_var, t_assign, t_binop, t_if, compfunccopy, functioncopy, tdeccopy);
+    return new Environment(t_input, t_const, t_var, t_assign, t_binop, t_if, t_while, compfunccopy, functioncopy, tdeccopy);
 }
 
 void Environment::addFunction(string name, string argumentName, Rule* definition)
