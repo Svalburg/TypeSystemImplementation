@@ -1,21 +1,12 @@
-#include "RuleFuncDef.cpp"
-#include "RuleSkip.cpp"
-#include "RuleAssign.cpp"
-#include "RuleConst.cpp"
-#include "RuleSkip.cpp"
-#include "RuleStmtConcat.cpp"
-#include "RuleCallF.cpp"
-#include "Rule.cpp"
-#include "Environment.cpp"
-#include "TimeDependentEC.cpp"
-#include "ComponentFunction.cpp"
-#include "Function.cpp"
+#include "libtypesystem.h"
 #include <gtest/gtest.h>
+
 
 class FuncDefTest: public ::testing::Test
 {
 	protected:
-		RuleFuncDef* testRule, testRuleRecur;
+		RuleFuncDef* testRule;
+		RuleFuncDef* testRuleRecur;
 		StateTuple* startState;
 		Environment* env;
 		
@@ -23,7 +14,7 @@ class FuncDefTest: public ::testing::Test
 		{
 			testRule = new RuleFuncDef("Test", "x", new RuleConst("5"), new RuleAssign("y", new RuleCallF("Test", new RuleConst("0"))));
 			testRuleRecur = new RuleFuncDef("Test", "x", 
-				new RuleStmtConcat(new RuleIf(RuleVar("x"), new RuleVar("x"), new RuleCallF("Test", 100))),
+				new RuleIf(new RuleVar("x"), new RuleVar("x"), new RuleCallF("Test", new RuleConst("100"))),
 				new RuleSkip());
 			vector<ComponentFunction*> compfuncs;
 			vector<Function*> funcs;

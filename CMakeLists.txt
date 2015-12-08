@@ -76,8 +76,31 @@ add_executable(${PROJECT_NAME} ${srcs})
 target_link_libraries(${PROJECT_NAME} libbp)
 
 if (BUILD_UNIT_TESTS)
+	SET(testsrcs
+    src/Rule.cpp
+    src/RuleAssign.cpp
+    src/RuleBinOp.cpp
+    src/RuleCallCmpF.cpp
+    src/RuleCallF.cpp
+    src/RuleConst.cpp
+    src/RuleExprAsStmt.cpp
+    src/RuleExprConcat.cpp
+    src/RuleFuncDef.cpp
+    src/RuleIf.cpp
+    src/RuleInput.cpp
+    src/RuleRepeat.cpp
+    src/RuleSkip.cpp
+    src/RuleStmtConcat.cpp
+    src/RuleVar.cpp
+    src/RuleWhile.cpp
+    src/StateTuple.cpp
+    src/Function.cpp
+    src/ComponentFunction.cpp
+    src/TimeDependentEC.cpp
+    src/Environment.cpp
+	)
     FILE(GLOB UNITTESTS_SRCS lib/*.test.cpp src/*.test.cpp)
-    add_executable(${PROJECT_NAME}-test ${UNITTESTS_SRCS} src/test.cpp)
+    add_executable(${PROJECT_NAME}-test ${UNITTESTS_SRCS} src/test.cpp ${testsrcs})
     target_link_libraries(${PROJECT_NAME}-test libbp)
 
     set(EXT_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/ext)

@@ -1,4 +1,4 @@
-#include "StateTuple.cpp"
+#include "StateTuple.h"
 #include <gtest/gtest.h>
 
 TEST(StateTupleTest, DeclareAndGet)

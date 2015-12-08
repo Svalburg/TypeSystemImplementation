@@ -13,6 +13,7 @@
 #include "RuleIf.h"
 #include "RuleInput.h"
 #include "RuleRepeat.h"
+#include "RuleWhile.h"
 #include "RuleSkip.h"
 #include "RuleStmtConcat.h"
 #include "RuleVar.h"

@@ -1,12 +1,4 @@
-#include "RuleExprConcat.cpp"
-#include "RuleSkip.cpp"
-#include "RuleAssign.cpp"
-#include "RuleConst.cpp"
-#include "Rule.cpp"
-#include "Environment.cpp"
-#include "TimeDependentEC.cpp"
-#include "ComponentFunction.cpp"
-#include "Function.cpp"
+#include "libtypesystem.h"
 #include <gtest/gtest.h>
 
 class ExprConcatTest: public ::testing::Test
