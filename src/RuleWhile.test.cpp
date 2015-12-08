@@ -28,7 +28,7 @@ class WhileTest: public ::testing::Test
 
 TEST_F(WhileTest, Value)
 {
-	//EXPECT_THROW(testRule->value(*startState), runtime_error);
+	EXPECT_THROW(testRule->value(*startState), runtime_error);
 }
 
 TEST_F(WhileTest, State)
