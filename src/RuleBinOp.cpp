@@ -36,8 +36,6 @@ string RuleBinOp::toStringV()
 
 int RuleBinOp::value(StateTuple states)
 {
-    try
-    {
     int v1 = branches.at(left)->value(states);
     StateTuple sigma1 = branches.at(left)->sigma(states);
     int v2 = branches.at(right)->value(sigma1);
@@ -96,12 +94,6 @@ int RuleBinOp::value(StateTuple states)
         else return 0;
     }
     throw runtime_error("Exception: Invalid binary operator" + binop + " in statement: " + statement);
-    }
-    catch (const runtime_error& e)
-    {
-        cout << e.what() << endl;
-    }
-    exit(-5);
 }
 
 StateTuple RuleBinOp::sigma(StateTuple states)
