@@ -13,19 +13,32 @@ StateTuple::StateTuple(vector<declaration> pState, vector<declaration> cState)
 
 int StateTuple::getPStateValue(string name)
 {
-	for(size_t i = 0; i < pState.size(); i++)
-		if(name == pState.at(i).name)
-			return pState.at(i).value;
-	throw runtime_error("Program value '" + name + "' has not been declared.\n");
+    try{
+        for(size_t i = 0; i < pState.size(); i++)
+            if(name == pState.at(i).name)
+                return pState.at(i).value;
+        throw runtime_error("Exception: Program value '" + name + "' has not been declared.\n");
+    }
+    catch( const runtime_error& e)
+    {
+        cout << e.what() << endl;
+    }
 	exit(-2);
 }
 
 int StateTuple::getCStateValue(string name)
 {
-	for(size_t i = 0; i < cState.size(); i++)
-		if(name == cState.at(i).name)
-			return cState.at(i).value;
-	throw runtime_error("Component value '" + name + "' has not been declared.\n");
+    try
+    {
+        for(size_t i = 0; i < cState.size(); i++)
+            if(name == cState.at(i).name)
+                return cState.at(i).value;
+        throw runtime_error("Exception: Component value '" + name + "' has not been declared.\n");
+    }
+    catch(const runtime_error& e)
+    {
+        cout << e.what() << endl;
+    }
 	exit(-2);
 }
 
