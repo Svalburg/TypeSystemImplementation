@@ -8,7 +8,7 @@ RuleWhile::RuleWhile(Rule* left, Rule* right)
     branches.push_back(right);
     this->left = 0;
     this->right = 1;
-    ruleName = "Repeat";
+    ruleName = "While";
 }
 
 string RuleWhile::toStringSigma()

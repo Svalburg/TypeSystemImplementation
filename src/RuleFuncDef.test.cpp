@@ -10,7 +10,7 @@ class FuncDefTest: public ::testing::Test
 		StateTuple* startState;
 		Environment* env;
 		
-		void StartUp()
+		void SetUp()
 		{
 			testRule = new RuleFuncDef("Test", "x", new RuleConst("5"), new RuleAssign("y", new RuleCallF("Test", new RuleConst("0"))));
 			testRuleRecur = new RuleFuncDef("Test", "x", 

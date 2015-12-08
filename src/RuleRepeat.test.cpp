@@ -7,9 +7,9 @@ class RepeatTest: public ::testing::Test
 		RuleRepeat* testRuleState, *testRuleEnergy;
 		StateTuple* startState;
 		
-		void StartUp()
+		void SetUp()
 		{
-			testRuleState = new RuleRepeat(new RuleVar("x"), new RuleBinOp("+", new RuleVar("x"), new RuleConst("1")));
+			testRuleState = new RuleRepeat(new RuleVar("x"), new RuleAssign("x", new RuleBinOp("+", new RuleVar("x"), new RuleConst("1"))));
 			testRuleEnergy = new RuleRepeat(new RuleConst("5"), new RuleCallCmpF("test", "testing", new RuleConst("0")));
 			vector<ComponentFunction*> compfuncs;
 			vector<Function*> funcs;

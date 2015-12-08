@@ -8,7 +8,7 @@ class WhileTest: public ::testing::Test
 		RuleWhile* testRule;
 		StateTuple* startState;
 		
-		void StartUp()
+		void SetUp()
 		{
 			RuleCallCmpF* rule1 = new RuleCallCmpF("test", "testing", new RuleConst("0"));
 			RuleAssign* rule2 = new RuleAssign("x", new RuleBinOp("+", new RuleVar("x"), new RuleConst("1")));
@@ -19,6 +19,7 @@ class WhileTest: public ::testing::Test
 			compfuncs.push_back(new ComponentFunction("test", "testing", "a", new RuleSkip(), new RuleConst("5"), 5));
 			Environment* env = new Environment(1, 2, 3, 4, 5, 6, 7, compfuncs, funcs, tdec);
 			testRule->updateEnvironment(env);
+			testRule->getStatement();
 			startState = new StateTuple();
 			startState->declarePState("x", 5);
 		}
@@ -33,11 +34,11 @@ TEST_F(WhileTest, Value)
 
 TEST_F(WhileTest, State)
 {
-	//StateTuple endState = testRule->sigma(*startState);
-	//EXPECT_EQ(10, endState.getPStateValue("x"));
+	StateTuple endState = testRule->sigma(*startState);
+	EXPECT_EQ(10, endState.getPStateValue("x"));
 }
 
 TEST_F(WhileTest, Energy)
 {
-	//EXPECT_EQ(25, testRule->energy(*startState));
+	EXPECT_EQ(25, testRule->energy(*startState));
 }
