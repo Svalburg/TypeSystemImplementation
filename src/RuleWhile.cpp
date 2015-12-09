@@ -8,7 +8,7 @@ RuleWhile::RuleWhile(Rule* left, Rule* right)
     branches.push_back(right);
     this->left = 0;
     this->right = 1;
-    ruleName = "Repeat";
+    ruleName = "While";
 }
 
 string RuleWhile::toStringSigma()
@@ -31,28 +31,12 @@ string RuleWhile::toStringE()
 
 string RuleWhile::toStringV()
 {
-    try
-    {
-        throw runtime_error("Exception: Tried to call toStringV. Not an expression.\n Statement: " + statement);
-    }
-    catch (const runtime_error& e)
-    {
-        cout << e.what() << endl;
-    }
-    exit(-3);
+    throw runtime_error("Exception: Tried to call toStringV. Not an expression.\n Statement: " + statement);
 }
 
 int RuleWhile::value(StateTuple states)
 {
-    try
-    {
-        throw runtime_error("Exception: Tried to call value. Not an expression.\n Statement: " + statement);
-    }
-    catch (const runtime_error& e)
-    {
-        cout << e.what() << endl;
-    }
-	exit(-4);
+    throw runtime_error("Exception: Tried to call value. Not an expression.\n Statement: " + statement);
 }
 
 StateTuple RuleWhile::sigma(StateTuple states)

@@ -31,8 +31,16 @@ int main(int argc, char** argv)
 	StateTuple* states = new StateTuple();
 	StateTuple stateEnd = root->sigma(*states);
 	
-	//cout << stateEnd.getPStateValue("y");
-    cout << "Energy usage is : " << root->energy(*states);
+	try
+	{
+		//cout << stateEnd.getPStateValue("y");
+		cout << "Energy usage is : " << root->energy(*states);
+	}
+	catch (const runtime_error& e)
+    {
+        cerr << e.what() << endl;
+		exit(-1);
+    }
 
 	getchar();
 	return 0;

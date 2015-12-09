@@ -55,60 +55,37 @@ int Environment::getTWhile()
 
 ComponentFunction* Environment::getComponentFunction(string component, string name)
 {
-    try{
-        for(size_t i=0;i<componentFunctions.size();i++)
-        {
-            ComponentFunction* cfunction = componentFunctions.at(i);
-            if(cfunction->getComponent() == component && cfunction->getName() == name)
-                return cfunction;
-        }
-        throw runtime_error("Exception: No component function found with name: " + component + '.' + name);
-    }
-    catch (const runtime_error& e)
-    {
-        cout << e.what() << endl;
-    }
-    exit(-6);
+	for(size_t i=0;i<componentFunctions.size();i++)
+	{
+		ComponentFunction* cfunction = componentFunctions.at(i);
+		if(cfunction->getComponent() == component && cfunction->getName() == name)
+			return cfunction;
+	}
+	throw runtime_error("Exception: No component function found with name: " + component + '.' + name);
 }
 
 Function* Environment::getFunction(string name)
-{    
-    try
-    {
-        for(size_t i=0;i<functions.size();i++)
-        {
-            Function* function = functions.at(i);
-            if(function->getName() == name)
-            {
-                return function;
-            }
-        }
-        throw runtime_error("Exception: No function found with name: " + name);
-    }
-    catch (const runtime_error& e)
-    {
-        cout << e.what() << endl;
-    }
-    exit(-6);
+{
+	for(size_t i=0;i<functions.size();i++)
+	{
+		Function* function = functions.at(i);
+		if(function->getName() == name)
+		{
+			return function;
+		}
+	}
+	throw runtime_error("Exception: No function found with name: " + name);
 }
 
 TimeDependentEC* Environment::getTimeDependentEC(string componentState)
 {
-    try
-    {
-        for(size_t i=0;i<tdecList.size();i++)
-        {
-            TimeDependentEC* timedependent = tdecList.at(i);
-            if(timedependent->getComponentState() == componentState)
-                return timedependent;
-        }
-        throw runtime_error("Exception: No component state found with name: " + componentState);
-    }
-    catch (const runtime_error& e)
-    {
-        cout << e.what() << endl;
-    }
-    exit(-7);
+	for(size_t i=0;i<tdecList.size();i++)
+	{
+		TimeDependentEC* timedependent = tdecList.at(i);
+		if(timedependent->getComponentState() == componentState)
+			return timedependent;
+	}
+	throw runtime_error("Exception: No component state found with name: " + componentState);
 }
 
 Environment* Environment::clone()
