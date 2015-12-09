@@ -38,7 +38,7 @@ int RuleCallCmpF::value(StateTuple states)
 {
     int v_ex = branches.at(middle)->value(states);
     StateTuple sigma_ex = branches.at(middle)->sigma(states);
-    ComponentFunction* function = env->getComponentFunction(componentName, functionName);
+	ComponentFunction* function = env->getComponentFunction(componentName, functionName);
     sigma_ex.declarePState(function->getArgumentName(), v_ex);
     return function->value(sigma_ex);    
 }

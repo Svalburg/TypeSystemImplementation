@@ -23,7 +23,7 @@ class RuleCallFTest: public ::testing::Test
         Environment* env = new Environment(1, 2, 3, 4, 5, 6, 7, compfuncs, funcs, tdec);
 		testRule->updateEnvironment(env);
 		startState = new StateTuple();
-        startState.declareCState("test1", 0);
+        startState->declareCState("test1", 0);
 	}
 	
 	void TearDown(){}
@@ -31,5 +31,5 @@ class RuleCallFTest: public ::testing::Test
 
 TEST_F(RuleCallFTest, Value)
 {
-    EXPECT_EQ(2, testRule->value(*startState));
+    EXPECT_EQ(3, testRule->value(*startState));
 }

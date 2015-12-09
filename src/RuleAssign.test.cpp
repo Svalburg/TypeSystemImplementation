@@ -22,7 +22,7 @@ class RuleAssignTest: public ::testing::Test
 		testRule->updateEnvironment(env);
         testRuleExpr->updateEnvironment(env);
 		startState = new StateTuple();
-        startState.declareCState("test1", 1);
+        startState->declareCState("test1", 1);
 	}
 	
 	void TearDown(){}
@@ -30,21 +30,15 @@ class RuleAssignTest: public ::testing::Test
 
 TEST_F(RuleAssignTest, Value)
 {
-    EXPECT_EQ(3, testRule->value());
-    EXPECT_EQ(12, testRuleExpr->value());
+    EXPECT_EQ(3, testRule->value(*startState));
+    EXPECT_EQ(12, testRuleExpr->value(*startState));
 }
 
 TEST_F(RuleAssignTest, State)
 {
-    StateTuple* endState = testRule->sigma(*startState);
-    StateTuple* endStateExpr = testRuleExpr->(*startState);
+    StateTuple endState = testRule->sigma(*startState);
+    StateTuple endStateExpr = testRuleExpr->sigma(*startState);
     EXPECT_EQ(3, endState.getPStateValue("x"));
     EXPECT_EQ(12, endStateExpr.getPStateValue("y"));
     EXPECT_THROW(endState.getPStateValue("y"), runtime_error);
-}
-
-TEST_F(RuleAssignTest, Energy)
-{
-    EXPECT_EQ(6, testRule->energy());
-    EXPECT_EQ(9, testRuleExpr->energy());
 }

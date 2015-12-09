@@ -5,8 +5,9 @@
 class RuleBinOpTest: public ::testing::Test
 {
 	protected:
-	RuleBinop* testRule;
+	RuleBinOp* testRule;
 	StateTuple* startState;
+	Environment* env;
 	
 	void SetUp()
 	{
@@ -17,10 +18,10 @@ class RuleBinOpTest: public ::testing::Test
         TimeDependentEC* tdec1, * tdec2, * tdec3;
         tdec1 = new TimeDependentEC("test1", new RuleConst("1"));
         tdec.push_back(tdec1);
-        Environment* env = new Environment(1, 2, 3, 4, 5, 6, 7, compfuncs, funcs, tdec);
+        env = new Environment(1, 2, 3, 4, 5, 6, 7, compfuncs, funcs, tdec);
 		testRule->updateEnvironment(env);
 		startState = new StateTuple();
-        startState.declareCState("test1", 1);
+        startState->declareCState("test1", 1);
 	}
 	
 	void TearDown(){}
@@ -29,6 +30,7 @@ class RuleBinOpTest: public ::testing::Test
 TEST_F(RuleBinOpTest, Value)
 {
     RuleBinOp* fail = new RuleBinOp("cfaaga", new RuleConst("1"), new RuleConst("1"));
+	fail->updateEnvironment(env);
     EXPECT_THROW(fail->value(*startState), runtime_error);
     EXPECT_EQ(6, testRule->value(*startState));       
 }

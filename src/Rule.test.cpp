@@ -5,12 +5,12 @@
 class RuleTest: public ::testing::Test
 {
 	protected:
-	Rule* testRule;
+	RuleConst* testRule;
 	StateTuple* startState;
 	
 	void SetUp()
 	{
-		testRule = new Rule();
+		testRule = new RuleConst("0");
 		vector<ComponentFunction*> compfuncs;
 		vector<Function*> funcs;
 		vector<TimeDependentEC*> tdec;
@@ -22,9 +22,9 @@ class RuleTest: public ::testing::Test
         Environment* env = new Environment(1, 2, 3, 4, 5, 6, 7, compfuncs, funcs, tdec);
 		testRule->updateEnvironment(env);
 		startState = new StateTuple();
-        startState.declareCState("test1", 1);
-        startState.declareCState("test2", 2);
-        startState.declareCState("test3", 3);
+        startState->declareCState("test1", 1);
+        startState->declareCState("test2", 2);
+        startState->declareCState("test3", 3);
 	}
 	
 	void TearDown(){}
@@ -32,5 +32,5 @@ class RuleTest: public ::testing::Test
 
 TEST_F(RuleTest, tdec)
 {
-    EXPECT_EQ(6, testRule->tdec());
+    EXPECT_EQ(12, testRule->energy(*startState));
 }
