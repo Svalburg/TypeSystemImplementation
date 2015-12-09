@@ -110,6 +110,11 @@
     <File Name="src/RuleRepeat.test.cpp"/>
     <File Name="src/RuleWhile.test.cpp"/>
     <File Name="src/Environment.test.cpp"/>
+    <File Name="src/Rule.test.cpp"/>
+    <File Name="src/RuleAssign.test.cpp"/>
+    <File Name="src/RuleBinop.test.cpp"/>
+    <File Name="src/RuleCallCmpF.test.cpp"/>
+    <File Name="src/RuleCallF.test.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="TypeSystemImplementation">
     <File Name="main.cpp"/>
