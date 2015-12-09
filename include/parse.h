@@ -17,6 +17,7 @@ public:
     typedef bitpowder::lib::shared_object<ECA_AST> Ref;
     virtual ~ECA_AST() {
     }
+    virtual void print(std::ostream& out) const = 0;
 };
 
 class ECAStatement : public ECA_AST {
@@ -25,7 +26,6 @@ public:
     virtual bool isExpression() const {
         return false;
     }
-    virtual void print(std::ostream& out) const = 0;
     virtual Rule* getTypeRule() const = 0;
 };
 
@@ -220,15 +220,22 @@ public:
     Rule* getTypeRule() const override;
 };
 
-class ECAProgram {
+class ECAProgram : public ECA_AST {
 public:
     std::map<bitpowder::lib::String,ECAFunctionDefinition::Ref> functions;
     ECAStatement::Ref main;
 
-    int refcount = 0;
-    typedef bitpowder::lib::shared_object<ECAProgram> Ref;
+    typedef bitpowder::lib::shared_object<ECAProgram, ECA_AST> Ref;
 
     Rule* getTypeRule() const;
+
+    virtual void print(std::ostream& out) const override {
+        for (const auto& f : functions) {
+            f.second->print(out);
+            out << std::endl;
+        }
+        main->print(out);
+    }
 };
 
 class ECAParseResult {
@@ -256,10 +263,10 @@ public:
 };
 
 // correct lifetime of strings in the structure is limited to the lifetime of the MemoryPool
-ECAParseResult ParseECA(const bitpowder::lib::String &str, bitpowder::lib::MemoryPool &mp);
+ECAParseResult ParseECAMemory(const bitpowder::lib::String &ecaString, bitpowder::lib::MemoryPool &mp);
 
 // correct lifetime of strings in the structure is limited to the lifetime of the MemoryPool
-ECAParseResult ParseECAFile(const bitpowder::lib::StringT &str, bitpowder::lib::MemoryPool& mp);
+ECAParseResult ParseECAFile(const bitpowder::lib::StringT &filename, bitpowder::lib::MemoryPool& mp);
 
 
 #endif // PARSE_H

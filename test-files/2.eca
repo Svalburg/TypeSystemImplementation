@@ -1,5 +1,5 @@
 x := 3;
-if x < 6 then
+if x < 6 && x < 3 then
 x := 3
  else
 x := 8

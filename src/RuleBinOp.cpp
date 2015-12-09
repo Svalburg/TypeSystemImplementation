@@ -83,13 +83,13 @@ int RuleBinOp::value(StateTuple states)
             return 1;
         else return 0;
     }
-    else if (binop == "and")
+    else if (binop == "and" || binop == "&&")
     {
         if(v1 != 0 && v2 != 0)
             return 1;
         else return 0;
     }
-    else if (binop == "or")
+    else if (binop == "or" || binop == "||")
     {
         if(v1 != 0 || v2 != 0)
             return 1;

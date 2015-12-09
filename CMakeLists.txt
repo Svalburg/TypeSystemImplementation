@@ -42,7 +42,6 @@ add_library(libbp STATIC ${lib})
 ###### EXECUTABLE
 
 SET(srcs
-    main.cpp
     src/Rule.cpp
     src/RuleAssign.cpp
     src/RuleBinOp.cpp
@@ -72,12 +71,12 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-add_executable(${PROJECT_NAME} ${srcs})
+add_executable(${PROJECT_NAME} ${srcs} main.cpp)
 target_link_libraries(${PROJECT_NAME} libbp)
 
 if (BUILD_UNIT_TESTS)
     FILE(GLOB UNITTESTS_SRCS lib/*.test.cpp src/*.test.cpp)
-    add_executable(${PROJECT_NAME}-test ${UNITTESTS_SRCS} src/test.cpp)
+    add_executable(${PROJECT_NAME}-test ${UNITTESTS_SRCS} src/test.cpp ${srcs})
     target_link_libraries(${PROJECT_NAME}-test libbp)
 
     set(EXT_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/ext)

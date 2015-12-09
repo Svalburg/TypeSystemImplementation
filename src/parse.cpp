@@ -66,6 +66,16 @@ public:
     static const Token<char> OPEN;
     static const Token<char> CLOSE;
 
+    static const Token<char> AND;
+    static const Token<char> OR;
+
+    static const Token<char> LESS;
+    static const Token<char> LESS_EQ;
+    static const Token<char> EQUAL;
+    static const Token<char> NOT_EQUAL;
+    static const Token<char> GREATER_EQ;
+    static const Token<char> GREATER;
+
     static const Token<char> IF;
     static const Token<char> THEN;
     static const Token<char> ELSE;
@@ -95,10 +105,6 @@ public:
 
         lookaheadIndex = (lookaheadIndex+1) % ECA_LOOKAHEAD;
 
-        if (StringParser(c).accept(":=").remainder(c)) {
-            opToken[lookaheadIndex] = ASSIGNMENT;
-            return &opToken[lookaheadIndex];
-        }
         if (StringParser(c).accept("skip").remainder(c)) {
             opToken[lookaheadIndex] = SKIP;
             return &opToken[lookaheadIndex];
@@ -135,8 +141,37 @@ public:
             opToken[lookaheadIndex] = WHILE;
             return &opToken[lookaheadIndex];
         }
+        if (StringParser(c).accept("and", "&&").remainder(c)) {
+            opToken[lookaheadIndex] = AND;
+            return &opToken[lookaheadIndex];
+        }
+        if (StringParser(c).accept("or", "||").remainder(c)) {
+            opToken[lookaheadIndex] = AND;
+            return &opToken[lookaheadIndex];
+        }
+        if (StringParser(c).accept("<=").remainder(c)) {
+            opToken[lookaheadIndex] = LESS_EQ;
+            return &opToken[lookaheadIndex];
+        }
+        if (StringParser(c).accept(">=").remainder(c)) {
+            opToken[lookaheadIndex] = GREATER_EQ;
+            return &opToken[lookaheadIndex];
+        }
+        if (StringParser(c).accept("!=").remainder(c)) {
+            opToken[lookaheadIndex] = NOT_EQUAL;
+            return &opToken[lookaheadIndex];
+        }
+        if (StringParser(c).accept("==").remainder(c)) {
+            opToken[lookaheadIndex] = EQUAL;
+            return &opToken[lookaheadIndex];
+        }
+        if (StringParser(c).accept(":=").remainder(c)) {
+            opToken[lookaheadIndex] = ASSIGNMENT;
+            return &opToken[lookaheadIndex];
+        }
         if (c[0] == MUL || c[0] == DIV || c[0] == PLUS || c[0] == MIN ||
-                c[0] == COMMA || c[0] == OPEN || c[0] == CLOSE || c[0] == SEMICOLON || c[0] == DOT) {
+                c[0] == COMMA || c[0] == OPEN || c[0] == CLOSE || c[0] == SEMICOLON || c[0] == DOT ||
+                c[0] == LESS || c[0] == GREATER) {
             opToken[lookaheadIndex].value = c[0];
             c = c.substring(1);
             //std::cout << "Token[lookaheadIndex] op: " << opToken[lookaheadIndex].value << " type=" << opToken[lookaheadIndex].type << std::endl;
@@ -184,7 +219,14 @@ const Token<char> ECALexer::END = 'd';
 const Token<char> ECALexer::REPEAT = 'r';
 const Token<char> ECALexer::WHILE = 'w';
 const Token<char> ECALexer::FUNCTION = 'f';
-
+const Token<char> ECALexer::LESS = '<';
+const Token<char> ECALexer::GREATER = '>';
+const Token<char> ECALexer::LESS_EQ = 'l';
+const Token<char> ECALexer::GREATER_EQ = 'g';
+const Token<char> ECALexer::EQUAL = 'q';
+const Token<char> ECALexer::NOT_EQUAL = 'n';
+const Token<char> ECALexer::AND = '&';
+const Token<char> ECALexer::OR = '|';
 
 template <class Lexer>
 struct ECALanguage {
@@ -307,8 +349,80 @@ struct ECALanguage {
         }, variableName);
     }
 
+    static PStmt exprBase(PStmt cont, UserData userData) {
+        return cont.choose(assignment, addition);
+    }
+
+    static PStmt equalOp(PStmt cont, UserData userData) {
+        return cont().accept(ECALexer::EQUAL)
+                .process(exprBase, [](Stmt &a, Stmt&& b, UserData userData) {
+            a = new ECABinary(a, "==", b);
+            return 0;
+        });
+    }
+
+    static PStmt notEqualOp(PStmt cont, UserData userData) {
+        return cont().accept(ECALexer::NOT_EQUAL)
+                .process(exprBase, [](Stmt &a, Stmt&& b, UserData userData) {
+            a = new ECABinary(a, "!=", b);
+            return 0;
+        });
+    }
+
+    static PStmt lessOp(PStmt cont, UserData userData) {
+        return cont().accept(ECALexer::LESS)
+                .process(exprBase, [](Stmt &a, Stmt&& b, UserData userData) {
+            a = new ECABinary(a, "<", b);
+            return 0;
+        });
+    }
+
+    static PStmt greaterOp(PStmt cont, UserData userData) {
+        return cont().accept(ECALexer::GREATER)
+                .process(exprBase, [](Stmt &a, Stmt&& b, UserData userData) {
+            a = new ECABinary(a, ">", b);
+            return 0;
+        });
+    }
+
+    static PStmt lessEqOp(PStmt cont, UserData userData) {
+        return cont().accept(ECALexer::LESS_EQ)
+                .process(exprBase, [](Stmt &a, Stmt&& b, UserData userData) {
+            a = new ECABinary(a, "<=", b);
+            return 0;
+        });
+    }
+
+    static PStmt greaterEqOp(PStmt cont, UserData userData) {
+        return cont().accept(ECALexer::GREATER_EQ)
+                .process(exprBase, [](Stmt &a, Stmt&& b, UserData userData) {
+            a = new ECABinary(a, ">=", b);
+            return 0;
+        });
+    }
+
+    static PStmt comparisonExpr(PStmt cont, UserData userData) {
+        return cont().perform(exprBase).optChoose(lessOp, lessEqOp, equalOp, notEqualOp, greaterEqOp, greaterOp);
+    }
+
+    static PStmt andOp(PStmt cont, UserData userData) {
+        return cont().accept(ECALexer::AND)
+                .process(comparisonExpr, [](Stmt &a, Stmt&& b, UserData userData) {
+            a = new ECABinary(a, "&&", b);
+            return 0;
+        });
+    }
+
+    static PStmt orOp(PStmt cont, UserData userData) {
+        return cont().accept(ECALexer::OR)
+                .process(comparisonExpr, [](Stmt &a, Stmt&& b, UserData userData) {
+            a = new ECABinary(a, "||", b);
+            return 0;
+        });
+    }
+
     static PStmt expr(PStmt cont, UserData userData) {
-        return cont().choose(assignment, addition);
+        return cont().perform(comparisonExpr).repeatChoose(andOp, orOp);
     }
 
 
@@ -412,6 +526,7 @@ struct ECALanguage {
 
     static PFunDefs def(PFunDefs cont, UserData userData) {
         return cont().store(new ECAProgram()).repeat(definition).perform(defTail).modify([](FuncDefs& a, UserData) {
+        /*
             for (auto& fd : a->functions) {
                 fd.second->print(std::cout);
                 std::cout << std::endl;
@@ -420,12 +535,13 @@ struct ECALanguage {
             std::cout << "main statements:" << std::endl;
             a->main->print(std::cout);
             std::cout << std::endl;
+            */
             return 0;
         });
     }
 };
 
-ECAParseResult ParseECA(const String &str, MemoryPool& mp) {
+ECAParseResult ParseECAMemory(const String &str, MemoryPool& mp) {
     ECALexer lexer(str, mp);
     auto p = ParserState<ECALexer, ECA_LOOKAHEAD>(lexer);
     ECALanguage<ECALexer>::FuncDefs result;
@@ -468,7 +584,7 @@ ECAParseResult ParseECAFile(const StringT& filename, MemoryPool& mp) {
 
     String current(buffer, size);
 
-    auto result = ParseECA(current, mp);
+    auto result = ParseECAMemory(current, mp);
     if (!result) {
 	std::cerr << "error: " << result.error() << " at " << result.position() << std::endl;
     }
