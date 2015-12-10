@@ -6,7 +6,7 @@
 class RuleVar : public Rule
 {
     public:
-        RuleVar(string statement);
+        RuleVar(string statement, bool readComponentState = false);
         string toStringSigma();
         string toStringE();
         string toStringV();
@@ -15,7 +15,8 @@ class RuleVar : public Rule
         int energy(StateTuple states);
         virtual ~RuleVar();
     protected:
-    private:
+	private:
+	bool readComponentState;
 };
 
 #endif // RULEVAR_H

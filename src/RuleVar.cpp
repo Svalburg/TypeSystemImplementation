@@ -1,9 +1,10 @@
 #include "RuleVar.h"
 #include "Environment.h"
 
-RuleVar::RuleVar(string statement)
+RuleVar::RuleVar(string statement, bool readComponentState)
 {
     this->statement = statement;
+	this->readComponentState = readComponentState;
     ruleName = "Var";
 }
 
@@ -24,7 +25,10 @@ string RuleVar::toStringV()
 
 int RuleVar::value(StateTuple states)
 {
-	return states.getPStateValue(statement);
+	if(readComponentState)
+		return states.getCStateValue(statement)
+	else
+		return states.getPStateValue(statement);
 }
 
 StateTuple RuleVar::sigma(StateTuple states)

@@ -7,7 +7,7 @@
 class RuleAssign : public Rule
 {
     public:
-        RuleAssign(string variable, Rule* branch);
+        RuleAssign(string variable, Rule* branch, bool writeComponentState = false);
         string toStringSigma();
         string toStringE();
         string toStringV();
@@ -18,6 +18,7 @@ class RuleAssign : public Rule
     protected:
     private:
         string variable;
+		bool writeComponentState;
 };
 
 #endif // RULEASSIGN_H
