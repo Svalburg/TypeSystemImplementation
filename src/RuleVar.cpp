@@ -26,7 +26,7 @@ string RuleVar::toStringV()
 int RuleVar::value(StateTuple states)
 {
 	if(readComponentState)
-		return states.getCStateValue(statement)
+		return states.getCStateValue(statement);
 	else
 		return states.getPStateValue(statement);
 }
