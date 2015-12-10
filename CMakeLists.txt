@@ -71,13 +71,16 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-add_executable(${PROJECT_NAME} ${srcs} main.cpp)
-target_link_libraries(${PROJECT_NAME} libbp)
+add_library(lib${PROJECT_NAME} ${srcs})
+target_link_libraries(lib${PROJECT_NAME} libbp)
+
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} lib${PROJECT_NAME})
 
 if (BUILD_UNIT_TESTS)
     FILE(GLOB UNITTESTS_SRCS lib/*.test.cpp src/*.test.cpp)
-    add_executable(${PROJECT_NAME}-test ${UNITTESTS_SRCS} src/test.cpp ${srcs})
-    target_link_libraries(${PROJECT_NAME}-test libbp)
+    add_executable(${PROJECT_NAME}-test ${UNITTESTS_SRCS} src/test.cpp)
+    target_link_libraries(${PROJECT_NAME}-test lib${PROJECT_NAME})
 
     set(EXT_PROJECTS_DIR ${PROJECT_SOURCE_DIR}/ext)
     add_subdirectory(${EXT_PROJECTS_DIR}/gtest)
