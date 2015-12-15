@@ -56,13 +56,16 @@ StateTuple RuleCallF::sigma(StateTuple states)
 
 int RuleCallF::energy(StateTuple states, bool output)
 {    
-    int e_expr = branches.at(middle)->energy(states);
+    int e_expr = branches.at(middle)->energy(states, output);
     int v_ex = branches.at(middle)->value(states);
     StateTuple sigma_ex = branches.at(middle)->sigma(states);
     Function* function = env->getFunction(functionName);
     sigma_ex.declarePState(function->getArgumentName(), v_ex);
-    int e_func = function->energy(sigma_ex);
-    return e_expr + e_func;
+    int e_func = function->energy(sigma_ex, output);
+    int total_energy = e_expr + e_func;
+    if(output)
+        cout << "Energy usage of " + statement + " is: " << total_energy << endl; 
+    return total_energy;
 }
 
 RuleCallF::~RuleCallF()

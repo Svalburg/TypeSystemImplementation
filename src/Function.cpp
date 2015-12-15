@@ -18,9 +18,9 @@ int Function::value(StateTuple states)
     return definition->value(states);
 }
 
-int Function::energy(StateTuple states)
+int Function::energy(StateTuple states, bool output)
 {
-	return definition->energy(states);
+	return definition->energy(states, output);
 }
 
 string Function::getArgumentName()

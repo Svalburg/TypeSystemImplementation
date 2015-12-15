@@ -57,14 +57,20 @@ StateTuple RuleCallCmpF::sigma(StateTuple states)
 
 int RuleCallCmpF::energy(StateTuple states, bool output)
 {
-    int e_expr = branches.at(middle)->energy(states);
+    int e_expr = branches.at(middle)->energy(states, output);
     int v_ex = branches.at(middle)->value(states);
     StateTuple sigma_ex = branches.at(middle)->sigma(states);
     ComponentFunction* function = env->getComponentFunction(componentName, functionName);
     sigma_ex.declarePState(function->getArgumentName(), v_ex);
     int e_func = function->energy(sigma_ex);
     int time = function->getTime();
-    return e_expr + e_func + td_ec(time, sigma_ex);
+    int td_energy = e_expr + td_ec(time, sigma_ex);
+    if(output)
+    {
+        cout << "Time dependent energy usage of " + statement + " is: " << td_energy << endl;
+        cout << "Incidental energy usage of " + statement + " is: " << e_func << endl;
+    }
+    return td_energy + e_func;
 }
 
 RuleCallCmpF::~RuleCallCmpF()

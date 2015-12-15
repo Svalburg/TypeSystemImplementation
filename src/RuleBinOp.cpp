@@ -105,12 +105,15 @@ StateTuple RuleBinOp::sigma(StateTuple states)
 
 int RuleBinOp::energy(StateTuple states, bool output)
 {
-    int e1 = branches.at(left)->energy(states);
+    int e1 = branches.at(left)->energy(states, output);
     StateTuple sigma1 = branches.at(left)->sigma(states);
-    int e2 = branches.at(right)->energy(sigma1);
+    int e2 = branches.at(right)->energy(sigma1, output);
     int time = env->getTBinop();
     StateTuple sigma2 = branches.at(right)->sigma(sigma1);
-    return e1 + e2 + td_ec(time, sigma2);
+    int total_energy = e1 + e2 + td_ec(time, sigma2);
+    if(output)
+        cout << "Energy usage of " + statement + " is: " << total_energy << endl; 
+    return total_energy;
 }
 
 RuleBinOp::~RuleBinOp()

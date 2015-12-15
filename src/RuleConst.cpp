@@ -36,7 +36,10 @@ StateTuple RuleConst::sigma(StateTuple states)
 int RuleConst::energy(StateTuple states, bool output)
 {
     int time = env->getTConst();
-    return td_ec(time, states);
+    int total_energy = td_ec(time, states);
+    if(output)
+        cout << "Energy usage of " + statement + " is: " <<total_energy << endl; 
+    return total_energy;
 }
 
 RuleConst::~RuleConst()

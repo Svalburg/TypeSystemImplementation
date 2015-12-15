@@ -47,10 +47,13 @@ StateTuple RuleAssign::sigma(StateTuple states)
 
 int RuleAssign::energy(StateTuple states, bool output)
 {
-    int e = branches.at(middle)->energy(states);
+    int e = branches.at(middle)->energy(states, output);
     StateTuple sigma = branches.at(middle)->sigma(states);
     int time = env->getTAssign();
-    return e + td_ec(time, sigma);
+    int total_energy = e + td_ec(time, sigma);
+    if(output)
+        cout << "Energy usage of " + statement + " is: " << total_energy << endl; 
+    return total_energy;
 }
 
 RuleAssign::~RuleAssign()

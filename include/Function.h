@@ -17,7 +17,7 @@ class Function
         Function(string name, string argumentName, Rule* definition);
         StateTuple sigma(StateTuple states);
         int value(StateTuple states);
-		int energy(StateTuple states);
+		int energy(StateTuple states, bool output);
         string getArgumentName();
 		string getName();
         virtual ~Function();
