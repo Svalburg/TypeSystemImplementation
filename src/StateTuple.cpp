@@ -65,5 +65,33 @@ vector<StateTuple::declaration> StateTuple::getCState()
 	return cState;
 }
 
+string StateTuple::toStringPState()
+{
+	string out = "";
+	if(pState.size() == 0)
+	{
+		out += "State is empty.";
+		return out;
+	}
+	else
+		for(size_t i = 0; i < pState.size(); i++)
+			out += pState.at(i).name + " = " + to_string(pState.at(i).value) + "\n";
+	return out;
+}
+
+string StateTuple::toStringCState()
+{
+	string out = "";
+	if(cState.size() == 0)
+	{
+		out += "State is empty.";
+		return out;
+	}
+	else
+		for(size_t i = 0; i < cState.size(); i++)
+			out += cState.at(i).name + " = " + to_string(cState.at(i).value) + "\n";
+	return out;
+}
+
 StateTuple::~StateTuple()
 {}

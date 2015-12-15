@@ -29,6 +29,9 @@ class StateTuple
 		//returns the entire state vector
 		vector<declaration> getPState();
 		vector<declaration> getCState();
+		//return a string with the entire state
+		string toStringPState();
+		string toStringCState();
         virtual ~StateTuple();
     protected:
 	private:
