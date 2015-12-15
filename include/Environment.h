@@ -5,7 +5,15 @@
 #include "TimeDependentEC.h"
 #include <exception>
 
-
+/* The Environment for the type system. It contains the time each rule takes (TInput ... TWhile), 
+ * a list of functions, a list of component functions, and a list of timedependentECs.
+ * The lists of component functions and timedependentecs should not be able to change 
+ * within the rule tree. A Function Definition can add a function to the environment.
+ * At the program's beginning, the function list should (normally) be empty.
+ * 
+ * A component is represented in the environment by its component functions and timedependent 
+ * energy costs.
+ * */
 class Environment
 {
     public:
@@ -24,7 +32,7 @@ class Environment
         ComponentFunction* getComponentFunction(string component, string name);
         Function* getFunction(string name);
         TimeDependentEC* getTimeDependentEC(string componentState);
-        Environment* clone();
+        Environment* clone(); //Returns a new Environment containing a copy of all the values in this environment.
         void addFunction(string name, string argumentName, Rule* definition);
         ~Environment();
     private:
