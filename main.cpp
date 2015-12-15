@@ -28,12 +28,11 @@ int main(int argc, char** argv)
 	root->updateEnvironment(env);
 	root->updatePath();
     
-	StateTuple* states = new StateTuple();
-	StateTuple stateEnd = root->sigma(*states);
-	
 	try
 	{
-		//cout << stateEnd.getPStateValue("y");
+		StateTuple* states = new StateTuple();
+		StateTuple stateEnd = root->sigma(*states);
+		cout << stateEnd.toStringPState();
 		cout << "Energy usage is : " << root->energy(*states);
 	}
 	catch (const runtime_error& e)
