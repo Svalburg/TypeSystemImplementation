@@ -52,7 +52,7 @@ StateTuple RuleWhile::sigma(StateTuple states)
 	return states_now;
 }
 
-int RuleWhile::energy(StateTuple states)
+int RuleWhile::energy(StateTuple states, bool output)
 {
 	int e_ex = branches.at(left)->energy(states);
 	int v = branches.at(left)->value(states);

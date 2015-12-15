@@ -34,7 +34,7 @@ StateTuple RuleExprAsStmt::sigma(StateTuple states)
     return branches.at(middle)->sigma(states);
 }
 
-int RuleExprAsStmt::energy(StateTuple states)
+int RuleExprAsStmt::energy(StateTuple states, bool output)
 {
     return branches.at(middle)->energy(states);
 }

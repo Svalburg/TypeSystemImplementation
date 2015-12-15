@@ -47,7 +47,7 @@ StateTuple RuleExprConcat::sigma(StateTuple states)
     return sigma2;
 }
 
-int RuleExprConcat::energy(StateTuple states)
+int RuleExprConcat::energy(StateTuple states, bool output)
 {
     int e_stmt = branches.at(left)->energy(states);
     StateTuple sigma1 = branches.at(left)->sigma(states);

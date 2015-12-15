@@ -33,7 +33,7 @@ StateTuple RuleConst::sigma(StateTuple states)
     return states;
 }
 
-int RuleConst::energy(StateTuple states)
+int RuleConst::energy(StateTuple states, bool output)
 {
     int time = env->getTConst();
     return td_ec(time, states);

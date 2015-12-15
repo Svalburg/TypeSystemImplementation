@@ -33,7 +33,7 @@ class Rule
         virtual string toStringV() = 0;
         virtual int value(StateTuple states) = 0;           // Returns the value of this statement if it is an expression. Otherwise, an exception is thrown.
 		virtual StateTuple sigma(StateTuple states) = 0;    // Returns the state after execution of this statement.
-        virtual int energy(StateTuple states) = 0;          // Returns the total energy use after execution of this statement.
+        virtual int energy(StateTuple states, bool output = true) = 0; // Returns the total energy use after execution of this statement.
     protected:
         vector<Rule*> branches;
         string statement;       // Contains the statement that rule represents.

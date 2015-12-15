@@ -103,7 +103,7 @@ StateTuple RuleBinOp::sigma(StateTuple states)
     return sigma2;
 }
 
-int RuleBinOp::energy(StateTuple states)
+int RuleBinOp::energy(StateTuple states, bool output)
 {
     int e1 = branches.at(left)->energy(states);
     StateTuple sigma1 = branches.at(left)->sigma(states);

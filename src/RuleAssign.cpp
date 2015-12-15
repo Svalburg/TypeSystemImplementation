@@ -45,7 +45,7 @@ StateTuple RuleAssign::sigma(StateTuple states)
     return sigma1;
 }
 
-int RuleAssign::energy(StateTuple states)
+int RuleAssign::energy(StateTuple states, bool output)
 {
     int e = branches.at(middle)->energy(states);
     StateTuple sigma = branches.at(middle)->sigma(states);

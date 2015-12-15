@@ -38,7 +38,7 @@ StateTuple RuleFuncDef::sigma(StateTuple states)
 	return branches.at(right)->sigma(states);
 }
 
-int RuleFuncDef::energy(StateTuple states)
+int RuleFuncDef::energy(StateTuple states, bool output)
 {
 	return branches.at(right)->energy(states);
 }

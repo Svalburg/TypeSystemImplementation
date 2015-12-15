@@ -36,7 +36,7 @@ StateTuple RuleVar::sigma(StateTuple states)
 	return states;
 }
 
-int RuleVar::energy(StateTuple states)
+int RuleVar::energy(StateTuple states, bool output)
 {
 	return td_ec(env->getTVar(), states);
 }

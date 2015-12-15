@@ -47,7 +47,7 @@ StateTuple RuleRepeat::sigma(StateTuple states)
 	return states_now;
 }
 
-int RuleRepeat::energy(StateTuple states)
+int RuleRepeat::energy(StateTuple states, bool output)
 {
 	int E_ex = branches.at(left)->energy(states);
 	StateTuple states_now = branches.at(left)->sigma(states);

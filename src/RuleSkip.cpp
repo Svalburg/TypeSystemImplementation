@@ -32,7 +32,7 @@ StateTuple RuleSkip::sigma(StateTuple states)
 	return states;
 }
 
-int RuleSkip::energy(StateTuple states)
+int RuleSkip::energy(StateTuple states, bool output)
 {
 	return 0;
 }

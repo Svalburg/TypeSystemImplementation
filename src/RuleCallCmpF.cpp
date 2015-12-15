@@ -55,7 +55,7 @@ StateTuple RuleCallCmpF::sigma(StateTuple states)
     return *(new StateTuple(pstate, cstate));
 }
 
-int RuleCallCmpF::energy(StateTuple states)
+int RuleCallCmpF::energy(StateTuple states, bool output)
 {
     int e_expr = branches.at(middle)->energy(states);
     int v_ex = branches.at(middle)->value(states);

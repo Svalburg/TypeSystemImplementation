@@ -53,7 +53,7 @@ StateTuple RuleIf::sigma(StateTuple states)
 		return branches.at(right)->sigma(sigma_ex);
 }
 
-int RuleIf::energy(StateTuple states)
+int RuleIf::energy(StateTuple states, bool output)
 {
 	StateTuple sigma_ex = branches.at(left)->sigma(states);
 	int e_ex = branches.at(left)->energy(states);

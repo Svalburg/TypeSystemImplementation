@@ -42,7 +42,7 @@ StateTuple RuleStmtConcat::sigma(StateTuple states)
 	return branches.at(right)->sigma(sigma1);
 }
 
-int RuleStmtConcat::energy(StateTuple states)
+int RuleStmtConcat::energy(StateTuple states, bool output)
 {
 	StateTuple sigma1 = branches.at(left)->sigma(states);
 	return branches.at(left)->energy(states) + branches.at(right)->energy(sigma1);

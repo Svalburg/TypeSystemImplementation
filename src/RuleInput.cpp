@@ -32,7 +32,7 @@ StateTuple RuleInput::sigma(StateTuple states)
 	return states;
 }
 
-int RuleInput::energy(StateTuple states)
+int RuleInput::energy(StateTuple states, bool output)
 {
 	return td_ec(env->getTInput(), states);
 }
