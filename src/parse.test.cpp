@@ -34,4 +34,15 @@ TEST(ECAParser, VariableOutput) {
     CheckOutput("123_a", false);
 }
 
+TEST(ECAParser, FaultyFunction)
+{
+	//this should fail because the function is not an expression
+	MemoryPool mp;
+	auto result = ParseECAMemory("function test(x) begin if x then skip else y := 5 end end y", mp);
+	EXPECT_EQ(false, (bool)result);
+	//this should fail because of the missing 'begin'
+	MemoryPool mp2;
+	auto result2 = ParseECAMemory("function test(x) if x then y:= 8 else y := 5 end; y end y", mp2);
+	EXPECT_EQ(false, (bool)result2);
+}
 }

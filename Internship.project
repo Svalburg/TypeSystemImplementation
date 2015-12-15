@@ -115,6 +115,7 @@
     <File Name="src/RuleBinop.test.cpp"/>
     <File Name="src/RuleCallCmpF.test.cpp"/>
     <File Name="src/RuleCallF.test.cpp"/>
+    <File Name="src/parse.test.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="TypeSystemImplementation">
     <File Name="main.cpp"/>
