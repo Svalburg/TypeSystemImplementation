@@ -40,7 +40,7 @@ StateTuple RuleFuncDef::sigma(StateTuple states)
 
 int RuleFuncDef::energy(StateTuple states, bool output)
 {
-	return branches.at(right)->energy(states);
+	return branches.at(right)->energy(states, output);
 }
 
 void RuleFuncDef::updateEnvironment(Environment* env)

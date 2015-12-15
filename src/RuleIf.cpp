@@ -56,13 +56,18 @@ StateTuple RuleIf::sigma(StateTuple states)
 int RuleIf::energy(StateTuple states, bool output)
 {
 	StateTuple sigma_ex = branches.at(left)->sigma(states);
-	int e_ex = branches.at(left)->energy(states);
+	int e_ex = branches.at(left)->energy(states, output);
 	int e_stmt;
 	if(branches.at(left)->value(states) != 0)
-		e_stmt = branches.at(middle)->energy(sigma_ex);
+		e_stmt = branches.at(middle)->energy(sigma_ex, output);
 	else
-		e_stmt = branches.at(right)->energy(sigma_ex);
-	return e_ex + td_ec(env->getTIf(), sigma_ex) + e_stmt;
+		e_stmt = branches.at(right)->energy(sigma_ex, output);
+	int tdec = td_ec(env->getTIf(), sigma_ex);
+	if(output)
+	{
+		cout << "Energy usage of \"if " << branches.at(left)->getStatement() << " then\" is: " << tdec << endl; 
+	}
+	return e_ex + tdec + e_stmt;
 }
 
 RuleIf::~RuleIf()

@@ -38,7 +38,10 @@ StateTuple RuleVar::sigma(StateTuple states)
 
 int RuleVar::energy(StateTuple states, bool output)
 {
-	return td_ec(env->getTVar(), states);
+	int tdec = td_ec(env->getTVar(), states);
+	if(output)
+		cout << "Energy usage of \"" << statement << "\" is:" << tdec << endl;
+	return tdec;
 }
 
 RuleVar::~RuleVar()

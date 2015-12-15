@@ -34,7 +34,10 @@ StateTuple RuleInput::sigma(StateTuple states)
 
 int RuleInput::energy(StateTuple states, bool output)
 {
-	return td_ec(env->getTInput(), states);
+	int tdec = td_ec(env->getTInput(), states);
+	if(output)
+		cout << "Energy usage of \"" << statement << "\" is:" << tdec << endl;
+	return tdec;
 }
 
 RuleInput::~RuleInput()

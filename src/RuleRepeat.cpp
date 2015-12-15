@@ -54,9 +54,10 @@ int RuleRepeat::energy(StateTuple states, bool output)
 	int repeatcost = 0;
 	for(int i = branches.at(left)->value(states); i > 0; i--)
 	{
-		repeatcost += branches.at(right)->energy(states_now);
+		repeatcost += branches.at(right)->energy(states_now, false);
 		states_now = branches.at(right)->sigma(states_now);
 	}
+	cout << "Total energy usage of loop \"repeat " << branches.at(left)->getStatement() << " begin\" is: " << repeatcost << endl;
 	return E_ex + repeatcost;
 }
 
