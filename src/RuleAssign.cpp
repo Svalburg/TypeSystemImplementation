@@ -47,7 +47,7 @@ StateTuple RuleAssign::sigma(StateTuple states)
 
 int RuleAssign::energy(StateTuple states, bool output)
 {
-    int e = branches.at(middle)->energy(states, output);
+    int e = branches.at(middle)->energy(states, false);
     StateTuple sigma = branches.at(middle)->sigma(states);
     int time = env->getTAssign();
     int total_energy = e + td_ec(time, sigma);

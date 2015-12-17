@@ -105,9 +105,9 @@ StateTuple RuleBinOp::sigma(StateTuple states)
 
 int RuleBinOp::energy(StateTuple states, bool output)
 {
-    int e1 = branches.at(left)->energy(states, output);
+    int e1 = branches.at(left)->energy(states, false);
     StateTuple sigma1 = branches.at(left)->sigma(states);
-    int e2 = branches.at(right)->energy(sigma1, output);
+    int e2 = branches.at(right)->energy(sigma1, false);
     int time = env->getTBinop();
     StateTuple sigma2 = branches.at(right)->sigma(sigma1);
     int total_energy = e1 + e2 + td_ec(time, sigma2);

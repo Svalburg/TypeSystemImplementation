@@ -1,0 +1,3 @@
+function recursion(x) if x == 6 then skip else x := recursion(x + 1) end; x end
+y := 0;
+y := recursion(y)
