@@ -652,7 +652,7 @@ Rule* ECAConditional::getTypeRule() const
 #include "RuleRepeat.h"
 Rule* ECARepeat::getTypeRule() const
 {
-    return new RuleRepeat(b->getTypeRule(), b->getTypeRule());
+    return new RuleRepeat(i->getTypeRule(), b->getTypeRule());
 }
 
 #include "RuleWhile.h"

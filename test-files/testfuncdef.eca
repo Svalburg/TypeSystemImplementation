@@ -1,6 +1,3 @@
 function test(x) x + 2 end
-y := 4;
-repeat 5 begin y := test(y) end
-
-
-
+y := 0;
+repeat 3 begin y := test(y) end

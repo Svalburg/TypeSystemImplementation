@@ -27,6 +27,7 @@ int main(int argc, char** argv)
 	
 	root->updateEnvironment(env);
 	root->updatePath();
+    cout << root->getStatement() << endl;
     
 	try
 	{
