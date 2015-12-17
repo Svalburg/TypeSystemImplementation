@@ -1,0 +1,6 @@
+function test(x) begin x := x + 1 * 2 end
+x := 3;
+repeat 5 begin x := test(x) end
+
+
+
