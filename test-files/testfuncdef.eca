@@ -1,6 +1,6 @@
-function test(x) begin x := x + 1 * 2 end
-x := 3;
-repeat 5 begin x := test(x) end
+function test(x) x + 2 end
+y := 4;
+repeat 5 begin y := test(y) end
 
 
 
