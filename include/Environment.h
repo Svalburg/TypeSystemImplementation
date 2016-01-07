@@ -3,6 +3,8 @@
 
 #include "ComponentFunction.h"
 #include "TimeDependentEC.h"
+#include "RuleConst.h"
+#include <algorithm>
 #include <exception>
 
 /* The Environment for the type system. It contains the time each rule takes (TInput ... TWhile), 
@@ -31,15 +33,17 @@ class Environment
         int getTWhile();
         ComponentFunction* getComponentFunction(string component, string name);
         Function* getFunction(string name);
-        TimeDependentEC* getTimeDependentEC(string componentState);
+        TimeDependentEC* getTimeDependentEC(string componentName);
         Environment* clone(); //Returns a new Environment containing a copy of all the values in this environment.
         void addFunction(string name, string argumentName, Rule* definition);
+		vector<string> getComponentNames();
         ~Environment();
     private:
         int t_input, t_const, t_var, t_assign, t_binop, t_if, t_while; //t_binop needs to be changed to reflect different binops
         vector<ComponentFunction*> componentFunctions;
         vector<Function*> functions;
         vector<TimeDependentEC*> tdecList;
+		vector<string> componentNames;
     protected:
         
 };

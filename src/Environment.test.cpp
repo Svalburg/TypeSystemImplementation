@@ -18,7 +18,7 @@ class EnvironmentTest: public ::testing::Test
             RuleConst* testConst2 = new RuleConst("1");
             Function* testFunction = new Function("x", "y", testConst);
             ComponentFunction* testComponent = new ComponentFunction("a", "z", "d", testConst, testConst2, 1);
-            TimeDependentEC* testTimeD = new TimeDependentEC("b", testConst2);
+            TimeDependentEC* testTimeD = new TimeDependentEC("a", testConst2);
 			testCompFuncs2.push_back(testComponent);
 			testFuncs2.push_back(testFunction);
 			testTdecs2.push_back(testTimeD);
@@ -31,15 +31,14 @@ TEST_F(EnvironmentTest, Search)
 {
     EXPECT_THROW(testEnv->getFunction("x"), runtime_error);
     EXPECT_THROW(testEnv->getComponentFunction("x", "y"), runtime_error);
-    EXPECT_THROW(testEnv->getTimeDependentEC("x"), runtime_error);
     RuleConst* check = new RuleConst("0");
     Function* newfunc = testEnv2->getFunction("x");
     EXPECT_EQ("x", newfunc->getName());
     ComponentFunction* newcompfunc = testEnv2->getComponentFunction("a", "z");
     EXPECT_EQ("a", newcompfunc->getComponent());
     EXPECT_EQ("z", newcompfunc->getName());
-    TimeDependentEC* newtdec = testEnv2->getTimeDependentEC("b");
-    EXPECT_EQ("b", newtdec->getComponentState());
+    TimeDependentEC* newtdec = testEnv2->getTimeDependentEC("a");
+    EXPECT_EQ("a", newtdec->getComponentName());
 }
 
 TEST_F(EnvironmentTest, Clone)

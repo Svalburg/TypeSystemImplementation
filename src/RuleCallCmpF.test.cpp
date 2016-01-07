@@ -16,7 +16,7 @@ class RuleCallCmpFTest: public ::testing::Test
 		vector<Function*> funcs;
 		vector<TimeDependentEC*> tdec;
         TimeDependentEC* tdec1, * tdec2, * tdec3;
-        tdec1 = new TimeDependentEC("test1", new RuleConst("1"));
+        tdec1 = new TimeDependentEC("test", new RuleConst("1"));
         tdec.push_back(tdec1);
         ComponentFunction* newfunc = new ComponentFunction("test", "testing", "x", new RuleAssign( "test1", new RuleConst("1"), true), new RuleConst("2"), 5);
         compfuncs.push_back(newfunc);

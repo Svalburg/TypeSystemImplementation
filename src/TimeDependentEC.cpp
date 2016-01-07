@@ -1,8 +1,8 @@
 #include "TimeDependentEC.h"
 
-TimeDependentEC::TimeDependentEC(string componentState, Rule* rule)
+TimeDependentEC::TimeDependentEC(string componentName, Rule* rule)
 {
-	this->componentState = componentState;
+	this->componentName = componentName;
 	this->rule = rule;
 }
 
@@ -11,9 +11,9 @@ int TimeDependentEC::getEnergyCost(StateTuple states)
 	return rule->value(states);
 }
 
-string TimeDependentEC::getComponentState()
+string TimeDependentEC::getComponentName()
 {
-    return componentState;
+    return componentName;
 }
 
 TimeDependentEC::~TimeDependentEC()

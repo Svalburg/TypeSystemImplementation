@@ -50,10 +50,10 @@ void Rule::updateEnvironment(Environment* env)
 int Rule::td_ec(int t, StateTuple states)
 {
 	int total = 0;
-	vector<StateTuple::declaration> cs = states.getCState();
-	for(size_t i = 0; i < cs.size(); i++)
+	vector<string> components = env->getComponentNames();
+	for(size_t i = 0; i < components.size(); i++)
 	{
-		TimeDependentEC* phi = env->getTimeDependentEC(cs.at(i).name);
+		TimeDependentEC* phi = env->getTimeDependentEC(components.at(i));
 		total += (phi->getEnergyCost(states))*t;
 	}
 	return total;

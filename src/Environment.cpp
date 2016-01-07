@@ -16,6 +16,12 @@ Environment::Environment(int t_input, int t_const, int t_var, int t_assign, int 
     this->componentFunctions = componentFunctions;
     this->functions = functions;
     this->tdecList = tdecList;
+	for(size_t i = 0; i < componentFunctions.size(); i++)
+	{
+		if(find(componentNames.begin(), componentNames.end(), 
+			componentFunctions.at(i)->getComponent()) == componentNames.end())
+			componentNames.push_back(componentFunctions.at(i)->getComponent());
+	}
 }
 
 int Environment::getTInput()
@@ -77,15 +83,16 @@ Function* Environment::getFunction(string name)
 	throw runtime_error("Exception: No function found with name: " + name);
 }
 
-TimeDependentEC* Environment::getTimeDependentEC(string componentState)
+TimeDependentEC* Environment::getTimeDependentEC(string componentName)
 {
 	for(size_t i=0;i<tdecList.size();i++)
 	{
 		TimeDependentEC* timedependent = tdecList.at(i);
-		if(timedependent->getComponentState() == componentState)
+		if(timedependent->getComponentName() == componentName)
 			return timedependent;
 	}
-	throw runtime_error("Exception: No component state found with name: " + componentState);
+	return new TimeDependentEC(componentName, new RuleConst("0"));
+	//throw runtime_error("Exception: No component found with name: " + componentName);
 }
 
 Environment* Environment::clone()
@@ -106,6 +113,11 @@ void Environment::addFunction(string name, string argumentName, Rule* definition
 {
     Function* newfunction = new Function(name, argumentName, definition);
     functions.push_back(newfunction);
+}
+
+vector<string> Environment::getComponentNames()
+{
+	return componentNames;
 }
 
 Environment::~Environment()
