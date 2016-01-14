@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <vector>
+#include <fstream>
 #include "libtypesystem.h"
 #include "parse.h"
 
@@ -14,7 +15,7 @@ int main(int argc, char** argv)
         return -1;
     }
     MemoryPool mp;
-    auto result = ParseECAFile(argv[1], mp);
+    auto result = ParseECAFile(argv[argc-1], mp);
     if (!result)
         return -1;
 
@@ -23,7 +24,23 @@ int main(int argc, char** argv)
 	vector<ComponentFunction*> compfuncs;
 	vector<Function*> funcs;
 	vector<TimeDependentEC*> tdec;
+	
 	Environment* env = new Environment(1, 2, 3, 4, 5, 6, 7, compfuncs, funcs, tdec);
+	StateTuple* states = new StateTuple();
+	
+	for(int i = 1; i < argc-1; i++)
+	{
+		ifstream compFile;
+		compFile.open(argv[i]);
+		if(!compFile)
+		{
+			cerr << argv[i] << " - File does not exist." << endl;
+			return -1;
+		}
+		cout << "Reading file " << argv[i] << endl;
+		env->addComponentFunction(compFile, *states);
+		compFile.close();
+	}
 	
 	root->updateEnvironment(env);
 	root->updatePath();
@@ -31,7 +48,6 @@ int main(int argc, char** argv)
     
 	try
 	{
-		StateTuple* states = new StateTuple();
 		StateTuple stateEnd = root->sigma(*states);
 		cout << stateEnd.toStringPState();
 		cout << "Energy usage is : " << root->energy(*states);

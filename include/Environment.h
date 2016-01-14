@@ -4,8 +4,11 @@
 #include "ComponentFunction.h"
 #include "TimeDependentEC.h"
 #include "RuleConst.h"
+#include "parse.h"
 #include <algorithm>
 #include <exception>
+#include <fstream>
+#include <sstream>
 
 /* The Environment for the type system. It contains the time each rule takes (TInput ... TWhile), 
  * a list of functions, a list of component functions, and a list of timedependentECs.
@@ -36,6 +39,7 @@ class Environment
         TimeDependentEC* getTimeDependentEC(string componentName);
         Environment* clone(); //Returns a new Environment containing a copy of all the values in this environment.
         void addFunction(string name, string argumentName, Rule* definition);
+		void addComponentFunction(ifstream &compFile, StateTuple &states);
 		vector<string> getComponentNames();
         ~Environment();
     private:
