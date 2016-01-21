@@ -1,16 +1,20 @@
 component test
 variable testVariable := 0
+
 variable test2 := 99 	
 
 phi:
 10
 end phi
 component function test1(x)
+
 time 1
 energy:
 1
 end energy
 definition:
+
 testVariable := testVariable + 1
 end definition
+
 end component

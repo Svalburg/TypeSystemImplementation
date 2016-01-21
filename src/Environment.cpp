@@ -124,6 +124,8 @@ void Environment::addComponentFunction(ifstream &compFile, StateTuple &states)
 {
 	string line;
 	getline(compFile, line);
+	while(line.empty())
+		getline(compFile, line);
 	size_t pos = line.find("component");
 	if(pos == string::npos)
 	{
@@ -135,7 +137,7 @@ void Environment::addComponentFunction(ifstream &compFile, StateTuple &states)
 	cout << "Component name: " << compName << endl;
 	
 	getline(compFile, line);
-	while(line == "\n")
+	while(line.empty())
 		getline(compFile, line);
 	
 	pos = line.find("variable");
@@ -157,17 +159,16 @@ void Environment::addComponentFunction(ifstream &compFile, StateTuple &states)
 		ss >> val;
 		ss.str("");
 		ss.clear();
-		states.declarePState(varName, val);
+		states.declareCState(varName, val);
 		
 		cout << "Assigned component variable: " << varName << " := " << val << endl;
 		
 		getline(compFile, line);
+		while(line.empty())
+			getline(compFile, line);
 		pos = line.find("variable");
 	}
 	
-	while(line == "\n")
-		getline(compFile, line);
-
 	pos = line.find("phi:");
 	if(pos != string::npos)
 	{
@@ -178,6 +179,8 @@ void Environment::addComponentFunction(ifstream &compFile, StateTuple &states)
 		{
 			phiString += line;
 			getline(compFile, line);
+			while(line.empty())
+				getline(compFile, line);
 			pos = line.find("end phi");
 		}
 		bitpowder::lib::MemoryPool mpPhi;
@@ -194,7 +197,7 @@ void Environment::addComponentFunction(ifstream &compFile, StateTuple &states)
 	}
 	
 	getline(compFile, line);
-	while(line == "\n")
+	while(line.empty())
 		getline(compFile, line);
 	
 	pos = line.find("component function");
@@ -216,6 +219,8 @@ void Environment::addComponentFunction(ifstream &compFile, StateTuple &states)
 		line.erase(pos, 1);
 		string argument = line;
 		getline(compFile, line);
+		while(line.empty())
+			getline(compFile, line);
 		pos = line.find("time");
 		if(pos == string::npos)
 			error = true;
@@ -226,16 +231,22 @@ void Environment::addComponentFunction(ifstream &compFile, StateTuple &states)
 		ss >> time;
 		
 		getline(compFile, line);
+		while(line.empty())
+			getline(compFile, line);
 		pos = line.find("energy:");
 		if(pos != string::npos && !error)
 		{
 			getline(compFile, line);
+			while(line.empty())
+				getline(compFile, line);
 			string energyString = "";
 			pos = line.find("end energy");
 			while(pos == string::npos)
 			{
 				energyString += line;
 				getline(compFile, line);
+				while(line.empty())
+					getline(compFile, line);
 				pos = line.find("end energy");
 			}
 			bitpowder::lib::MemoryPool mpEnergy;
@@ -251,16 +262,22 @@ void Environment::addComponentFunction(ifstream &compFile, StateTuple &states)
 			error = true;
 			
 		getline(compFile, line);
+		while(line.empty())
+			getline(compFile, line);
 		pos = line.find("definition:");
 		if(pos != string::npos && !error)
 		{
 			getline(compFile, line);
+			while(line.empty())
+				getline(compFile, line);
 			string definitionString = "";
 			pos = line.find("end definition");
 			while(pos == string::npos)
 			{
 				definitionString += line;
 				getline(compFile, line);
+				while(line.empty())
+					getline(compFile, line);
 				pos = line.find("end definition");
 			}
 			bitpowder::lib::MemoryPool mpDefinition;
@@ -287,7 +304,7 @@ void Environment::addComponentFunction(ifstream &compFile, StateTuple &states)
 		cout << "Added component function: " << funcName << endl;
 		
 		getline(compFile, line);
-		while(line == "\n")
+		while(line.empty())
 			getline(compFile, line);
 		pos = line.find("component function");
 	}
