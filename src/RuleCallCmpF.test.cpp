@@ -18,7 +18,7 @@ class RuleCallCmpFTest: public ::testing::Test
         TimeDependentEC* tdec1, * tdec2, * tdec3;
         tdec1 = new TimeDependentEC("test", new RuleConst("1"));
         tdec.push_back(tdec1);
-        ComponentFunction* newfunc = new ComponentFunction("test", "testing", "x", new RuleAssign( "test1", new RuleConst("1"), true), new RuleConst("2"), 5);
+        ComponentFunction* newfunc = new ComponentFunction("test", "testing", "x", new RuleAssign( "test1", new RuleConst("1")), new RuleConst("2"), 5);
         compfuncs.push_back(newfunc);
         env = new Environment(1, 2, 3, 4, 5, 6, 7, compfuncs, funcs, tdec);
 		testRule->updateEnvironment(env);

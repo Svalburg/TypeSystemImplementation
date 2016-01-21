@@ -1,11 +1,10 @@
 #include "RuleAssign.h"
 #include "Environment.h"
 
-RuleAssign::RuleAssign(string variable, Rule* branch, bool writeComponentState)
+RuleAssign::RuleAssign(string variable, Rule* branch)
 {
     this->variable = variable;
     this->statement = variable + " := " + branch->getStatement();
-	this->writeComponentState = writeComponentState;
     branches.push_back(branch);
     middle = 0;
     ruleName = "Assign";
@@ -38,10 +37,7 @@ int RuleAssign::value(StateTuple states)
 StateTuple RuleAssign::sigma(StateTuple states)
 {
     StateTuple sigma1 = branches.at(middle)->sigma(states);
-	if(writeComponentState)
-		sigma1.declareCState(variable, this->value(states));
-	else
-		sigma1.declarePState(variable, this->value(states));
+	sigma1.declareState(variable, this->value(states));
     return sigma1;
 }
 

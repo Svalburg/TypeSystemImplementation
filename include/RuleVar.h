@@ -6,7 +6,7 @@
 class RuleVar : public Rule
 {
     public:
-        RuleVar(string statement, bool readComponentState = false);
+        RuleVar(string statement);
         string toStringSigma();
         string toStringE();
         string toStringV();
@@ -16,7 +16,6 @@ class RuleVar : public Rule
         virtual ~RuleVar();
     protected:
 	private:
-	bool readComponentState;
 };
 
 #endif // RULEVAR_H

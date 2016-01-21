@@ -64,10 +64,10 @@ TEST(ECAParser, EndToEnd)
     
     
     vector<ComponentFunction*> compfuncs;
-    ComponentFunction* soundsystemon = new ComponentFunction("SoundSystem", "on", "zero", new RuleAssign("on", new RuleConst("1"), true), 
+    ComponentFunction* soundsystemon = new ComponentFunction("SoundSystem", "on", "zero", new RuleAssign("on", new RuleConst("1")), 
                             new RuleConst("0"), 0);
     compfuncs.push_back(soundsystemon);
-    ComponentFunction* soundsystemoff = new ComponentFunction("SoundSystem", "off", "zero", new RuleAssign("on", new RuleConst("0"), true), 
+    ComponentFunction* soundsystemoff = new ComponentFunction("SoundSystem", "off", "zero", new RuleAssign("on", new RuleConst("0")), 
                             new RuleConst("0"), 0);
     compfuncs.push_back(soundsystemoff);
     ComponentFunction* soundsystembeeps = new ComponentFunction("SoundSystem", "playBeepAtHz", "hz", new RuleConst("0"), 
@@ -78,7 +78,7 @@ TEST(ECAParser, EndToEnd)
     compfuncs.push_back(systemsleep);
 	vector<Function*> funcs;
 	vector<TimeDependentEC*> tdec;
-    TimeDependentEC* soundsystem = new TimeDependentEC("SoundSystem", new RuleBinOp("*", new RuleConst("5"), new RuleVar("on", true)));
+    TimeDependentEC* soundsystem = new TimeDependentEC("SoundSystem", new RuleBinOp("*", new RuleConst("5"), new RuleVar("on")));
     tdec.push_back(soundsystem);
 	Environment* env = new Environment(0, 0, 0, 0, 0, 0, 0, compfuncs, funcs, tdec);
     

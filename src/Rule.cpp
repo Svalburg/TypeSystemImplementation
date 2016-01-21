@@ -51,6 +51,7 @@ int Rule::td_ec(int t, StateTuple states)
 {
 	int total = 0;
 	vector<string> components = env->getComponentNames();
+	states.setAccessCState(true);
 	for(size_t i = 0; i < components.size(); i++)
 	{
 		TimeDependentEC* phi = env->getTimeDependentEC(components.at(i));

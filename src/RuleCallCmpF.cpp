@@ -40,6 +40,7 @@ int RuleCallCmpF::value(StateTuple states)
     StateTuple sigma_ex = branches.at(middle)->sigma(states);
 	ComponentFunction* function = env->getComponentFunction(componentName, functionName);
     sigma_ex.declarePState(function->getArgumentName(), v_ex);
+	sigma_ex.setAccessCState(true);
     return function->value(sigma_ex);    
 }
 
@@ -49,8 +50,10 @@ StateTuple RuleCallCmpF::sigma(StateTuple states)
     StateTuple sigma_ex = branches.at(middle)->sigma(states);
     vector<StateTuple::declaration> pstate = sigma_ex.getPState();
     ComponentFunction* function = env->getComponentFunction(componentName, functionName);
-    sigma_ex.declarePState(function->getArgumentName(), v_ex);
+    sigma_ex.declareCState(function->getArgumentName(), v_ex);
+	sigma_ex.setAccessCState(true);
     StateTuple sigma_f = function->sigma(sigma_ex);
+	sigma_f.deleteCState(function->getArgumentName());
     vector<StateTuple::declaration> cstate = sigma_f.getCState();
     return *(new StateTuple(pstate, cstate));
 }
@@ -61,7 +64,8 @@ int RuleCallCmpF::energy(StateTuple states, bool output)
     int v_ex = branches.at(middle)->value(states);
     StateTuple sigma_ex = branches.at(middle)->sigma(states);
     ComponentFunction* function = env->getComponentFunction(componentName, functionName);
-    sigma_ex.declarePState(function->getArgumentName(), v_ex);
+    sigma_ex.declareCState(function->getArgumentName(), v_ex);
+	sigma_ex.setAccessCState(true);
     int e_func = function->energy(sigma_ex);
     int time = function->getTime();
     int td_energy = e_expr + td_ec(time, sigma_ex);

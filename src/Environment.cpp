@@ -16,12 +16,12 @@ Environment::Environment(int t_input, int t_const, int t_var, int t_assign, int 
     this->componentFunctions = componentFunctions;
     this->functions = functions;
     this->tdecList = tdecList;
-	/*for(size_t i = 0; i < componentFunctions.size(); i++)
+	for(size_t i = 0; i < componentFunctions.size(); i++)
 	{
 		if(find(componentNames.begin(), componentNames.end(), 
 			componentFunctions.at(i)->getComponent()) == componentNames.end())
 			componentNames.push_back(componentFunctions.at(i)->getComponent());
-	}*/
+	}
 }
 
 int Environment::getTInput()
