@@ -121,7 +121,12 @@ string StateTuple::toStringPState()
 		for(size_t i = 0; i < pState.size(); i++)
 		{
 			string valueString = "";
-			
+			ValueInt* valueInt = dynamic_cast<ValueInt*>(pState.at(i).value);
+			ValueString* valueString = dynamic_cast<ValueString*>(pState.at(i).value);
+			if(valueInt)
+				valueString = to_string(valueInt.getValue());
+			else if(valueString)
+				valueString = to_string(valueString.getValue());
 			out += pState.at(i).name + " = " + valueString + "\n";
 		}
 	return out;
@@ -139,6 +144,12 @@ string StateTuple::toStringCState()
 		for(size_t i = 0; i < cState.size(); i++)
 		{
 			string valueString = "";
+			ValueInt* valueInt = dynamic_cast<ValueInt*>(cState.at(i).value);
+			ValueString* valueString = dynamic_cast<ValueString*>(cState.at(i).value);
+			if(valueInt)
+				valueString = to_string(valueInt.getValue());
+			else if(valueString)
+				valueString = to_string(valueString.getValue());
 			out += cState.at(i).name + " = " + valueString + "\n";
 		}
 	return out;
