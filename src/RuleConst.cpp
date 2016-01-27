@@ -5,6 +5,7 @@ RuleConst::RuleConst(string statement, Value* value)
 {
     this->statement = statement;
     ruleName = "Const";
+    this->constValue = value;
 }
 
 string RuleConst::toStringSigma()
@@ -25,7 +26,7 @@ string RuleConst::toStringV()
 Value* RuleConst::value(StateTuple states)
 {
     //returns the value of the constant as in the statement
-    return value;
+    return constValue;
 }
 
 StateTuple RuleConst::sigma(StateTuple states)

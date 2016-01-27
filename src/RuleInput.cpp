@@ -22,7 +22,7 @@ string RuleInput::toStringV()
     return "Lookup_" + statement;
 }
 
-int RuleInput::value(StateTuple states)
+Value* RuleInput::value(StateTuple states)
 {
 	return states.getPStateValue(statement);
 }

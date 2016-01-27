@@ -33,9 +33,9 @@ string RuleCallF::toStringV()
     return "[ x_" + functionName + "<- V_" + path + ", Sigma_" + path + "] >>> V_" + functionName;
 }
 
-int RuleCallF::value(StateTuple states)
+Value* RuleCallF::value(StateTuple states)
 {
-    int v_ex = branches.at(middle)->value(states);
+    Value* v_ex = branches.at(middle)->value(states);
     StateTuple sigma_ex = branches.at(middle)->sigma(states);
     Function* function = env->getFunction(functionName);
     sigma_ex.declarePState(function->getArgumentName(), v_ex);
@@ -44,7 +44,7 @@ int RuleCallF::value(StateTuple states)
 
 StateTuple RuleCallF::sigma(StateTuple states)
 {
-    int v_ex = branches.at(middle)->value(states);
+    Value* v_ex = branches.at(middle)->value(states);
     StateTuple sigma_ex = branches.at(middle)->sigma(states);
     vector<StateTuple::declaration> pstate = sigma_ex.getPState();
     Function* function = env->getFunction(functionName);
@@ -57,7 +57,7 @@ StateTuple RuleCallF::sigma(StateTuple states)
 int RuleCallF::energy(StateTuple states, bool output)
 {    
     int e_expr = branches.at(middle)->energy(states, output);
-    int v_ex = branches.at(middle)->value(states);
+    Value* v_ex = branches.at(middle)->value(states);
     StateTuple sigma_ex = branches.at(middle)->sigma(states);
     Function* function = env->getFunction(functionName);
     sigma_ex.declarePState(function->getArgumentName(), v_ex);

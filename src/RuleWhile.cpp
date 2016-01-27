@@ -34,40 +34,56 @@ string RuleWhile::toStringV()
     throw runtime_error("Exception: Tried to call toStringV. Not an expression.\n Statement: " + statement);
 }
 
-int RuleWhile::value(StateTuple states)
+Value* RuleWhile::value(StateTuple states)
 {
     throw runtime_error("Exception: Tried to call value. Not an expression.\n Statement: " + statement);
 }
 
 StateTuple RuleWhile::sigma(StateTuple states)
 {
-	int v = branches.at(left)->value(states);
-	StateTuple states_now = branches.at(left)->sigma(states);
-	while(v != 0)
-	{
-		states_now = branches.at(right)->sigma(states_now);
-		v = branches.at(left)->value(states_now);
-		states_now = branches.at(left)->sigma(states_now);
-	}
-	return states_now;
+    ValueInt* valueInt = dynamic_cast<ValueInt*>(branches.at(left)->value(states));
+    if(valueInt)
+    {
+        int v = valueInt->getValue();
+        StateTuple states_now = branches.at(left)->sigma(states);
+        while(v != 0)
+        {
+            states_now = branches.at(right)->sigma(states_now);
+            valueInt = dynamic_cast<ValueInt*>(branches.at(left)->value(states_now));
+            if(!valueInt)
+                throw runtime_error("Exception: Used non-integer value in statement: \n" + statement + "\n");
+            v = valueInt->getValue();
+            states_now = branches.at(left)->sigma(states_now);
+        }
+        return states_now;
+    }
+    else throw runtime_error("Exception: Used non-integer value in statement: \n" + statement + "\n");
 }
 
 int RuleWhile::energy(StateTuple states, bool output)
 {
-	int e_ex = branches.at(left)->energy(states, false);
-	int v = branches.at(left)->value(states);
-	StateTuple states_now = branches.at(left)->sigma(states);
-	int whilecost = e_ex + td_ec(env->getTIf(), states);
-	while(v != 0)
-	{
-		whilecost += branches.at(right)->energy(states_now, false);
-		states_now = branches.at(right)->sigma(states_now);
-		v = branches.at(left)->value(states_now);
-		whilecost += branches.at(left)->energy(states_now, false) + td_ec(env->getTIf(), states_now);
-		states_now = branches.at(left)->sigma(states_now);
-	}
-	cout << "Total energy usage of loop \"while " << branches.at(left)->getStatement() << " begin\" is: " << whilecost << endl;
-	return whilecost;
+    ValueInt* valueInt = dynamic_cast<ValueInt*>(branches.at(left)->value(states));
+    if(valueInt)
+    {
+        int e_ex = branches.at(left)->energy(states, false);
+        int v = valueInt->getValue();
+        StateTuple states_now = branches.at(left)->sigma(states);
+        int whilecost = e_ex + td_ec(env->getTIf(), states);
+        while(v != 0)
+        {
+            whilecost += branches.at(right)->energy(states_now, false);
+            states_now = branches.at(right)->sigma(states_now);
+            valueInt = dynamic_cast<ValueInt*>(branches.at(left)->value(states_now));
+            if(!valueInt)
+                throw runtime_error("Exception: Used non-integer value in statement: \n" + statement + "\n");
+            v = valueInt->getValue();
+            whilecost += branches.at(left)->energy(states_now, false) + td_ec(env->getTIf(), states_now);
+            states_now = branches.at(left)->sigma(states_now);
+        }
+        cout << "Total energy usage of loop \"while " << branches.at(left)->getStatement() << " begin\" is: " << whilecost << endl;
+        return whilecost;
+    }
+    else throw runtime_error("Exception: Used non-integer value in statement: \n" + statement + "\n");
 }
 
 RuleWhile::~RuleWhile()

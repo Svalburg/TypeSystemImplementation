@@ -91,7 +91,7 @@ TimeDependentEC* Environment::getTimeDependentEC(string componentName)
 		if(timedependent->getComponentName() == componentName)
 			return timedependent;
 	}
-	return new TimeDependentEC(componentName, new RuleConst("0"));
+	return new TimeDependentEC(componentName, new RuleConst("0", new ValueInt(0)));
 	//throw runtime_error("Exception: No component found with name: " + componentName);
 }
 
@@ -159,7 +159,7 @@ void Environment::addComponentFunction(ifstream &compFile, StateTuple &states)
 		ss >> val;
 		ss.str("");
 		ss.clear();
-		states.declareCState(varName, val);
+		states.declareCState(varName, new ValueInt(val));
 		
 		cout << "Assigned component variable: " << varName << " := " << val << endl;
 		

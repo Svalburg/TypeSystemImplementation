@@ -22,7 +22,7 @@ string RuleVar::toStringV()
     return "Lookup_" + statement;
 }
 
-int RuleVar::value(StateTuple states)
+Value* RuleVar::value(StateTuple states)
 {
 	return states.getStateValue(statement);
 }

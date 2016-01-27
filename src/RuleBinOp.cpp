@@ -34,66 +34,94 @@ string RuleBinOp::toStringV()
     return v1 + ' ' + binop + ' ' + v2;
 }
 
-int RuleBinOp::value(StateTuple states)
+Value* RuleBinOp::value(StateTuple states)
 {
-    int v1 = branches.at(left)->value(states);
     StateTuple sigma1 = branches.at(left)->sigma(states);
-    int v2 = branches.at(right)->value(sigma1);
-    if(binop == "+")
-        return v1 + v2;
-    else if(binop == "-")
-        return v1 - v2;
-    else if(binop == "*")
-        return v1 * v2;
-    else if (binop == ">")
+    ValueInt* valueInt1 = dynamic_cast<ValueInt*>(branches.at(left)->value(states));
+    ValueInt* valueInt2 = dynamic_cast<ValueInt*>(branches.at(right)->value(sigma1));
+    ValueString* valueString1 = dynamic_cast<ValueString*>(branches.at(left)->value(states));
+    ValueString* valueString2 = dynamic_cast<ValueString*>(branches.at(right)->value(sigma1));
+    if(valueInt1 && valueInt2)
     {
-        if(v1 > v2)
-            return 1;
-        else return 0;
+        int v1 = valueInt1->getValue();
+        int v2 = valueInt2->getValue();
+        if(binop == "+")
+            return new ValueInt(v1 + v2);
+        else if(binop == "-")
+            return new ValueInt(v1 - v2);
+        else if(binop == "*")
+            return new ValueInt(v1 * v2);
+        else if (binop == ">")
+        {
+            if(v1 > v2)
+                return new ValueInt(1);
+            else return new ValueInt(0);
+        }
+        else if (binop == ">=")
+        {
+            if(v1 >= v2)
+                return new ValueInt(1);
+            else return new ValueInt(0);
+        }
+        else if (binop == "==")
+        {
+            if(v1 == v2)
+                return new ValueInt(1);
+            else return new ValueInt(0);
+        }
+        else if (binop == "!=")
+        {
+            if(v1 != v2)
+                return new ValueInt(1);
+            else return new ValueInt(0);
+        }
+        else if (binop == "<=")
+        {
+            if(v1 <= v2)
+                return new ValueInt(1);
+            else return new ValueInt(0);
+        }
+        else if (binop == "<")
+        {
+            if(v1 < v2)
+                return new ValueInt(1);
+            else return new ValueInt(0);
+        }
+        else if (binop == "and" || binop == "&&")
+        {
+            if(v1 != 0 && v2 != 0)
+                return new ValueInt(1);
+            else return new ValueInt(0);
+        }
+        else if (binop == "or" || binop == "||")
+        {
+            if(v1 != 0 || v2 != 0)
+                return new ValueInt(1);
+            else return new ValueInt(0);
+        }
+        throw runtime_error("Exception: Invalid binary operator" + binop + " in statement: " + statement);
     }
-    else if (binop == ">=")
+    else if(valueString1 && valueString2)
     {
-        if(v1 >= v2)
-            return 1;
-        else return 0;
+        string v1 = valueString1->getValue();
+        string v2 = valueString2->getValue();
+        if(binop == "+")
+            return new ValueString(v1 + v2);
+        else if (binop == "==")
+        {
+            if(v1.compare(v2) == 0)
+                return new ValueInt(1);
+            else return new ValueInt(0);
+        }
+        else if (binop == "!=")
+        {
+            if(v1.compare(v2) != 0)
+                return new ValueInt(1);
+            else return new ValueInt(0);
+        }
+        throw runtime_error("Exception: Invalid binary operator" + binop + " in statement: " + statement);
     }
-    else if (binop == "==")
-    {
-        if(v1 == v2)
-            return 1;
-        else return 0;
-    }
-    else if (binop == "!=")
-    {
-        if(v1 != v2)
-            return 1;
-        else return 0;
-    }
-    else if (binop == "<=")
-    {
-        if(v1 <= v2)
-            return 1;
-        else return 0;
-    }
-    else if (binop == "<")
-    {
-        if(v1 < v2)
-            return 1;
-        else return 0;
-    }
-    else if (binop == "and" || binop == "&&")
-    {
-        if(v1 != 0 && v2 != 0)
-            return 1;
-        else return 0;
-    }
-    else if (binop == "or" || binop == "||")
-    {
-        if(v1 != 0 || v2 != 0)
-            return 1;
-        else return 0;
-    }
-    throw runtime_error("Exception: Invalid binary operator" + binop + " in statement: " + statement);
+    else throw runtime_error("Exception: Incompatible types in statement: \n" + statement + "\n");
 }
 
 StateTuple RuleBinOp::sigma(StateTuple states)

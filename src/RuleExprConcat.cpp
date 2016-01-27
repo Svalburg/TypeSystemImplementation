@@ -33,10 +33,10 @@ string RuleExprConcat::toStringV()
     return sigma1 + " >>> " + v;
 }
 
-int RuleExprConcat::value(StateTuple states)
+Value* RuleExprConcat::value(StateTuple states)
 {
     StateTuple sigma1 = branches.at(left)->sigma(states);
-    int v = branches.at(right)->value(sigma1);
+    Value* v = branches.at(right)->value(sigma1);
     return v;
 }
 

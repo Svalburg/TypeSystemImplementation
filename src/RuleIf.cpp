@@ -39,7 +39,7 @@ string RuleIf::toStringV()
     throw runtime_error("Exception: Tried to call toStringV. Not an expression.\n Statement: " + statement);
 }
 
-int RuleIf::value(StateTuple states)
+Value* RuleIf::value(StateTuple states)
 {
     throw runtime_error("Exception: Tried to call value. Not an expression.\n Statement: " + statement);
 }
@@ -47,10 +47,15 @@ int RuleIf::value(StateTuple states)
 StateTuple RuleIf::sigma(StateTuple states)
 {
 	StateTuple sigma_ex = branches.at(left)->sigma(states);
-	if(branches.at(left)->value(states) != 0)
-		return branches.at(middle)->sigma(sigma_ex);
-	else
-		return branches.at(right)->sigma(sigma_ex);
+    ValueInt* valueInt = dynamic_cast<ValueInt*>(branches.at(left)->value(states));
+    if(valueInt)
+    {
+        if(valueInt->getValue()!= 0)
+            return branches.at(middle)->sigma(sigma_ex);
+        else
+            return branches.at(right)->sigma(sigma_ex);
+    }
+    else throw runtime_error("Exception: Used non-integer value in if statement: \n" + statement + "\n");
 }
 
 int RuleIf::energy(StateTuple states, bool output)
@@ -58,16 +63,21 @@ int RuleIf::energy(StateTuple states, bool output)
 	StateTuple sigma_ex = branches.at(left)->sigma(states);
 	int e_ex = branches.at(left)->energy(states, output);
 	int e_stmt;
-	if(branches.at(left)->value(states) != 0)
-		e_stmt = branches.at(middle)->energy(sigma_ex, output);
-	else
-		e_stmt = branches.at(right)->energy(sigma_ex, output);
-	int tdec = td_ec(env->getTIf(), sigma_ex);
-	if(output)
-	{
-		cout << "Energy usage of \"if " << branches.at(left)->getStatement() << " then\" is: " << tdec << endl; 
-	}
-	return e_ex + tdec + e_stmt;
+    ValueInt* valueInt = dynamic_cast<ValueInt*>(branches.at(left)->value(states));
+    if(valueInt)
+    {
+        if(valueInt->getValue() != 0)
+            e_stmt = branches.at(middle)->energy(sigma_ex, output);
+        else
+            e_stmt = branches.at(right)->energy(sigma_ex, output);
+        int tdec = td_ec(env->getTIf(), sigma_ex);
+        if(output)
+        {
+            cout << "Energy usage of \"if " << branches.at(left)->getStatement() << " then\" is: " << tdec << endl; 
+        }
+        return e_ex + tdec + e_stmt;
+    }
+    else throw runtime_error("Exception: Used non-integer value in if statement: \n" + statement + "\n");
 }
 
 RuleIf::~RuleIf()

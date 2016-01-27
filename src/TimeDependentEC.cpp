@@ -8,7 +8,10 @@ TimeDependentEC::TimeDependentEC(string componentName, Rule* rule)
 
 int TimeDependentEC::getEnergyCost(StateTuple states)
 {
-	return rule->value(states);
+    ValueInt* energyInt = dynamic_cast<ValueInt*>(rule->value(states));
+    if(energyInt)
+        return energyInt->getValue();
+    else throw runtime_error("Exception: invalid phi function in component " + componentName + "\n");
 }
 
 string TimeDependentEC::getComponentName()

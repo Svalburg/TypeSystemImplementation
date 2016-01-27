@@ -16,7 +16,7 @@ class RuleConst : public Rule
         virtual ~RuleConst();
     protected:
     private:
-        Value* value;
+        Value* constValue;
 };
 
 #endif // RULECONST_H

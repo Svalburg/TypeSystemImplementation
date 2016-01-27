@@ -31,7 +31,7 @@ string RuleStmtConcat::toStringV()
     throw runtime_error("Exception: Tried to call toStringV. Not an expression.\n Statement: " + statement);
 }
 
-int RuleStmtConcat::value(StateTuple states)
+Value* RuleStmtConcat::value(StateTuple states)
 {
     throw runtime_error("Exception: Tried to call value. Not an expression.\n Statement: " + statement);
 }

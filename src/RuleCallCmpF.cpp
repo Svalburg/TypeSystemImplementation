@@ -34,9 +34,9 @@ string RuleCallCmpF::toStringV()
     return "[ x_" + functionName + "<- V_" + path + ", Sigma_" + path + "] >>> V_" + functionName;
 }
 
-int RuleCallCmpF::value(StateTuple states)
+Value* RuleCallCmpF::value(StateTuple states)
 {
-    int v_ex = branches.at(middle)->value(states);
+    Value* v_ex = branches.at(middle)->value(states);
     StateTuple sigma_ex = branches.at(middle)->sigma(states);
 	ComponentFunction* function = env->getComponentFunction(componentName, functionName);
     sigma_ex.declarePState(function->getArgumentName(), v_ex);
@@ -46,7 +46,7 @@ int RuleCallCmpF::value(StateTuple states)
 
 StateTuple RuleCallCmpF::sigma(StateTuple states)
 {
-    int v_ex = branches.at(middle)->value(states);
+    Value* v_ex = branches.at(middle)->value(states);
     StateTuple sigma_ex = branches.at(middle)->sigma(states);
     vector<StateTuple::declaration> pstate = sigma_ex.getPState();
     ComponentFunction* function = env->getComponentFunction(componentName, functionName);
@@ -61,7 +61,7 @@ StateTuple RuleCallCmpF::sigma(StateTuple states)
 int RuleCallCmpF::energy(StateTuple states, bool output)
 {
     int e_expr = branches.at(middle)->energy(states, output);
-    int v_ex = branches.at(middle)->value(states);
+    Value* v_ex = branches.at(middle)->value(states);
     StateTuple sigma_ex = branches.at(middle)->sigma(states);
     ComponentFunction* function = env->getComponentFunction(componentName, functionName);
     sigma_ex.declareCState(function->getArgumentName(), v_ex);

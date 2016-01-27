@@ -610,7 +610,7 @@ Rule* ECASkip::getTypeRule() const {
 #include "RuleConst.h"
 Rule* ECAConstant::getTypeRule() const
 {
-    return new RuleConst(std::to_string(value));
+    return new RuleConst(std::to_string(value), new ValueInt(value));
 }
 
 #include "RuleVar.h"

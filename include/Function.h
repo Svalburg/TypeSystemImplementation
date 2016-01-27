@@ -22,10 +22,10 @@ class Function
 		string getName();
         virtual ~Function();
 	private:
+    protected:
 		string name;
         string argumentName;
         Rule* definition;
-    protected:
         
 
 };

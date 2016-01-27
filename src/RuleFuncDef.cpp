@@ -28,7 +28,7 @@ string RuleFuncDef::toStringV()
 	throw runtime_error("Exception: Tried to call toStringV. Not an expression.\n Statement: " + statement);
 }
 
-int RuleFuncDef::value(StateTuple states)
+Value* RuleFuncDef::value(StateTuple states)
 {
 	throw runtime_error("Exception: Tried to call value. Not an expression.\n Statement: " + statement);
 }

@@ -20,7 +20,10 @@ int ComponentFunction::getTime()
 
 int ComponentFunction::energy(StateTuple states)
 {
-    return energyFunc->value(states);
+    ValueInt* energyInt = dynamic_cast<ValueInt*>(energyFunc->value(states));
+    if(energyInt)
+        return energyInt->getValue();
+    else throw runtime_error("Exception: invalide energy function in component function: " + component + "." + name + "\n");
 }
 
 ComponentFunction::~ComponentFunction()

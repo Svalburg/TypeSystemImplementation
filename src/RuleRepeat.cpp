@@ -34,7 +34,7 @@ string RuleRepeat::toStringV()
     throw runtime_error("Exception: Tried to call toStringV. Not an expression.\n Statement: " + statement);
 }
 
-int RuleRepeat::value(StateTuple states)
+Value* RuleRepeat::value(StateTuple states)
 {
     throw runtime_error("Exception: Tried to call value. Not an expression.\n Statement: " + statement);
 }
@@ -42,9 +42,14 @@ int RuleRepeat::value(StateTuple states)
 StateTuple RuleRepeat::sigma(StateTuple states)
 {
 	StateTuple states_now = branches.at(left)->sigma(states);
-	for(int i = branches.at(left)->value(states); i > 0; i--)
-		states_now = branches.at(right)->sigma(states_now);
-	return states_now;
+    ValueInt* valueInt = dynamic_cast<ValueInt*>(branches.at(left)->value(states));
+    if(valueInt)
+    {
+        for(int i = valueInt->getValue(); i > 0; i--)
+            states_now = branches.at(right)->sigma(states_now);
+        return states_now;
+    }
+    else throw runtime_error("Exception: Used non-integer in statement: \n" + statement + "\n");
 }
 
 int RuleRepeat::energy(StateTuple states, bool output)
@@ -52,13 +57,18 @@ int RuleRepeat::energy(StateTuple states, bool output)
 	int E_ex = branches.at(left)->energy(states);
 	StateTuple states_now = branches.at(left)->sigma(states);
 	int repeatcost = 0;
-	for(int i = branches.at(left)->value(states); i > 0; i--)
-	{
-		repeatcost += branches.at(right)->energy(states_now, false);
-		states_now = branches.at(right)->sigma(states_now);
-	}
-	cout << "Total energy usage of loop \"repeat " << branches.at(left)->getStatement() << " begin\" is: " << repeatcost << endl;
-	return E_ex + repeatcost;
+    ValueInt* valueInt = dynamic_cast<ValueInt*>(branches.at(left)->value(states));
+    if(valueInt)
+    {
+        for(int i = valueInt->getValue(); i > 0; i--)
+        {
+            repeatcost += branches.at(right)->energy(states_now, false);
+            states_now = branches.at(right)->sigma(states_now);
+        }
+        cout << "Total energy usage of loop \"repeat " << branches.at(left)->getStatement() << " begin\" is: " << repeatcost << endl;
+        return E_ex + repeatcost;
+    }
+    else throw runtime_error("Exception: Used non-integer in statement: \n" + statement + "\n");
 }
 
 RuleRepeat::~RuleRepeat()

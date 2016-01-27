@@ -13,7 +13,7 @@ StateTuple Function::sigma(StateTuple states)
     return definition->sigma(states);
 }
 
-int Function::value(StateTuple states)
+Value* Function::value(StateTuple states)
 {
     return definition->value(states);
 }
