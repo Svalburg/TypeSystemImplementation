@@ -1,7 +1,7 @@
 #include "RuleConst.h"
 #include "Environment.h"
 
-RuleConst::RuleConst(string statement)
+RuleConst::RuleConst(string statement, Value* value)
 {
     this->statement = statement;
     ruleName = "Const";
@@ -22,10 +22,10 @@ string RuleConst::toStringV()
     return "Const_N(" + statement + ")";
 }
 
-int RuleConst::value(StateTuple states)
+Value* RuleConst::value(StateTuple states)
 {
     //returns the value of the constant as in the statement
-    return atoi(statement.c_str());
+    return value;
 }
 
 StateTuple RuleConst::sigma(StateTuple states)

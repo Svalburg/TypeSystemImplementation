@@ -16,7 +16,7 @@ class Function
 	public:
         Function(string name, string argumentName, Rule* definition);
         StateTuple sigma(StateTuple states);
-        int value(StateTuple states);
+        Value* value(StateTuple states);
 		int energy(StateTuple states, bool output);
         string getArgumentName();
 		string getName();

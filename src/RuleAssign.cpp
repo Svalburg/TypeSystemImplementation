@@ -29,7 +29,7 @@ string RuleAssign::toStringV()
     return branches.at(middle)->toStringV();
 }
 
-int RuleAssign::value(StateTuple states)
+Value* RuleAssign::value(StateTuple states)
 {
     return branches.at(middle)->value(states);
 }

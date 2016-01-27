@@ -3,20 +3,20 @@
 
 #include <Rule.h>
 
-
 class RuleConst : public Rule
 {
     public:
-        RuleConst(string statement);
+        RuleConst(string statement, Value* value);
         string toStringSigma();
         string toStringE();
         string toStringV();
-        int value(StateTuple states);
+        Value* value(StateTuple states);
 		StateTuple sigma(StateTuple states);
         int energy(StateTuple states, bool output = true);
         virtual ~RuleConst();
     protected:
     private:
+        Value* value;
 };
 
 #endif // RULECONST_H
