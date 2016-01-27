@@ -64,26 +64,26 @@ TEST(ECAParser, EndToEnd)
     
     
     vector<ComponentFunction*> compfuncs;
-    ComponentFunction* soundsystemon = new ComponentFunction("SoundSystem", "on", "zero", new RuleAssign("on", new RuleConst("1")), 
-                            new RuleConst("0"), 0);
+    ComponentFunction* soundsystemon = new ComponentFunction("SoundSystem", "on", "zero", new RuleAssign("on", new RuleConst("1", new ValueInt(1))), 
+                            new RuleConst("0", new ValueInt(0)), 0);
     compfuncs.push_back(soundsystemon);
-    ComponentFunction* soundsystemoff = new ComponentFunction("SoundSystem", "off", "zero", new RuleAssign("on", new RuleConst("0")), 
-                            new RuleConst("0"), 0);
+    ComponentFunction* soundsystemoff = new ComponentFunction("SoundSystem", "off", "zero", new RuleAssign("on", new RuleConst("0", new ValueInt(0))), 
+                            new RuleConst("0", new ValueInt(0)), 0);
     compfuncs.push_back(soundsystemoff);
-    ComponentFunction* soundsystembeeps = new ComponentFunction("SoundSystem", "playBeepAtHz", "hz", new RuleConst("0"), 
-                            new RuleConst("2"), 3);
+    ComponentFunction* soundsystembeeps = new ComponentFunction("SoundSystem", "playBeepAtHz", "hz", new RuleConst("0", new ValueInt(0)), 
+                            new RuleConst("2", new ValueInt(2)), 3);
     compfuncs.push_back(soundsystembeeps);
-    ComponentFunction* systemsleep = new ComponentFunction("System", "sleep", "zero", new RuleConst("0"), 
-                            new RuleConst("0"), 10);
+    ComponentFunction* systemsleep = new ComponentFunction("System", "sleep", "zero", new RuleConst("0", new ValueInt(0)), 
+                            new RuleConst("0", new ValueInt(0)), 10);
     compfuncs.push_back(systemsleep);
 	vector<Function*> funcs;
 	vector<TimeDependentEC*> tdec;
-    TimeDependentEC* soundsystem = new TimeDependentEC("SoundSystem", new RuleBinOp("*", new RuleConst("5"), new RuleVar("on")));
+    TimeDependentEC* soundsystem = new TimeDependentEC("SoundSystem", new RuleBinOp("*", new RuleConst("5", new ValueInt(5)), new RuleVar("on")));
     tdec.push_back(soundsystem);
 	Environment* env = new Environment(0, 0, 0, 0, 0, 0, 0, compfuncs, funcs, tdec);
     
     StateTuple* startstate = new StateTuple();
-    startstate->declareCState("on", 0);
+    startstate->declareCState("on", new ValueInt(0));
     
     
 	root->updateEnvironment(env);

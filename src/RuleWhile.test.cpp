@@ -10,18 +10,18 @@ class WhileTest: public ::testing::Test
 		
 		void SetUp()
 		{
-			RuleCallCmpF* rule1 = new RuleCallCmpF("test", "testing", new RuleConst("0"));
-			RuleAssign* rule2 = new RuleAssign("x", new RuleBinOp("+", new RuleVar("x"), new RuleConst("1")));
-			testRule = new RuleWhile(new RuleBinOp("<", new RuleVar("x"), new RuleConst("10")), new RuleStmtConcat(rule1, rule2));
+			RuleCallCmpF* rule1 = new RuleCallCmpF("test", "testing", new RuleConst("0", new ValueInt(5)));
+			RuleAssign* rule2 = new RuleAssign("x", new RuleBinOp("+", new RuleVar("x"), new RuleConst("1", new ValueInt(1))));
+			testRule = new RuleWhile(new RuleBinOp("<", new RuleVar("x"), new RuleConst("10", new ValueInt(10))), new RuleStmtConcat(rule1, rule2));
 			vector<ComponentFunction*> compfuncs;
 			vector<Function*> funcs;
 			vector<TimeDependentEC*> tdec;
-			compfuncs.push_back(new ComponentFunction("test", "testing", "a", new RuleSkip(), new RuleConst("5"), 5));
+			compfuncs.push_back(new ComponentFunction("test", "testing", "a", new RuleSkip(), new RuleConst("5", new ValueInt(5)), 5));
 			Environment* env = new Environment(1, 2, 3, 4, 5, 6, 7, compfuncs, funcs, tdec);
 			testRule->updateEnvironment(env);
 			testRule->getStatement();
 			startState = new StateTuple();
-			startState->declarePState("x", 5);
+			startState->declarePState("x", new ValueInt(5));
 		}
 		
 		void TearDown() {}
@@ -35,7 +35,11 @@ TEST_F(WhileTest, Value)
 TEST_F(WhileTest, State)
 {
 	StateTuple endState = testRule->sigma(*startState);
-	EXPECT_EQ(10, endState.getPStateValue("x"));
+	ValueInt* v = dynamic_cast<ValueInt*>(endState.getPStateValue("x"));
+	if(v)
+		EXPECT_EQ(10, v->getValue());
+	else
+		FAIL();
 }
 
 TEST_F(WhileTest, Energy)

@@ -9,7 +9,7 @@ class ExprConcatTest: public ::testing::Test
 	
 	void SetUp()
 	{
-		testRule = new RuleExprConcat(new RuleSkip(), new RuleAssign("x", new RuleConst("5")));
+		testRule = new RuleExprConcat(new RuleSkip(), new RuleAssign("x", new RuleConst("5", new ValueInt(5))));
 		vector<ComponentFunction*> compfuncs;
 		vector<Function*> funcs;
 		vector<TimeDependentEC*> tdec;
@@ -23,7 +23,11 @@ class ExprConcatTest: public ::testing::Test
 
 TEST_F(ExprConcatTest, Value)
 {
-	EXPECT_EQ(5, testRule->value(*startState));
+	ValueInt* v = dynamic_cast<ValueInt*>(testRule->value(*startState));
+	if(v)
+		EXPECT_EQ(5, v->getValue());
+	else
+		FAIL();
 }
 
 TEST_F(ExprConcatTest, Energy)
@@ -34,5 +38,9 @@ TEST_F(ExprConcatTest, Energy)
 TEST_F(ExprConcatTest, State)
 {
 	StateTuple endState = testRule->sigma(*startState);
-	EXPECT_EQ(5, endState.getPStateValue("x"));
+	ValueInt* v = dynamic_cast<ValueInt*>(endState.getPStateValue("x"));
+	if(v)
+		EXPECT_EQ(5, v->getValue());
+	else
+		FAIL();
 }

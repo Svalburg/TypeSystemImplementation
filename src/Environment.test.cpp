@@ -14,8 +14,8 @@ class EnvironmentTest: public ::testing::Test
 			vector<TimeDependentEC*> testTdecs, testTdecs2;
             testEnv = new Environment(1, 2, 3, 4, 5, 6, 7, testCompFuncs, testFuncs, testTdecs);
             
-            RuleConst* testConst = new RuleConst("0");
-            RuleConst* testConst2 = new RuleConst("1");
+            RuleConst* testConst = new RuleConst("0", new ValueInt(0));
+            RuleConst* testConst2 = new RuleConst("1", new ValueInt(1));
             Function* testFunction = new Function("x", "y", testConst);
             ComponentFunction* testComponent = new ComponentFunction("a", "z", "d", testConst, testConst2, 1);
             TimeDependentEC* testTimeD = new TimeDependentEC("a", testConst2);
@@ -31,7 +31,7 @@ TEST_F(EnvironmentTest, Search)
 {
     EXPECT_THROW(testEnv->getFunction("x"), runtime_error);
     EXPECT_THROW(testEnv->getComponentFunction("x", "y"), runtime_error);
-    RuleConst* check = new RuleConst("0");
+    RuleConst* check = new RuleConst("0", new ValueInt(0));
     Function* newfunc = testEnv2->getFunction("x");
     EXPECT_EQ("x", newfunc->getName());
     ComponentFunction* newcompfunc = testEnv2->getComponentFunction("a", "z");
@@ -49,7 +49,7 @@ TEST_F(EnvironmentTest, Clone)
 
 TEST_F(EnvironmentTest, Add)
 {
-    RuleConst* testadd = new RuleConst("7");
+    RuleConst* testadd = new RuleConst("7", new ValueInt(7));
     testEnv->addFunction("newfunction", "x", testadd);
     EXPECT_NO_THROW(testEnv->getFunction("newfunction"));
 }

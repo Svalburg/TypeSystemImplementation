@@ -12,9 +12,10 @@ class FuncDefTest: public ::testing::Test
 		
 		void SetUp()
 		{
-			testRule = new RuleFuncDef("Test", "x", new RuleConst("5"), new RuleAssign("y", new RuleCallF("Test", new RuleConst("0"))));
+			testRule = new RuleFuncDef("Test", "x", new RuleConst("5", new ValueInt(5)), 
+			new RuleAssign("y", new RuleCallF("Test", new RuleConst("0", new ValueInt(0)))));
 			testRuleRecur = new RuleFuncDef("Test", "x", 
-				new RuleIf(new RuleVar("x"), new RuleVar("x"), new RuleCallF("Test", new RuleConst("100"))),
+				new RuleIf(new RuleVar("x"), new RuleVar("x"), new RuleCallF("Test", new RuleConst("100", new ValueInt(100)))),
 				new RuleSkip());
 			vector<ComponentFunction*> compfuncs;
 			vector<Function*> funcs;
