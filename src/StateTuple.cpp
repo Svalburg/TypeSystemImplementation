@@ -12,7 +12,7 @@ StateTuple::StateTuple(vector<declaration> pState, vector<declaration> cState)
 	accessCState = false;
 }
 
-int StateTuple::getPStateValue(string name)
+Value* StateTuple::getPStateValue(string name)
 {
 	for(size_t i = 0; i < pState.size(); i++)
 		if(name == pState.at(i).name)
@@ -20,7 +20,7 @@ int StateTuple::getPStateValue(string name)
 	throw runtime_error("Exception: Program value '" + name + "' has not been declared.\n");
 }
 
-int StateTuple::getCStateValue(string name)
+Value* StateTuple::getCStateValue(string name)
 {
 	for(size_t i = 0; i < cState.size(); i++)
 		if(name == cState.at(i).name)
@@ -28,7 +28,7 @@ int StateTuple::getCStateValue(string name)
 	throw runtime_error("Exception: Component value '" + name + "' has not been declared.\n");
 }
 
-int StateTuple::getStateValue(string name)
+Value* StateTuple::getStateValue(string name)
 {
 	if(accessCState)
 		return getCStateValue(name);
@@ -36,7 +36,7 @@ int StateTuple::getStateValue(string name)
 		return getPStateValue(name);
 }
 
-void StateTuple::declarePState(string name, int value)
+void StateTuple::declarePState(string name, Value* value)
 {
 	for(size_t i = 0; i < pState.size(); i++)
 		if(name == pState.at(i).name)
@@ -50,7 +50,7 @@ void StateTuple::declarePState(string name, int value)
 	pState.push_back(newvar);
 }
 
-void StateTuple::declareCState(string name, int value)
+void StateTuple::declareCState(string name, Value* value)
 {
 	for(size_t i = 0; i < cState.size(); i++)
 		if(name == cState.at(i).name)
@@ -64,7 +64,7 @@ void StateTuple::declareCState(string name, int value)
 	cState.push_back(newvar);
 }
 
-void StateTuple::declareState(string name, int value)
+void StateTuple::declareState(string name, Value* value)
 {
 	if(accessCState)
 		declareCState(name, value);
@@ -119,7 +119,11 @@ string StateTuple::toStringPState()
 	}
 	else
 		for(size_t i = 0; i < pState.size(); i++)
-			out += pState.at(i).name + " = " + to_string(pState.at(i).value) + "\n";
+		{
+			string valueString = "";
+			
+			out += pState.at(i).name + " = " + valueString + "\n";
+		}
 	return out;
 }
 
@@ -133,7 +137,10 @@ string StateTuple::toStringCState()
 	}
 	else
 		for(size_t i = 0; i < cState.size(); i++)
-			out += cState.at(i).name + " = " + to_string(cState.at(i).value) + "\n";
+		{
+			string valueString = "";
+			out += cState.at(i).name + " = " + valueString + "\n";
+		}
 	return out;
 }
 

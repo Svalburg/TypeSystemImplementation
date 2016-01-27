@@ -65,7 +65,9 @@ SET(srcs
     src/ComponentFunction.cpp
     src/TimeDependentEC.cpp
     src/Environment.cpp
-
+	src/Value.cpp
+	src/ValueInt.cpp
+	src/ValueString.cpp
     src/parse.cpp)
 
 include_directories(

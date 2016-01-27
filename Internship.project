@@ -45,6 +45,9 @@
     <File Name="include/StateTuple.h"/>
     <File Name="include/TimeDependentEC.h"/>
     <File Name="include/RuleWhile.h"/>
+    <File Name="include/Value.h"/>
+    <File Name="include/ValueInt.h"/>
+    <File Name="include/ValueString.h"/>
   </VirtualDirectory>
   <VirtualDirectory Name="lib">
     <File Name="lib/deque.h"/>
@@ -95,7 +98,6 @@
     <File Name="src/RuleFuncDef.cpp"/>
     <File Name="src/RuleIf.cpp"/>
     <File Name="src/RuleInput.cpp"/>
-    <File Name="src/RuleRepeat.cpp"/>
     <File Name="src/RuleSkip.cpp"/>
     <File Name="src/RuleStmtConcat.cpp"/>
     <File Name="src/RuleVar.cpp"/>
@@ -116,6 +118,10 @@
     <File Name="src/RuleCallCmpF.test.cpp"/>
     <File Name="src/RuleCallF.test.cpp"/>
     <File Name="src/parse.test.cpp"/>
+    <File Name="src/Value.cpp"/>
+    <File Name="src/ValueInt.cpp"/>
+    <File Name="src/ValueString.cpp"/>
+    <File Name="src/RuleRepeat.cpp"/>
   </VirtualDirectory>
   <VirtualDirectory Name="TypeSystemImplementation">
     <File Name="main.cpp"/>

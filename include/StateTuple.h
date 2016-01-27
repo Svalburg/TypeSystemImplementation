@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include "ValueString.h"
+#include "ValueInt.h"
 
 using namespace std;
 
@@ -15,19 +17,19 @@ class StateTuple
 		struct declaration
 		{
 			string name;
-			int value;
+			Value* value;
 		};
 		
-        StateTuple();
+		StateTuple();
 		StateTuple(vector<declaration> cState, vector<declaration> pState);
 		//returns the value for a variable name
-		int getPStateValue(string name);
-		int getCStateValue(string name);
-		int getStateValue(string name);
+		Value* getPStateValue(string name);
+		Value* getCStateValue(string name);
+		Value* getStateValue(string name);
 		//updates the value for a given variable if it exists, creates it if it doesn't
-		void declarePState(string name, int value);
-		void declareCState(string name, int value);
-		void declareState(string name, int value);
+		void declarePState(string name, Value* value);
+		void declareCState(string name, Value* value);
+		void declareState(string name, Value* value);
 		void deleteCState(string name);
 		void deletePState(string name);
 		//updates the accessCState value

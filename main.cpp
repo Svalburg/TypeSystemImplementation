@@ -4,6 +4,9 @@
 #include <fstream>
 #include "libtypesystem.h"
 #include "parse.h"
+#include "ValueInt.h"
+#include "ValueString.h"
+#include "Value.h"
 
 using namespace std;
 using namespace bitpowder::lib;
