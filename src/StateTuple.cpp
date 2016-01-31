@@ -114,7 +114,7 @@ string StateTuple::toStringPState()
 	string out = "";
 	if(pState.size() == 0)
 	{
-		out += "State is empty.";
+		out += "Program state is empty.\n";
 		return out;
 	}
 	else
@@ -137,7 +137,7 @@ string StateTuple::toStringCState()
 	string out = "";
 	if(cState.size() == 0)
 	{
-		out += "State is empty.";
+		out += "Component state is empty.\n";
 		return out;
 	}
 	else

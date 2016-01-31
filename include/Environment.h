@@ -38,8 +38,8 @@ class Environment
         Function* getFunction(string name);
         TimeDependentEC* getTimeDependentEC(string componentName);
         Environment* clone(); //Returns a new Environment containing a copy of all the values in this environment.
-        void addFunction(string name, string argumentName, Rule* definition);
-		void addComponentFunction(ifstream &compFile, StateTuple &states);
+        void addFunction(string name, string argumentName, Rule* definition); //Adds a program function to the environment
+		void addComponentFunction(ifstream &compFile, StateTuple &states); //Reads in a component from a file, and adds component variables to the given StateTuple
 		vector<string> getComponentNames();
         ~Environment();
     private:
