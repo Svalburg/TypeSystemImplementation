@@ -69,11 +69,8 @@ int RuleCallCmpF::energy(StateTuple states, bool output)
     int e_func = function->energy(sigma_ex);
     int time = function->getTime();
     int td_energy = e_expr + td_ec(time, sigma_ex);
-    if(output)
-    {
-        cout << "Time dependent energy usage of " + statement + " is: " << td_energy << endl;
-        cout << "Incidental energy usage of " + statement + " is: " << e_func << endl;
-    }
+    cout << "Time dependent energy usage of " + statement + " is: " << td_energy << endl;
+    cout << "Incidental energy usage of " + statement + " is: " << e_func << endl;
     return td_energy + e_func;
 }
 
