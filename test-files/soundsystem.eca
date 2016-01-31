@@ -1,0 +1,41 @@
+component SoundSystem
+
+variable systemOn := 0
+
+phi:
+2*systemOn
+end phi
+
+component function on(x)
+time 0
+energy:
+2
+end energy
+definition:
+systemOn := 1
+end definition
+
+component function off(x)
+time 0
+energy:
+0
+end energy
+definition:
+systemOn := 0
+end definition
+
+component function playBeep(x)
+time 5
+energy:
+15
+end energy
+definition:
+if systemOn then
+	x := 1 
+else
+	x := 0
+end;
+x
+end definition
+
+end component
