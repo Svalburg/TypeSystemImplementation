@@ -1,6 +1,6 @@
 SoundSystem.on(0);
 repeat 5  begin
 	SoundSystem.playBeep(0);
-	Skip
+	SoundSystem.sleep(0)
 end;
 SoundSystem.off(0)

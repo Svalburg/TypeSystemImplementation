@@ -9,7 +9,7 @@ end phi
 component function on(x)
 time 0
 energy:
-2
+0
 end energy
 definition:
 systemOn := 1
@@ -36,6 +36,15 @@ else
 	x := 0
 end;
 x
+end definition
+
+component function sleep(x)
+time 50
+energy:
+0
+end energy
+definition:
+0
 end definition
 
 end component
