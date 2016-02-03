@@ -18,7 +18,7 @@ end definition
 component function off(x)
 time 0
 energy:
-55
+75
 end energy
 definition:
 systemOn := 0
